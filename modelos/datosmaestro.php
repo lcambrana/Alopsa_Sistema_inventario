@@ -12,7 +12,7 @@ class datosm{
             . "Descripcion_contenido, Detalle_Servicio, Marchamo, Hora_TIR, Serie_TIR, producto, Ord, Bloque,"
             . " Posicion, Observaciones, Destino, Fecha_Asignacion, Estado, Id_f, id_usuario) VALUES ('$fecha_ingreso','$hora_ingreso'"
             . ",'$no_Contenedor','$barco','$tipocontenido','$dcontenido','$dservicio','$marchmo','$htir','$serietir','$producto','$ord','$bloque','$posicion'"
-            . ",'$observaciones','$destino','$fechaasig','Ingresado','$idflota','$idusuario'";
+            . ",'$observaciones','$destino','$fechaasig','Ingresado','$idflota','$idusuario')";
     $idingreso= ejecutarConsulta_retornarID($sql);
     $sw=true;
         $sql_posicion="update posicion set estado='Asignado',id_ingreso='$idingreso' where idPosicion='$posicion' and idbloque='$bloque'";
@@ -24,8 +24,10 @@ class datosm{
         return ejecutarConsulta($sql);
     }
     public function listar() {
-        $sql="SELECT a.Id_Ingreso,b.Nombre_de_Piloto,b.Placas,a.No_Contenedor,a.Marchamo,a.Bloque,a.Posicion,a.producto,a.Barco,a.Destino from ingreso_maestro a 
+        $sql="SELECT a.Id_Ingreso,b.Nombre_de_Piloto,b.Placas,a.No_Contenedor,a.Marchamo,c.Descripcion Bloque,d.noPosicion Posicion,a.producto,a.Barco,a.Destino from ingreso_maestro a 
             inner join flota_transporte b on a.Id_f=b.Id_f 
+            inner join bloque c on a.Bloque=c.id_bloque
+            inner join posicion d on a.Posicion=d.idPosicion and a.Bloque=d.idbloque
             WHERE b.Estado=1 and a.Estado='Ingresado'";
            return ejecutarConsulta($sql);
     }
