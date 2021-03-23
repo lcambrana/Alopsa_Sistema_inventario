@@ -68,7 +68,7 @@ switch ($_GET["op"]){
                 "6"=>$reg->producto,
                 "7"=>$reg->Barco,
                 "8"=>$reg->Destino,
-                "9"=>'<button class="btn btn-warning btn-xs" onclick="mostrar('.$reg->Id_Ingreso.')"><i class="fa fa-pencil"></i></button>'.' '.'<button class="btn btn-danger btn-xs" onclick="dasactivar('.$reg->Id_Ingreso.')"><i class="fa fa-close"></i></button> '
+                "9"=>'<button class="btn btn-warning btn-xs" onclick="mostrar('.$reg->Id_Ingreso.')"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Editar Ingreso"></i></button>'.' '.'<button class="btn btn-danger btn-xs" onclick="dasactivar('.$reg->Id_Ingreso.')"><i class="fa fa-close" data-toggle="tooltip" data-placement="top" title="Anular Ingreso"></i></button> '
             );
         }
         $results=array(
