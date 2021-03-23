@@ -44,6 +44,9 @@ switch ($_GET["op"]){
     case 'activar':
         break;
     case 'desactivar':
+        $idingreso=$_REQUEST['idingreso'];
+        $rspta=$datosmaestros->desactivar($idingreso);
+         echo $rspta ? "Datos desactivados correctamente" : "No se pudo desactivar los datos";
         break;
     case 'mostrardatos';
         $idingreso=$_REQUEST['idingreso'];
