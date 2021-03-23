@@ -29,7 +29,7 @@ class datosm{
             WHERE b.Estado=1 and a.Estado='Ingresado'";
            return ejecutarConsulta($sql);
     }
-    public function mostraringreso($id){
+public function mostraringreso($id){
         $sql="select * from ingreso_maestro where Id_Ingreso='$id'";
         return ejecutarConsultaSimpleFila($sql);
     }
