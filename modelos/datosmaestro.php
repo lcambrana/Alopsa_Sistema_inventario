@@ -28,7 +28,7 @@ class datosm{
             inner join flota_transporte b on a.Id_f=b.Id_f 
             inner join bloque c on a.Bloque=c.id_bloque
             inner join posicion d on a.Posicion=d.idPosicion and a.Bloque=d.idbloque
-            WHERE b.Estado=1 and a.Estado='Ingresado'";
+            WHERE b.Estado=1 and a.Estado in('Ingresado','Anulado')";
            return ejecutarConsulta($sql);
     }
 public function mostraringreso($id){
@@ -36,7 +36,7 @@ public function mostraringreso($id){
         return ejecutarConsultaSimpleFila($sql);
     }
     public function desactivar($id){
-        $sql="update ingreso_maestro set estado='Desactivado' where Id_Ingreso='$id'";
+        $sql="update ingreso_maestro set estado='Anulado' where Id_Ingreso='$id'";
         return ejecutarConsulta($sql);
     }
 }

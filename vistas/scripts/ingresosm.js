@@ -171,7 +171,11 @@ function mostrar(id){
                 $("#bloque").selectpicker('refresh'); 
                 $("#posicion").val(data.Posicion);
                 $("#posicion").selectpicker('refresh');
-                
+                $("#piloto").val(data.Id_f);
+                $("#piloto").selectpicker('refresh');
+                $("#idpiloto").val(data.Id_f);
+                datospiloto();
+               
            });
     
 }
