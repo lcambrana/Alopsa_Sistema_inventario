@@ -58,6 +58,12 @@ switch ($_GET["op"]){
         $datos=Array();
         
         while ($reg=$rspta->fetch_object()){
+            $opcion="";
+                    if ($reg->Estado=='Ingresado'){
+                       $opcion ='<button class="btn btn-danger btn-xs" onclick="dasactivar('.$reg->Id_Ingreso.')"><i class="fa fa-close" data-toggle="tooltip" data-placement="top" title="Anular Ingreso"></i></button> ';
+                    }else {
+                        $opcion = '<button class="btn btn-success btn-xs" onclick="activar('.$reg->Id_Ingreso.')"><i class="fa fa-check" data-toggle="tooltip" data-placement="top" title="Activar Ingreso"></i></button>';
+                    }
             $datos[]=array(
                 "0"=>$reg->Nombre_de_Piloto,
                 "1"=>$reg->Placas,
@@ -68,7 +74,7 @@ switch ($_GET["op"]){
                 "6"=>$reg->producto,
                 "7"=>$reg->Barco,
                 "8"=>$reg->Destino,
-                "9"=>'<button class="btn btn-warning btn-xs" onclick="mostrar('.$reg->Id_Ingreso.')"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Editar Ingreso"></i></button>'.' '.'<button class="btn btn-danger btn-xs" onclick="dasactivar('.$reg->Id_Ingreso.')"><i class="fa fa-close" data-toggle="tooltip" data-placement="top" title="Anular Ingreso"></i></button> '
+                "9"=>'<button class="btn btn-warning btn-xs" onclick="mostrar('.$reg->Id_Ingreso.')"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Editar Ingreso"></i></button>'.' '.$opcion
             );
         }
         $results=array(

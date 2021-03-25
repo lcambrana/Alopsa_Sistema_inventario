@@ -179,10 +179,14 @@ function mostrar(id){
            });
     
 }
-function desactivar(idingreso){
-    bootbox.confirm("¿Esta seguro de desactivar el ingreso seleccionado?", function(result){
+function dasactivar(idingreso){
+   $("#getmodal").modal('show');
+   
+}
+function desactivaringreso(val){
+     bootbox.confirm("¿Esta seguro de desactivar el ingreso seleccionado?", function(result){
 		if (result) {
-			$.post("../ajax/datosmaestro.php?op=desactivar", {idingreso : idingreso}, function(e){
+			$.post("../ajax/datosmaestro.php?op=desactivar", {idingreso : val}, function(e){
 				bootbox.alert(e);
 				tabla.ajax.reload();
 			});

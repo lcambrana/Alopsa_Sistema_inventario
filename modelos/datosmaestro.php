@@ -24,7 +24,7 @@ class datosm{
         return ejecutarConsulta($sql);
     }
     public function listar() {
-        $sql="SELECT a.Id_Ingreso,b.Nombre_de_Piloto,b.Placas,a.No_Contenedor,a.Marchamo,c.Descripcion Bloque,d.noPosicion Posicion,a.producto,a.Barco,a.Destino from ingreso_maestro a 
+        $sql="SELECT a.Id_Ingreso,b.Nombre_de_Piloto,b.Placas,a.No_Contenedor,a.Marchamo,c.Descripcion Bloque,d.noPosicion Posicion,a.producto,a.Barco,a.Destino,a.Estado from ingreso_maestro a 
             inner join flota_transporte b on a.Id_f=b.Id_f 
             inner join bloque c on a.Bloque=c.id_bloque
             inner join posicion d on a.Posicion=d.idPosicion and a.Bloque=d.idbloque
