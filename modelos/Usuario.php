@@ -84,11 +84,16 @@ public function listarmarcados($id_usuario){
 }
 
 //Función para verificar el acceso al sistema
-	public function verificar($login,$clave)
+public function verificar($login,$clave)
     {
     	$sql="SELECT id_usuario,nombre_usuario,email,descripcion cargo,imagen,nombre_usuario  FROM usuarios inner join rol on usuarios.id_rol = rol.id_rol WHERE usuario='$login' AND clave='$clave' AND condicion='1'"; 
     	return ejecutarConsulta($sql);  
     }
+    
+public function verificaranulacion($login,$clave){
+    $sql="SELECT id_usuario,nombre_usuario,email,descripcion cargo,imagen,nombre_usuario  FROM usuarios inner join rol on usuarios.id_rol = rol.id_rol WHERE usuario='$login' AND clave='$clave' AND condicion='1' AND rol.id_rol in(1,3)"; 
+    	return ejecutarConsulta($sql);  
+}
 }
 
  ?>

@@ -42,6 +42,9 @@ switch ($_GET["op"]){
         break;
         
     case 'activar':
+        $idingreso=$_REQUEST['idingreso'];
+        $rspta=$datosmaestros->activar($idingreso);
+         echo $rspta ? "Ingreso Activado correctamente" : "No se pudo activar el ingreso";
         break;
     case 'desactivar':
         $idingreso=$_REQUEST['idingreso'];

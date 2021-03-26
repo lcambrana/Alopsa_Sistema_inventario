@@ -176,7 +176,20 @@ switch ($_GET["op"]) {
 		echo json_encode($fetch);
 
 	break;
+        case 'validaranulacion':
+                $logina=$_POST['logina'];
+		$clavea=$_POST['clavea'];
 
+		//Hash SHA256 en la contraseña
+		$clavehash=hash("SHA256", $clavea);
+	
+		$rspta=$usuario->verificaranulacion($logina, $clavehash);
+
+		$fetch=$rspta->fetch_object();
+                
+                
+                echo json_encode($fetch);
+            break;
 	case 'salir':
 		//Limpiamos las variables de sesión   
         session_unset();

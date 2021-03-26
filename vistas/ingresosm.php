@@ -165,17 +165,20 @@ if (!isset($_SESSION['nombre'])){
             <div class="modal-body">
                 <form action="" name="formularioauto" id="formularioauto" method="POST">
                     <div class="form-group col-lg-12 col-md-12 col-xs-12">
+                        <input type="hidden" id="id_anular" name="id_anular">
                         <label>Usuario:</label>
                         <input type="text" class="form-control" name="usuario" id="usuario">
                         <label>Contraseña:</label>
                         <input type="password" class="form-control" name="password" id="password">
                     </div>
-                    
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <button class="btn btn-primary" type="submit" id="btnGuardar2"><i class="fa fa-close"></i>  Anular</button>
+                        <button class="btn btn-danger pull-right" data-dismiss="modal" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" type="submit" id="btnGuardar2"><i class="fa fa-close"></i>  Anular</button>
-                        <button class="btn btn-danger pull-right" data-dismiss="modal" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                
             </div>
         </div>
     </div>

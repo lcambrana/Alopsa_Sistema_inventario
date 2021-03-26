@@ -9,6 +9,9 @@ function init(){
     $("#formularioingreso").on("submit",function(e){
        guardaryeditar(e); 
     });
+    $("#formularioauto").on("submit",function(e){
+        validarusuario(e);
+    });
 }
 function listar_bloque(){
     $.post("../ajax/bloque_posicion.php?op=listar_bloques",function(r){
@@ -181,17 +184,50 @@ function mostrar(id){
 }
 function dasactivar(idingreso){
    $("#getmodal").modal('show');
-   
+   $("#id_anular").val(idingreso);
+}
+function activar(idingreso){
+     bootbox.confirm("¿Se activara el ingreso seleccionado desea continuar?", function(result){
+		if (result) {
+			$.post("../ajax/datosmaestro.php?op=activar", {idingreso : idingreso}, function(e){
+				bootbox.alert(e);
+				tabla.ajax.reload();
+			});
+		}
+	});
 }
 function desactivaringreso(val){
      bootbox.confirm("¿Esta seguro de desactivar el ingreso seleccionado?", function(result){
 		if (result) {
 			$.post("../ajax/datosmaestro.php?op=desactivar", {idingreso : val}, function(e){
 				bootbox.alert(e);
+                                $('#getmodal').modal('toggle');
 				tabla.ajax.reload();
 			});
 		}
 	});
+}
+function validarusuario(e){
+    e.preventDefault();
+    $("#btnGuardar2").prop("disabled",false);
+    var usuario=$("#usuario").val();
+    var password=$("#password").val();
+    if ($("#usuario").val()==""){
+        bootbox.alert("Debe de Ingresar su usuario para anular el ingreso");
+    }else if ($("#password").val()=="") {
+        bootbox.alert('Debe de Ingresar su contraseña para continuar');
+    }else{
+        $.post("../ajax/usuario.php?op=validaranulacion",{"logina":usuario,"clavea":password},
+        function(data){
+            if (data!="null"){
+                var idanular=$("#id_anular").val();
+                desactivaringreso(idanular);
+            }else{
+                bootbox.alert("No cuenta con el acceso para anular el ingreso")
+            }
+        }
+        );
+    }
 }
 init();
 

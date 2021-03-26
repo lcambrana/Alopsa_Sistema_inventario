@@ -39,4 +39,8 @@ public function mostraringreso($id){
         $sql="update ingreso_maestro set estado='Anulado' where Id_Ingreso='$id'";
         return ejecutarConsulta($sql);
     }
+    public  function activar($id){
+        $sql="update ingreso_maestro set estado='Ingresado' where Id_Ingreso='$id'";
+        return ejecutarConsulta($sql);
+    }
 }
