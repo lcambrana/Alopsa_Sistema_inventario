@@ -15,20 +15,10 @@ if (!isset($_SESSION['nombre'])){
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h class="box-title"> Monitoreo de Contenedores <button class="btn btn-success" id="btnagregar" onclick="mostrarform(true)"><i class="fa fa-plus-circle"></i>  Agregar</button> </h>
+                        <h class="box-title">Asignacion del Contenedor <button class="btn btn-success" id="btnagregar" onclick="mostrarform(true)"><i class="fa fa-plus-circle"></i>  Agregar</button> </h>
                         <div class="box-tools pull-right">
                                     <a href="../vistas/dashboard.php"><button class="btn btn-info"><i class="fa fa-arrow-circle-left"></i> Volver</button></a>
-                        </div>
-                    </div>
-                    <div class="panel-body table-responsive" id="listadeingresos">
-                        <table id="tbllistadoingresos" class="table table-striped table-bordered table-condensed table-hover">
-                            <thead>
-                            <th></th>
-                            </thead>
-                            <tbody>
-                                
-                            </tbody>
-                        </table>
+                                </div>
                     </div>
                 </div>
             </div>
@@ -41,7 +31,7 @@ if (!isset($_SESSION['nombre'])){
     }
     require 'footer.php';
     ?>
-<script src="scripts/monitoreo.js"></script>
+<script src="scripts/asignaciones.js"></script>
 <?php
     
 }

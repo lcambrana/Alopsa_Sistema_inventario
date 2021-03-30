@@ -128,7 +128,7 @@ if ($_SESSION['ingresoc']==1) {
             <li><a href="conexiones.php"><i class="fa fa-plug"></i>Conexion</a></li>
           </ul>
           <ul class="treeview-menu">
-          <li><a href="descionexion.php"><i class="fa fa-minus-circle"></i>Desconexion</a></li>
+          <li><a href="desconexiones.php"><i class="fa fa-minus-circle"></i>Desconexion</a></li>
           </ul>
             <ul class="treeview-menu">
           <li><a href="asignaciones.php"><i class="fa fa-plus-square"></i>Asignaciones</a></li>
