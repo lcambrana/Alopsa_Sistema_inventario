@@ -23,6 +23,15 @@ if (!isset($_SESSION['nombre'])){
                     <div class="panel-body table-responsive" id="listadeingresos">
                         <table id="tbllistadoingresos" class="table table-striped table-bordered table-condensed table-hover">
                             <thead>
+                            <th>Contenedor</th>
+                            <th>Hora</th>
+                            <th>Producto</th>
+                            <th>Set Point</th>
+                            <th>Retorno</th>
+                            <th>Bloque</th>
+                            <th>Posicion</th>
+                            <th>Barco</th>
+                            <th>fecha</th>
                             <th></th>
                             </thead>
                             <tbody>
