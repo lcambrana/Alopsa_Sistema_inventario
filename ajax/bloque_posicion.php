@@ -21,7 +21,7 @@ switch ($_GET["op"]){
         if ($rspta->num_rows>0){
         echo '<option value="0">Seleccione Posicion</option>';
         while ($reg=$rspta->fetch_object()){
-            echo '<option value='.$reg->idPosicion.'>'.$reg->noPosicion.'</option>';;
+            echo '<option value='.$reg->idposicion.'>'.$reg->noposicion.'</option>';
         }
         }else{
            echo'<option value="0">Sin Posicion</option>';

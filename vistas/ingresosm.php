@@ -134,7 +134,7 @@ if (!isset($_SESSION['nombre'])){
                                                 </select>
                                            <input type="hidden" id="idpiloto" name="idpiloto">
                                         </div>
-                                    <div id="datos_piloto"></div>
+                                <div id="datos_piloto"></div>
                                       <div class="form-inline col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
                                      <div class="form-group col-lg-6 col-md-3 col-xs-12">
                                         <label>Observaciones</label>

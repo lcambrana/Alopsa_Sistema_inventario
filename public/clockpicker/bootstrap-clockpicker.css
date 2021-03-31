@@ -3,7 +3,9 @@
  * Copyright 2014 Wang Shenwei.
  * Licensed under MIT (https://github.com/weareoutman/clockpicker/blob/master/LICENSE)
  */
-
+.clockpicker-popover{
+    z-index: 999999 !important;
+}
 .clockpicker .input-group-addon {
 	cursor: pointer;
 }
