@@ -36,7 +36,7 @@ function mostrarform(){
     if(idm==""){
          $("#titulo").html("Agregar Monitoreo");
     }else{
-        $("#titulo").html("Modificar Monitoreo");
+        $("#titulo").html("Modificar Monitoreo No. "+idm);
     }
     $('#getmodalm').modal('toggle');
 }
@@ -96,7 +96,6 @@ function limpiar(){
     var dia = ("0" + now.getDate()).slice(-2);
     var mes = ("0" + (now.getMonth() + 1)).slice(-2);
     var today = now.getFullYear()+"-"+(mes)+"-"+dia;
-    alert(today);
     var hora = now.getHours();
     var minuto =("0" + now.getMinutes()).slice(-2);
     var segundo = ("0" + now.getSeconds()).slice(-2);
@@ -112,5 +111,24 @@ function limpiar(){
     $("#mecanico").val("");
     $("#observaciones").val();
     
+}
+function mostrar(id){
+    $.post("../ajax/monitoreo.php?op=mostrardatos",{idmon:id},
+            function(data,status){
+                data=JSON.parse(data);
+                $("#idmonitoreo").val(data.Id_m);
+                $("#horamonitoreo").val(data.Hora_De_Monitoreo);
+                $("#fecham").val(data.Fecha_Del_Monitoreo);
+                $("#retorno").val(data.Retorno);
+                $("#setpoint").val(data.Set_Point);
+                $("#suministro").val(data.Suministro);
+                $("#mecanico").val(data.Nombre_Del_Mecanico);
+                $("#observaciones").val(data.Observaciones);
+                $("#contenedor").val(data.id_ingreso);
+                $("#contenedor").selectpicker('refresh');
+                mostraringreso(data.id_ingreso);
+                mostrarform();
+            }
+    );
 }
 init();

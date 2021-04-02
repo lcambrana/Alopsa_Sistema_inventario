@@ -11,12 +11,12 @@ class monitoreo_c{
         $sql="CALL insertar_monitoreo('$horamonitoreo','$retorno','$observacion','$producto','$setpoint','$suministro','$fecha','$mecanico',$idingreso,$idf,$idusuario)";
         return ejecutarConsulta($sql);
     }
-    public function editar($id,$horamonitoreo,$retorno,$observacion,$producto,$setpoint,$suministro,$fecha,$mecanico,$idingreso,$idf,$idusuario){
-         $sql="CALL actualizar_monitoreo()";
+    public function editar($id,$horamonitoreo,$retorno,$observacion,$producto,$setpoint,$suministro,$fecha,$mecanico,$idingreso,$idf){
+         $sql="CALL actualizar_monitoreo($id,'$horamonitoreo','$retorno','$observacion','$producto','$setpoint','$suministro','$fecha','$mecanico',$idingreso,$idf)";
         return ejecutarConsulta($sql);
     }
     public function mostrarm($id){
-        $sql="";
+        $sql="CALL mostrar_datos_monitoreo('$id')";
         return ejecutarConsultaSimpleFila($sql);
     }
     public function listar(){
