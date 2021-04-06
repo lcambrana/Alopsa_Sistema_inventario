@@ -18,7 +18,26 @@ if (!isset($_SESSION['nombre'])){
                         <h class="box-title"> Conexion por Contenedor <button class="btn btn-success" id="btnagregar" onclick="mostrarform(true)"><i class="fa fa-plus-circle"></i>  Agregar</button> </h>
                         <div class="box-tools pull-right">
                                     <a href="../vistas/dashboard.php"><button class="btn btn-info"><i class="fa fa-arrow-circle-left"></i> Volver</button></a>
-                                </div>
+                        </div>
+                    </div>
+                    <div class="panel-body table-responsive" id="listaconexion">
+                        <table id="tbllistadoconexion" class="table table-striped table-bordered table-condensed table-hover">
+                            <thead>
+                            <th>contenedor</th>
+                            <th>Fecha Conexion</th>
+                            <th>Hora Conexion</th>
+                            <th>Set Point</th>
+                            <th>Suministro</th>
+                            <th>Retorno</th>
+                            <th>No. Ingreso</th>
+                            <th>Cabezal</th>
+                            <th>Piloto</th>
+                            <th>Opciones</th>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -31,7 +50,7 @@ if (!isset($_SESSION['nombre'])){
     }
     require 'footer.php';
     ?>
-<script src="scripts/conexiones.jsa"></script>
+<script src="scripts/conexiones.js"></script>
 <?php
     
 }
