@@ -29,6 +29,7 @@ if (!isset($_SESSION['nombre'])){
                                 <th>No. Conexion</th>
                                 <th>Opciones</th>    
                                 </thead>
+                                <tbody></tbody>
                             </table>
                         </div>
                     </div>
