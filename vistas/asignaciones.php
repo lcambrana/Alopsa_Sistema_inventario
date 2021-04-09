@@ -17,9 +17,17 @@ if (!isset($_SESSION['nombre'])){
                     <div class="box-header with-border">
                         <h class="box-title">Asignacion del Contenedor <button class="btn btn-success" id="btnagregar" onclick="mostrarform(true)"><i class="fa fa-plus-circle"></i>  Agregar</button> </h>
                         <div class="box-tools pull-right">
-                                    <a href="../vistas/dashboard.php"><button class="btn btn-info"><i class="fa fa-arrow-circle-left"></i> Volver</button></a>
-                                </div>
+                             <a href="../vistas/dashboard.php"><button class="btn btn-info"><i class="fa fa-arrow-circle-left"></i> Volver</button></a>
+                        </div>
                     </div>
+                    <div class="panel-body table-responsive" id="listaasignaciones">
+                        <table id="tbllistasignaciones" class="table table-striped table-bordered table-condensed table-hover">
+                            <thead>
+                            
+                            </thead>
+                        </table>
+                    </div>
+                    
                 </div>
             </div>
         </div>

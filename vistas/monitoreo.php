@@ -82,10 +82,7 @@ if (!isset($_SESSION['nombre'])){
                         <label>Fecha:</label>
                         <input type="date" class="form-control" name="fecham" id="fecham" value="<?php  echo date("Y-m-d"); ?>">
                         </div>
-                        <div class="form-group col-lg-3 col-md-3 col-xs-12">
-                        <label>Retorno:</label>
-                        <input type="text" class="form-control" name="retorno" id="retorno" placeholder="Retorno" onkeyup="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
-                        </div>
+                        
                         <div class="form-group col-lg-3 col-md-3 col-xs-12">
                         <label>Set Point:</label>
                         <input type="text" class="form-control" name="setpoint" id="setpoint" placeholder="Set Point" onkeyup="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
@@ -94,6 +91,17 @@ if (!isset($_SESSION['nombre'])){
                         <label>Suministro:</label>
                         <input type="text" class="form-control" name="suministro" id="suministro" placeholder="Suministro" onkeyup="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
                         </div>
+                        <div class="form-group col-lg-3 col-md-3 col-xs-12">
+                        <label>Retorno:</label>
+                        <input type="text" class="form-control" name="retorno" id="retorno" placeholder="Retorno" onkeyup="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
+                        </div>
+                        <div class="form-group col-lg-2 col-md-3 col-xs-12">
+                           <label>Temperatura</label>
+                           <select id="temperatura" name="temperatura" class="form-control">
+                               <option>F</option>
+                               <option>C</option>
+                           </select>
+                       </div>
                         <div class="form-group col-lg-3 col-md-3 col-xs-12">
                         <label>Mecanico:</label>
                         <input type="text" class="form-control" name="mecanico" id="mecanico" placeholder="mecanico" onkeyup="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">

@@ -91,6 +91,7 @@ if (!isset($_SESSION['nombre'])){
                         <label>Suministro:</label>
                         <input type="text" class="form-control" name="suministro"  autocomplete="off" id="suministro" placeholder="Suministro" onkeyup="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
                         </div>
+                       
                     </div>
                     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <button class="btn btn-primary" type="submit" id="btnGuardar"><i class="fa fa-save"></i>  Grabar</button>
