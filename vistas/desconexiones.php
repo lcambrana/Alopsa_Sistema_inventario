@@ -2,6 +2,7 @@
 
 ob_start();
 session_start();
+date_default_timezone_set("America/Guatemala");
 if (!isset($_SESSION['nombre'])){
     header("Location: login.html");
 }else{
@@ -62,8 +63,26 @@ if (!isset($_SESSION['nombre'])){
                         </select>
                     </div>
                     <div id="datoscone"></div>
+                    <div class="form-group col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                        <label>Fecha Desconexion:</label>
+                        <input type="date" id="fechadesc" name="fechadesc" class="form-control" value="<?php  echo date("Y-m-d"); ?>" placeholder="Fecha Desconexion">
+                    </div>
+                    <div class="form-group col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                        <label>Hora Desconexion:</label>
+                        <div class="input-group clockpicker">
+                            <input type="text" class="form-control" name="horadesc" id="horadesc" value="<?php $hora2 =new DateTime("now", new DateTimeZone(' America/Guatemala')); echo $hora2->format('H:i:s'); ?>">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-time"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                        <label>Total Horas</label>
+                        <input type="hidden" id="fechahorai" name="fechahorai">
+                        <input type="hidden" id="fechahoraf" name="fechahoraf">
+                        <input type="text" id="totalhoras" name="totalhoras" class="form-control" >
+                    </div>
                 </div>
-                
                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <button class="btn btn-primary" type="submit" id="btnGuardar"><i class="fa fa-save"></i>  Grabar</button>
                         <button class="btn btn-danger pull-right" onclick="cancelarform()" data-dismiss="modal" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
@@ -82,6 +101,13 @@ if (!isset($_SESSION['nombre'])){
     }
     require 'footer.php';
     ?>
+<script>
+$('.clockpicker').clockpicker({
+    placement:'bottom',
+    donetext:'Aceptar'
+});
+</script>
+<script src="../public/js/moment.min.js"></script>
 <script src="scripts/desconexiones.js"></script>
 <?php
     

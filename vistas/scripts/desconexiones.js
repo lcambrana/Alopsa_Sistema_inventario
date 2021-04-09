@@ -58,7 +58,24 @@ function mostrarconexion(val){
        type: "get", 
        datatype:"json",
        success: function(resp){
-           $('#datosicone').html(resp);
+           $('#datoscone').html(resp);
+           calcularhoras()
        }
     });
+}
+function calcularhoras(){
+    if ($('#contenedor').val()>0){
+    $('#fechahorai').val($("#fechac").val() + ' ' + $('#horac').val());
+    $('#fechahoraf').val($("#fechadesc").val() + ' ' + $('#horadesc').val());
+    var horaconexion=moment($('#fechahorai').val(),"YYYY-MM-DD HH:mm");
+    var horadesconexion=moment($('#fechahoraf').val(),"YYYY-MM-DD HH:mm" );
+    var totalfecha=horadesconexion.diff(horaconexion,'hours')
+    var min=totalfecha*60;
+    var mindef=horadesconexion.diff(horaconexion,'m')-min
+    
+    $("#totalhoras").val(totalfecha+':' + padDigitos(mindef,2));
+    }else{$("#totalhoras").val('0');}
+}
+function padDigitos(numero, digitos) {
+    return Array(Math.max(digitos - String(numero).length + 1, 0)).join(0) + numero;
 }

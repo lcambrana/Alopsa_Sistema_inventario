@@ -44,7 +44,15 @@ switch ($_GET['op']){
             $idcon=$_REQUEST['idconexion'];
             $rspta=$desconexion->datosconexion($idcon);
             while ($row= mysqli_fetch_array($rspta)){
-                echo '';
+                echo '<div class="form-group col-lg-3 col-md-3 col-xs-12">'
+                . '<label>Fecha Conexion:</label><input type="text" class="form-control" id="fechac" value="'.$row['Fecha_Conexion'].'" disabled="true"></div>'
+                . '<div class="form-group col-lg-3 col-md-3 col-xs-12"><label>Hora Conexion:</label><input type="text" id="horac" class="form-control" value="'.$row['Hora_De_Conexion'].'" disabled="true"></div>'
+                . '<div class="form-group col-lg-3 col-md-3 col-xs-12"><label>Setpoint:</label><input type="text" class="form-control" value="'.$row['Setpoint'].'" disabled="true"></div>'
+                . '<div class="form-group col-lg-3 col-md-3 col-xs-12"><label>Suministro:</label><input type="text" class="form-control" value="'.$row['Suministro'].'" disabled="true"></div>'
+                . '<div class="form-group col-lg-3 col-md-3 col-xs-12"><label>Fecha Ingreso:</label><input type="text" id="fechai" class="form-control" value="'.$row['Fecha_ingreso'].'" disabled="true"></div>'
+                . '<div class="form-group col-lg-3 col-md-3 col-xs-12"><label>Hora Ingreso:</label><input type="text" id="horai" class="form-control" value="'.$row['Hora_ingreso'].'" disabled="true"></div>'
+                . '<div class="form-group col-lg-3 col-md-3 col-xs-12"><label>Cabezal:</label><input type="text" class="form-control" value="'.$row['Cabezal'].'" disabled="true"></div>'
+                . '<div class="form-group col-lg-3 col-md-3 col-xs-12"><label>Piloto:</label><input type="text" class="form-control" value="'.$row['Nombre_de_Piloto'].'" disabled="true"></div>';
             }
             break;
 }
