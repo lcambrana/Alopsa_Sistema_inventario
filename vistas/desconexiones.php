@@ -61,16 +61,17 @@ if (!isset($_SESSION['nombre'])){
                         <label>Contenedor</label>
                         <select name="contenedor" id="contenedor" class="form-control select-picker" data-live-search="true">
                         </select>
+                        <input type="hidden" id="idconexion" name="idconexion">
                     </div>
                     <div id="datoscone"></div>
                     <div class="form-group col-lg-3 col-md-12 col-sm-12 col-xs-12">
                         <label>Fecha Desconexion:</label>
-                        <input type="date" id="fechadesc" name="fechadesc" class="form-control" value="<?php  echo date("Y-m-d"); ?>" placeholder="Fecha Desconexion">
+                        <input type="date" id="fechadesc" name="fechadesc" class="form-control" autocomplete="off" value="<?php  echo date("Y-m-d"); ?>" placeholder="Fecha Desconexion">
                     </div>
                     <div class="form-group col-lg-3 col-md-12 col-sm-12 col-xs-12">
                         <label>Hora Desconexion:</label>
                         <div class="input-group clockpicker">
-                            <input type="text" class="form-control" name="horadesc" id="horadesc" value="<?php $hora2 =new DateTime("now", new DateTimeZone(' America/Guatemala')); echo $hora2->format('H:i:s'); ?>">
+                            <input type="text" class="form-control" name="horadesc" id="horadesc" autocomplete="off" value="<?php $hora2 =new DateTime("now", new DateTimeZone(' America/Guatemala')); echo $hora2->format('H:i:s'); ?>">
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-time"></span>
                             </span>
@@ -80,7 +81,11 @@ if (!isset($_SESSION['nombre'])){
                         <label>Total Horas</label>
                         <input type="hidden" id="fechahorai" name="fechahorai">
                         <input type="hidden" id="fechahoraf" name="fechahoraf">
-                        <input type="text" id="totalhoras" name="totalhoras" class="form-control" >
+                        <input type="text" id="totalhoras" name="totalhoras" autocomplete="off" class="form-control" >
+                    </div>
+                    <div class="form-group col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                        <label>Observaciones:</label>
+                        <textarea class="form-control" id="observaciones" name="observaciones"  placeholder="Observaciones"></textarea>
                     </div>
                 </div>
                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -95,6 +100,31 @@ if (!isset($_SESSION['nombre'])){
     </div>
 </div> 
 </div>
+<div class="modal fade" id="getmodalau_desc" nama="getmodalau_desc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidde="true"  data-backdrop="static" 
+  data-keyboard="false">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Autorizacion de Anulacion</h4>
+            </div>
+            <div class="modal-body">
+                <form action="" name="formularioautorizacion" id="formularioautorizacion"method="POST">
+                    <div class="form-group col-lg-12 col-md-12 col-xs-12">
+                        <input type="hidden" id="id_desco" name="id_desco">
+                        <label>Usuario:</label>
+                        <input type="text" class="form-control" name="usuario" id="usuario">
+                        <label>contraseña:</label>
+                        <input type="password" class="form-control" id="password" name="password">
+                    </div
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <button class="btn btn-primary" type="submit" id="btnGuardar2"><i class="fa fa-close"></i>  Anular</button>
+                        <button class="btn btn-danger pull-right" data-dismiss="modal" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
         <?php
     }else{
         require 'noacceso.php';

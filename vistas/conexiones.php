@@ -128,7 +128,7 @@ if (!isset($_SESSION['nombre'])){
             </div>
         </div>
     </div>
-</div>
+
 
         <?php
     }else{

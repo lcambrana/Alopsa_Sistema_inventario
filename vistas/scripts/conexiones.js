@@ -97,7 +97,7 @@ function guardaryeditar(e){
     }
 }
 function limpiar(){
-     var now = new Date();
+    var now = new Date();
     var dia = ("0" + now.getDate()).slice(-2);
     var mes = ("0" + (now.getMonth() + 1)).slice(-2);
     var today = now.getFullYear()+"-"+(mes)+"-"+dia;

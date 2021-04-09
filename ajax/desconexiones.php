@@ -3,9 +3,27 @@ session_start();
 require '../modelos/desconexiones.php';
 
 $desconexion=new desconexiones();
+
+$iddesc= isset($_POST['iddesconexion'])? limpiarCadena($_POST['iddesconexion']):'';
+$idconec=isset($_POST['idconexion'])? limpiarCadena($_POST['idconexion']):'';
+$fechadesc= isset($_POST['fechadesc'])? limpiarCadena($_POST['fechadesc']):'';
+$horadesc= isset($_POST['horadesc'])? limpiarCadena($_POST['horadesc']):'';
+$totalh=isset($_POST['totalhoras'])? limpiarCadena($_POST['totalhoras']):'';
+$observaciones= isset($_POST['observaciones'])? limpiarCadena($_POST['observaciones']):'';
+$idf= isset($_POST['id_f'])? limpiarCadena($_POST['id_f']):'';
+$idingreso=isset($_POST['id_ingreso'])? limpiarCadena($_POST['id_ingreso']):'';
 $user_id=$_SESSION['idusuario'];
 
 switch ($_GET['op']){
+    case 'guardaryeditar':
+        if (empty($iddesc)){
+            $rspta=$desconexion->insertar($fechadesc,$horadesc,$totalh,$observaciones,$idingreso,$idf,$user_id,$idconec);
+            echo $rspta ? 'Se Ingreso la desconexion Exitosamente':'Error al realizar la desconexion';
+        }else{
+            $rspta=$desconexion->actualizar($iddesc,$fechadesc,$horadesc,$totalh,$observaciones,$idingreso,$idf,$idconec);
+             echo $rspta ? "Se ha actualizados correctamente" : "No se pudo actualizar los datos"; 
+        }
+        break;
     case 'listar':
         $rspta=$desconexion->listar();
         $datos=array();
@@ -35,7 +53,7 @@ switch ($_GET['op']){
         break;
         case 'listarconexiones':
             $rspta=$desconexion->listarconexiones();
-            echo '<option value="0">Selecione...</option>';
+            echo '<option value="0">Seleccione...</option>';
             while ($reg=$rspta->fetch_object()){
                 echo '<option value='.$reg->Id.'>'.$reg->Id.'-'.$reg->No_Contenedor.'</option>';
             }
@@ -52,7 +70,19 @@ switch ($_GET['op']){
                 . '<div class="form-group col-lg-3 col-md-3 col-xs-12"><label>Fecha Ingreso:</label><input type="text" id="fechai" class="form-control" value="'.$row['Fecha_ingreso'].'" disabled="true"></div>'
                 . '<div class="form-group col-lg-3 col-md-3 col-xs-12"><label>Hora Ingreso:</label><input type="text" id="horai" class="form-control" value="'.$row['Hora_ingreso'].'" disabled="true"></div>'
                 . '<div class="form-group col-lg-3 col-md-3 col-xs-12"><label>Cabezal:</label><input type="text" class="form-control" value="'.$row['Cabezal'].'" disabled="true"></div>'
-                . '<div class="form-group col-lg-3 col-md-3 col-xs-12"><label>Piloto:</label><input type="text" class="form-control" value="'.$row['Nombre_de_Piloto'].'" disabled="true"></div>';
+                . '<div class="form-group col-lg-3 col-md-3 col-xs-12"><label>Piloto:</label><input type="text" class="form-control" value="'.$row['Nombre_de_Piloto'].'" disabled="true"></div>'
+                . '<input type="hidden" id="id_f" name="id_f" value="'.$row['Id_f'].'"><input type="hidden" id="id_ingreso" name="id_ingreso" value="'.$row['Id_Ingreso'].'">';
             }
             break;
+    case 'mostrar':
+        $iddescon=$_REQUEST['iddesconexion'];
+        $rspta=$desconexion->mostrardesc($iddescon);
+        echo json_encode($rspta);
+        break;
+    case 'desactivar':
+        $iddesconexion=$_REQUEST['id_desc'];
+        $rspta=$desconexion->desactivar($iddesconexion);
+        echo $rspta ? "Conexion desactivados correctamente" : "No se pudo desactivar el Registro";
+
+        break;
 }
