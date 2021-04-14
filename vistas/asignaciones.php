@@ -59,10 +59,17 @@ if (!isset($_SESSION['nombre'])){
                             </select>
                             <input type="hidden" id="idingreso" name="idingreso">
                         </div>
+                        <div id="datosingreso"></div>
+                    </div>
+                     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <button class="btn btn-primary" type="submit" id="btnGuardar"><i class="fa fa-save"></i>  Grabar</button>
+                        <button class="btn btn-danger pull-right" onclick="cancelarform()" data-dismiss="modal" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
                     </div>
                 </form>
             </div>
+             <div class="modal-footer">
             
+            </div>
         </div>
     </div>
 </div>

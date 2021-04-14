@@ -42,4 +42,13 @@ case 'listaringresos':
             echo '<option value='.$reg->Id_Ingreso.'>'.$reg->Id_Ingreso.'-'.$reg->No_Contenedor.'</option>';
         }
     break;
+case 'mostraringreso':
+    $idingreso=$_REQUEST['idingreso'];
+    $rspta=$asgin->datosingreso($idingreso);
+    while($row= mysqli_fetch_array($rspta)){
+        echo '<div class="form-group col-lg-2 col-md-3 col-xs-12"><label>ORD</label><input type="text" class="form-control" id="ord" name="ord" value="'.$row['ord'].'" disabled="true"></div>'
+            .'<div class="form-group col-lg-3 col-md-3 col-xs-12"><label>Piloto</label><input type="text" class="form-control" value="'.$row['Nombre_de_Piloto'].'" disabled="true"></div>'
+            .'<div class="form-group col-lg-3 col-md-3 col-xs-12"><label>Licencia</label><input type="text" class="form-control" value="'.$row['Licencias'].'" disabled="true"></div>';
+    }
+    break;
 }

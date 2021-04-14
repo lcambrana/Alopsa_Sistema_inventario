@@ -1,5 +1,9 @@
 var tabla;
 
+$("#contenedor").change(function(){
+    var idingreso=$("#contenedor").val();
+    mostraringreso(idingreso);
+});
 function init(){
     listar();
     listarcomboingreso();
@@ -39,6 +43,17 @@ function listarcomboingreso(){
     $.post("../ajax/asignaciones.php?op=listaringresos",function(r){
         $("#contenedor").html(r);
         $("#contenedor").selectpicker('refresh');
+    });
+}
+function mostraringreso(val){
+    $.ajax({
+        url:'../ajax/asignaciones.php?op=mostraringreso',
+        data: {idingreso:val},
+        type: "get",
+        datatype: "json",
+        success: function(resp){
+            $('#datosingreso').html(resp);
+        }
     });
 }
 init();
