@@ -27,4 +27,12 @@ switch ($_GET["op"]){
            echo'<option value="0">Sin Posicion</option>';
         }
         break;
+    case 'listaposiciones':
+        $id=$_REQUEST['idbloque'];
+        $rspta=$bloqueposicion->listarposiciones($id);
+        echo '<option value="0">seleccione Posicion</option>';
+         while ($reg=$rspta->fetch_object()){
+            echo '<option value='.$reg->idposicion.'>'.$reg->idbloque.'-'.$reg->noposicion.'</option>';
+        }
+        break;
 }

@@ -60,6 +60,19 @@ if (!isset($_SESSION['nombre'])){
                             <input type="hidden" id="idingreso" name="idingreso">
                         </div>
                         <div id="datosingreso"></div>
+                        <div class="form-group col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                            <label>Bloque</label>
+                            <select name="bloque" id="bloque" class="form-control select-picker" data-live-search="true"></select>
+                        </div>
+                        <div class="form-group col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                            <label>Posicion</label>
+                            <select name="posiciones" id="posiciones" class="form-control select-picker" data-live-search="true"></select>
+                        </div>
+                        <div class="form-group col-lg-5 col-md-3 col-xs-4">
+                            <label>Observaciones:</label>
+                            <textarea class="form-control" id="observaciones" name="observaciones" ></textarea>
+                            <input type="hidden" id="mposi" name="mposi" >
+                        </div>
                     </div>
                      <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <button class="btn btn-primary" type="submit" id="btnGuardar"><i class="fa fa-save"></i>  Grabar</button>

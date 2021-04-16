@@ -5,12 +5,15 @@
         <group>
             <file>file:/C:/xampp/htdocs/inv_contenedores/ajax/monitoreo.php</file>
             <file>file:/C:/xampp/htdocs/inv_contenedores/vistas/monitoreo.php</file>
+            <file>file:/C:/xampp/htdocs/inv_contenedores/ajax/bloque_posicion.php</file>
+            <file>file:/C:/xampp/htdocs/inv_contenedores/modelos/bloqueposicion.php</file>
             <file>file:/C:/xampp/htdocs/inv_contenedores/ajax/asignaciones.php</file>
             <file>file:/C:/xampp/htdocs/inv_contenedores/modelos/asignaciones.php</file>
-            <file>file:/C:/xampp/htdocs/inv_contenedores/modelos/monitoreo.php</file>
+            <file>file:/C:/xampp/htdocs/inv_contenedores/vistas/scripts/ingresosm.js</file>
             <file>file:/C:/xampp/htdocs/inv_contenedores/vistas/asignaciones.php</file>
-            <file>file:/C:/xampp/htdocs/inv_contenedores/vistas/scripts/monitoreo.js</file>
+            <file>file:/C:/xampp/htdocs/inv_contenedores/modelos/monitoreo.php</file>
             <file>file:/C:/xampp/htdocs/inv_contenedores/vistas/scripts/asignaciones.js</file>
+            <file>file:/C:/xampp/htdocs/inv_contenedores/vistas/scripts/monitoreo.js</file>
         </group>
     </open-files>
 </project-private>

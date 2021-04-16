@@ -176,7 +176,7 @@ function desactivarcon(val){
 				tabla.ajax.reload();
 			});
   } else {
-    swal("se ha cancelo la accion!");
+    swal("se ha cancelado la accion!");
   }
 });
 }

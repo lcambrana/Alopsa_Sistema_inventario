@@ -85,9 +85,20 @@ function guardaryeditar(e){
            processData: false,
            
            success: function(datos){
-           bootbox.alert(datos);
-           tabla.ajax.reload();
-           $('#getmodalm').modal('toggle');
+            var d= datos.substring(0,2);
+            if (d=='Se'){
+                swal({
+                    icon:'success',title: 'Monitoreo',text:datos
+                    });
+                    tabla.ajax.reload();
+                     $('#getmodalm').modal('toggle');
+                   
+            }else if (d=='Er'){
+                swal({icon:'Error',title:'Error al Grabar',text:datos})
+            }
+            
+           
+           
        }
         });
         
@@ -148,9 +159,9 @@ function validarusuario(e){
     var usuario=$("#usuario").val();
     var password=$("#password").val();
     if ($("#usuario").val()==""){
-        bootbox.alert("Debe de Ingresar su usuario para anular el ingreso");
+        swal({ title: "Parametro Requerido", text:"Debe de Ingresar su usuario para anular el ingreso"});
     }else if ($("#password").val()=="") {
-        bootbox.alert('Debe de Ingresar su contraseña para continuar');
+         swal({title:"Parametro Requerido",text:'Debe de Ingresar su contraseña para continuar'});
     }else{
         $.post("../ajax/usuario.php?op=validaranulacion",{"logina":usuario,"clavea":password},
         function(data){
@@ -158,21 +169,31 @@ function validarusuario(e){
                 var idanular=$("#id_monitoreo").val();
                 desactivar_m(idanular,);
             }else{
-                bootbox.alert("No cuenta con el acceso para anular el ingreso")
+                swal({title:'Anulacion Cancelada',title:"No cuenta con el acceso para anular el ingreso"})
             }
         }
         );
     }
 }
 function desactivar_m(val){
-     bootbox.confirm("¿Esta seguro de desactivar el ingreso seleccionado?", function(result){
-		if (result) {
-			$.post("../ajax/monitoreo.php?op=desactivar", {id_m : val}, function(e){
+    swal({
+        title: "Anulacion de Registro",
+        text: "¿Esta seguro de desactivar el ingreso seleccionado?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+            .then((willDelete) =>{
+                if (willDelete){
+                $.post("../ajax/monitoreo.php?op=desactivar", {id_m : val}, function(e){
 				bootbox.alert(e);
                                 $('#getmodalau_m').modal('toggle');
 				tabla.ajax.reload();
 			});
-		}
-	});
+                    } else {
+                    swal("Se ha cancelado la accion")
+                }
+            });
+    
 }
 init();
