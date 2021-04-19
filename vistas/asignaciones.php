@@ -86,6 +86,32 @@ if (!isset($_SESSION['nombre'])){
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="getmodalau_asig" nama="getmodalau_asig" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidde="true"  data-backdrop="static" 
+  data-keyboard="false">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Autorizacion de Anulacion</h4>
+            </div>
+            <div class="modal-body">
+                <form action="" name="formularioautorizacion" id="formularioautorizacion"method="POST">
+                    <div class="form-group col-lg-12 col-md-12 col-xs-12">
+                        <input type="hidden" id="id_monitoreo" name="id_monitoreo">
+                        <label>Usuario:</label>
+                        <input type="text" class="form-control" name="usuario" id="usuario">
+                        <label>contraseña:</label>
+                        <input type="password" class="form-control" id="password" name="password">
+                    </div
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <button class="btn btn-primary" type="submit" id="btnGuardar2"><i class="fa fa-close"></i>  Anular</button>
+                        <button class="btn btn-danger pull-right" data-dismiss="modal" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
         <?php
     }else{
         require 'noacceso.php';

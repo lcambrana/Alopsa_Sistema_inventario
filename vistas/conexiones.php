@@ -86,6 +86,13 @@ if (!isset($_SESSION['nombre'])){
                                <option value="C">C</option>
                            </select>
                        </div>
+                       <div class="form-group col-lg-3 col-md-12 col-sm-12">
+                           <label>Tipo Conexion:</label>
+                           <select id="tipoconexion" name="tipoconexion" class="form-control">
+                               <option value="EE">Energia Electrica</option>
+                               <option value="PP">Power Pack</option>
+                           </select>
+                       </div>
                        <div class="form-group col-lg-3 col-md-3 col-xs-12">
                         <label>Retorno:</label>
                         <input type="text" class="form-control" name="retorno" id="retorno"  autocomplete="off" placeholder="Retorno" onkeyup="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">

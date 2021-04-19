@@ -143,9 +143,16 @@ function guardaryeditar(e){
        processData: false,
        
        success: function(datos){
-           bootbox.alert(datos);
-           mostrarform(false);
-           tabla.ajax.reload();
+           var cadena=datos.substring(0,2);
+           if (cadena=='Se'){
+               swal({icon:'success',title:'Ingreso Maestro',text:datos});
+                mostrarform(false);
+                 tabla.ajax.reload();
+           }else if (d=='Er'){
+                swal({icon:'Error',title:'Error al Grabar',text:datos})
+           }
+   
+          
        }
     });
 }
@@ -190,25 +197,39 @@ function dasactivar(idingreso,idbloque,posicion){
    $("#idp").val(posicion);
 }
 function activar(idingreso,idbloque,posicion){
-     bootbox.confirm("¿Se activara el ingreso seleccionado desea continuar?", function(result){
-		if (result) {
-			$.post("../ajax/datosmaestro.php?op=activar", {idingreso : idingreso, idbloque:idbloque, posicion: posicion}, function(e){
+      swal({
+       title:"Activacion de Ingreso Maestro",
+       text:"¿Se activara el ingreso seleccionado desea continuar?",
+       icon:"success",
+       buttons: true,
+       dangerMode: true,
+    }).then((willDelete)=>{
+        if (willDelete){
+        $.post("../ajax/datosmaestro.php?op=activar", {idingreso : idingreso, idbloque:idbloque, posicion: posicion}, function(e){
 				bootbox.alert(e);
 				tabla.ajax.reload();
 			});
-		}
-	});
+              }
+    });
+   
 }
 function desactivaringreso(val,val2,val3){
-     bootbox.confirm("¿Esta seguro de desactivar el ingreso seleccionado?", function(result){
-		if (result) {
-			$.post("../ajax/datosmaestro.php?op=desactivar", {idingreso : val,idbloque:val2,idposicion:val3}, function(e){
-				bootbox.alert(e);
+    swal({
+       title:"Anulacion de Ingreso Maestro",
+       text:"¿Esta seguro de desactivar el ingreso seleccionado?",
+       icon:"warning",
+       buttons: true,
+       dangerMode: true,
+    }).then((willDelete)=>{
+        if (willDelete){
+            $.post("../ajax/datosmaestro.php?op=desactivar", {idingreso : val,idbloque:val2,idposicion:val3}, function(e){
+				swal({title:e});
                                 $('#getmodal').modal('toggle');
 				tabla.ajax.reload();
 			});
-		}
-	});
+        }
+    })
+  
 }
 function validarusuario(e){
     e.preventDefault();
@@ -216,9 +237,9 @@ function validarusuario(e){
     var usuario=$("#usuario").val();
     var password=$("#password").val();
     if ($("#usuario").val()==""){
-        bootbox.alert("Debe de Ingresar su usuario para anular el ingreso");
+        swal({title:"Debe de Ingresar su usuario para anular el ingreso"});
     }else if ($("#password").val()=="") {
-        bootbox.alert('Debe de Ingresar su contraseña para continuar');
+       swal({title:'Debe de Ingresar su contraseña para continuar'});
     }else{
         $.post("../ajax/usuario.php?op=validaranulacion",{"logina":usuario,"clavea":password},
         function(data){
@@ -228,7 +249,7 @@ function validarusuario(e){
                 var idpo=$("#idp").val()
                 desactivaringreso(idanular,idblo,idpo);
             }else{
-                bootbox.alert("No cuenta con el acceso para anular el ingreso")
+                swql({ text:"No cuenta con el acceso para anular el ingreso"})
             }
         }
         );

@@ -32,7 +32,7 @@ switch ($_GET["op"]){
     case 'guardaryeditar':
         if (empty($id)){
             $rspta=$datosmaestros->insertar($fechai,$horai,$contenedor,$barco,$tipocontenido,$descontenido,$detalleservicio,$marchamo,$horatir,$serietir,$producto,$orden,$bloque,$posicion,$destino,$fechaasignacion,$idpiloto,$user_id,$observaciones);
-            echo $rspta ? 'Ingreso Realizado Exitosamente':'Error al realizar el Ingreso';
+            echo $rspta ? 'Se ha hecho el Ingreso Exitosamente':'Error al realizar el Ingreso';
         }else {
             $noposicionac= isset($_POST['noposicion']);
             if ($posicion==0){
@@ -42,7 +42,7 @@ switch ($_GET["op"]){
             }
             $rspta=$datosmaestros->actualizar($id, $fechai,$horai,$contenedor,$barco,$tipocontenido,$descontenido,$detalleservicio,$marchamo,$horatir,$serietir,$producto,$orden,$bloque,$nposicion,$destino,$fechaasignacion,$idpiloto,$user_id,$observaciones);
                     
-            echo $rspta ? "Datos actualizados correctamente" : "No se pudo actualizar los datos"; 
+            echo $rspta ? "Se ha actualizados correctamente" : "Error: No se pudo actualizar los datos"; 
         }
         
         break;

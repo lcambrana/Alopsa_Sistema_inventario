@@ -178,7 +178,7 @@ function validarusuario(e){
 function desactivar_m(val){
     swal({
         title: "Anulacion de Registro",
-        text: "¿Esta seguro de desactivar el ingreso seleccionado?",
+        text: "¿Esta seguro de desactivar el Monitoreo seleccionado?",
         icon: "warning",
         buttons: true,
         dangerMode: true,
@@ -186,7 +186,7 @@ function desactivar_m(val){
             .then((willDelete) =>{
                 if (willDelete){
                 $.post("../ajax/monitoreo.php?op=desactivar", {id_m : val}, function(e){
-				bootbox.alert(e);
+				swal({title:e});
                                 $('#getmodalau_m').modal('toggle');
 				tabla.ajax.reload();
 			});

@@ -7,6 +7,8 @@ $id=isset($_POST['idasignacion'])? limpiarCadena($_POST['idasignacion']):"";
 $idingreso= isset($_POST['contenedor'])? limpiarCadena($_POST['contenedor']):"";
 $idf=isset($_POST['idf'])? limpiarCadena($_POST['idf']):"";
 $bloque=isset($_POST['bloque'])? limpiarCadena($_POST['bloque']):"";
+$bloquea=isset($_POST['idbloque'])? limpiarCadena($_POST['idbloque']):"";
+$posiciona=isset($_POST['idposicion'])? limpiarCadena($_POST['idposicion']):"";
 $posicion=isset($_POST['posiciones'])? limpiarCadena($_POST['posiciones']):"";
 $observaciones=isset($_POST['observaciones'])? limpiarCadena($_POST['observaciones']):"";
 $user_id=$_SESSION['idusuario'];
@@ -14,10 +16,11 @@ $user_id=$_SESSION['idusuario'];
 switch ($_GET['op']){
 case 'guardaryeditar':
     if (empty($id)){
-        $rspta=$asgin->insertar($observaciones,$bloque,$posicion,$idingreso,$idf,$user_id);
+        $rspta=$asgin->insertar($observaciones,$bloque,$posicion,$idingreso,$idf,$user_id,$bloquea,$posiciona);
          echo $rspta ? 'Se ingreso la asignacion Exitosamente':'Error al realizar la asignacion';
     }else{
-         echo $rspta ? "Datos actualizados correctamente" : "No se pudo actualizar los datos"; 
+        $rspta=$asgin->actualizar($id, $observaciones, $bloque, $posicion, $idingreso, $idf, $bloquea, $posiciona);
+         echo $rspta ? "Se ha actualizados correctamente" : "No se pudo actualizar los datos"; 
     }
     break;
 case 'listar':
@@ -75,6 +78,11 @@ case 'validarposicion':
     $bloque=$_REQUEST['idbloque'];
     $posicion=$_REQUEST['idposicion'];
     $rspta=$bloquep->validarposicion($bloque,$posicion);
+    echo json_encode($rspta);
+    break;
+case 'mostrarasig':
+    $idasig=$_REQUEST['idasignacion'];
+    $rspta=$asgin->mostrarasignacion($idasig);
     echo json_encode($rspta);
     break;
 }

@@ -157,4 +157,24 @@ function guardaryeditar(e){
       });
     }
 }
+function mostrar(id){
+    $.post("../ajax/asignaciones.php?op=mostrarasig",{idasignacion:id},
+    function(data,status){
+        datos=JSON.parse(data);
+         $("#contenedor").val(datos.id);
+         $("#contenedor").selectpicker('refresh');
+         $("#observaciones").val(datos.observaciones);
+         $("#idasignacion").val(datos.Id_a);
+         $("#bloque").val(datos.bloque);
+         $("#bloque").selectpicker('refresh');
+         mostraringreso(datos.id);
+         mostrarmodal();
+        
+    });
+}
+
+function dasactivar(id){
+     $("#getmodalau_asig").modal('show');
+    $("#id_anular").val(id);
+}
 init();

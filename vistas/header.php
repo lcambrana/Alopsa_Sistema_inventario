@@ -123,6 +123,13 @@ if ($_SESSION['ingresoc']==1) {
             <li><a href="ingresosm.php"><i class="fa fa-ship"></i>Ingreso Maestro</a></li>
           </ul>
           <ul class="treeview-menu">
+            <li><a href="daniostir.php"><i class="fa fa-calendar-times-o"></i>Daños TIR</a></li>
+          </ul>
+          <ul class="treeview-menu">
+            <li><a href="posicionpredio.php"><i class="fa fa-caret-square-o-left"></i>Posicion Predio</a></li>
+          </ul>
+          
+          <ul class="treeview-menu">
             <li><a href="conexiones.php"><i class="fa fa-plug"></i>Conexion</a></li>
           </ul>
            <ul class="treeview-menu">
