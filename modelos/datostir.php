@@ -14,4 +14,8 @@ class datostir{
         $sql="select Id_Ingreso,No_Contenedor from ingreso_maestro where estado='Ingresado'";
         return ejecutarConsulta($sql);
     }
+    public function datosingreso($ingreso){
+         $sql="call datosingreso_datostir('$ingreso')";
+        return ejecutarConsulta($sql);
+    }
 }
