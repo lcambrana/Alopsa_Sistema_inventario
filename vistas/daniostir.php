@@ -76,6 +76,13 @@ if (!isset($_SESSION['nombre'])){
                                 <input type="hidden" id="idingreso" name="idingreso">
                         </div>
                         <div id="datosingreso"></div>
+                        <select name="oingrtir" id="oingrtir" class="form-control"  multiple="multiple" style="display: none;">
+                            <option value="AL">Alabama</option>
+                            <option value="AK">Alaska</option>
+                            <option value="AZ">Arizona</option>
+                            <option value="AR">Arkansas</option>
+                            <option selected value="CA">California</option>
+                          </select>
                     </div>
                     <div class="row">
                           <div class="form-group col-lg-3 col-md-3 col-xs-12">
@@ -174,17 +181,19 @@ if (!isset($_SESSION['nombre'])){
                                     <option value="puerta">Puertas</option>
                                     <option value="chasis">Chasis</option>
                                     <option value="llantas">Llantas</option>
+                                    <option value="marcham">Marchamos</option>
                                 </select>
                             </div>
                             <div class="form-group col-lg-2 col-md-12 col-sm-12 col-xs-12">
                                 <label>Opciones Daños</label>
                                 <select name="opcionesd" id="opcionesd" class="form-control select-picker" data-live-search="true"></select>
                             </div>
+                            <div id="select_esp"></div>
                             <div class="form-group col-lg-4 col-md-12 col-sm-12 col-xs-12">
                                <label>Observacion</label>
                                 <textarea name="observacionf" id="observacionf" class="form-control"></textarea>
                             </div>
-                            <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <div class="form-group col-lg-2 col-md-3 col-sm-3 col-xs-3">
                                 <div align="center">
                                     <p></p><br>
                                     <button id="agregar" type="button" name="agregar" class="btn btn-success"><i class="fa fa-plus-circle"></i>  Agregar</button>
@@ -211,12 +220,24 @@ if (!isset($_SESSION['nombre'])){
                                     <label>Observaciones:</label>
                                     <textarea id="observaciones" name="observaciones" class="form-control"></textarea>
                                 </div>
+                                <div class="form-group col-lg-3">
+                                    <label>Cliente</label>
+                                    <input type="text" id="cliente" name="cliente" class="form-control">
+                                </div>
                             </div>
                         </div>  
+                        
                    </div>
+                     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <button class="btn btn-primary" type="submit" id="btnGuardar"><i class="fa fa-save"></i>  Grabar</button>
+                        <button clsdd="btn btn-success" onclick="enviadetallefallas(1)">prueba</button>
+                        <button class="btn btn-danger pull-right" onclick="cancelarform()" data-dismiss="modal" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                    </div>
                 </form>
             </div>
+            <div class="modal-footer"></div>
         </div>
+        
     </div>
 </div> 
     <?php    
@@ -227,7 +248,7 @@ if (!isset($_SESSION['nombre'])){
     
     ?>
 <script  type="text/javascript">
-
+$("select").bsMultiSelect();
 $('.clockpicker').clockpicker({
      donetext: 'Done'
 });

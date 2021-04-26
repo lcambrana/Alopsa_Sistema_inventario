@@ -26,6 +26,6 @@
     <script src="../public/js/bootbox.min.js"></script> 
     <script src="../public/js/bootstrap-select.min.js"></script>
     <script type="text/javascript" src="../public/clockpicker/bootstrap-clockpicker.min.js"></script>
-    
+    <script src="../public/bsmultiselect/js/BsMultiSelect.js"></script>
 </body>
 </html>

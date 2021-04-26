@@ -7,6 +7,9 @@ function init(){
       listar();
       listarcomboingreso();
       tabladanios();
+       $("#formulariotir").on("submit",function(e){
+       guardaryeditar(e); 
+    });
 }
 
 function listar(){
@@ -61,8 +64,24 @@ $("#contenedor").change(function(){
     mostraringreso(idingreso);
 });
 $("#ubicacion").change(function(){
+    $('#select_esp').html("");
     var opcionu=$("#ubicacion").val();
     mostrardanios(opcionu);
+});
+$("#opcionesd").change(function(){
+   var opcionfalla=$('#ubicacion').val();
+   if (opcionfalla=='llantas'||opcionfalla=='marcham'){
+       $.ajax({
+       url:'../ajax/daniostir.php?op=crearselect',
+       type: "get",
+       datatype: "json",
+       success:function(resp){
+            $('#select_esp').html(resp);
+       }
+    });
+   }else{
+       $('#select_esp').html("");
+   }
 });
 $('#agregar').click(function(){
     var ubicacion = document.getElementById("ubicacion");
@@ -111,4 +130,53 @@ function mostrardanios(val){
         $("#opcionesd").html(r);
         $("#opcionesd").selectpicker('refresh');
     })
+}
+function guardaryeditar(e){
+    e.preventDefault();
+    $("#btnGuardar").prop("disabled",false);
+    var formdata=new FormData($("#formulariotir")[0]);
+     $.ajax({
+       url: "../ajax/daniostir.php?op=guardaryeditar",
+       type: "POST",
+       data: formdata,
+       contentType: false,
+       processData: false,
+       
+       success: function(datos){
+           var cadena=datos.substring(0,2);
+           if (cadena>=0){
+               enviadetallefallas(cadena)
+           }else if (d=='Er'){
+                swal({icon:'Error',title:'Error al Grabar',text:datos})
+           }
+   
+          
+       }
+    });
+}
+function enviadetallefallas(val){
+    var filas=[];
+    $('#tablafallastir tbody tr').each(function(){
+        var ubic=$(this).find('td').eq(1).text();
+        var descripd=$(this).find('td').eq(2).text();
+        var opcion=$(this).find('td').eq(3).text();
+        var obser=$(this).find('td').eq(4).text();
+        
+        var fila={
+          val,
+          ubic,
+          descripd,
+          opcion,
+          obser
+        };
+        filas.push(fila);
+    });
+   $.ajax({
+       url:'../ajax/daniostir.php?op=enviardetalle',
+       type:"POST",
+       data:{datosfilas:JSON.stringify(filas)},
+       success:function(data){
+           console.log(data);
+       }
+   });
 }

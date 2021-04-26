@@ -66,4 +66,33 @@ switch ($_GET['op']){
            }
            
            break;
+       case 'guardaryeditar':
+           break;
+       case 'enviardetalle':
+            $insertado=0;
+           $dfilas = json_decode($_POST['datosfilas'],true);
+           foreach ($dfilas as $filas){
+               $item=$filas['val'];
+               $ubica=$filas['ubic'];
+               $desc=$filas['descripd'];
+               $op=$filas['opcion'];
+               $ob=$filas['obser'];
+               if ($op=='SI'){
+                   $op1=1;
+               }else{$op1=0;}
+                   
+                 $rspta=$datosTIR->inserta_detalle_tir($item,$ubica,$desc,$op1,$ob);
+                 if($rspta==true){
+                     $insertado=$insertado+1;
+                 }
+           }
+           if ($insertado>=1){
+               echo 'Se ha Insertado los Datos Tir';
+           }else {
+               echo 'Error: Error al Grabar';
+           }
+           break;
+       case 'crearselect':
+           echo '<div class="form-group col-lg-2 col-md-3 col-xs-12"><label>Posicion</label><select class="form-control" id="posicion" name="Posicion"><option value="izq">Izquierda</option><option value="der">Derecha</option></select></div>';
+           break;
 }

@@ -22,4 +22,13 @@ class datostir{
         $sql="select * from dfallatir where utfalla='$ufalla'";
         return ejecutarConsulta($sql);
     }
+    public function inserta_detalle_tir($id,$ubicacion,$descd,$op,$obser){
+        $sql="CALL insert_fallastir($id,'$ubicacion','$descd',$op,'$obser')";
+        return ejecutarConsulta($sql);
+    }
+    public function Insertar(){}
+    
+    public function actualizar() {
+        
+    }
 }
