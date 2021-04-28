@@ -215,6 +215,7 @@ if (!isset($_SESSION['nombre'])){
                                     <th>Ubicacion</th>
                                     <th>Descripcion daño</th>
                                     <th>Opcion</th>
+                                    <th>posicion</th>
                                     <th>Observaciones</th>
                                     <th>Borrar</th>
                                 </thead>

@@ -102,14 +102,20 @@ $('#agregar').click(function(){
     var opd=document.getElementById("opcionesd");
     var opciond =opd.options[opd.selectedIndex].text;
     var observacion = $('#observacionf').val();
-       
-    tabla2.row.add([i,ubic,opciond,'SI',observacion,'<button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button>']).draw(false);
+    var pos =document.getElementById("posicion");
+    var posi
+    if ( $('#ubicacion').val()=='llantas' || $('#ubicacion').val()=='marcham'){
+        posi=pos.options[pos.selectedIndex].text;
+    }else {posi="No Aplica";};
+    tabla2.row.add([i,ubic,opciond,'SI',posi,observacion,'<button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button>']).draw(false);
     i++;
     $('#ubicacion').val("");
     $('#ubicacion').selectpicker('refresh');
     $('#opcionesd').val("");
     $('#opcionesd').selectpicker('refresh');
     $("#observacionf").val("");
+    $('#opcionesd').val(false).trigger("change");
+    
     $("#tablafallastir").DataTable();
     
 });
@@ -191,9 +197,8 @@ function limpiar(){
     $('#chassis').val('');
     $('#fecha').val(today);
     $('#hora').val(horaactual);
-    //tabla2.row('.selected').remove().draw( false );
     eliminar_tabla();
-    //$("#tablafallastir tbody").children().html("");
+    
     
 }
 function eliminar_tabla(){
