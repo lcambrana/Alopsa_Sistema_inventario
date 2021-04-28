@@ -66,6 +66,20 @@ switch ($_GET['op']){
            }
            
            break;
+       case 'listar_tchasis':
+           $rspta=$datosTIR->listar_tchasis();
+           echo '<option value="0">Seleccione..</option>';
+           while ($reg=$rspta->fetch_object()){
+               echo '<option value='.$reg->descripcion.'>'.$reg->descripcion.'</option>';
+           }
+           break;
+       case 'listar_tcontenedor':
+           $rspta=$datosTIR->listar_tcontenedores();
+           echo '<option value="0">Seleccione..</option>';
+           while ($reg=$rspta->fetch_object()){
+               echo '<option value='.$reg->descripcion.'>'.$reg->descripcion.'</option>';
+           }
+           break;
        case 'guardaryeditar':
            break;
        case 'enviardetalle':

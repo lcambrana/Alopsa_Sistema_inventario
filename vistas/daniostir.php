@@ -76,13 +76,22 @@ if (!isset($_SESSION['nombre'])){
                                 <input type="hidden" id="idingreso" name="idingreso">
                         </div>
                         <div id="datosingreso"></div>
-                        <select name="oingrtir" id="oingrtir" class="form-control"  multiple="multiple" style="display: none;">
-                            <option value="AL">Alabama</option>
-                            <option value="AK">Alaska</option>
-                            <option value="AZ">Arizona</option>
-                            <option value="AR">Arkansas</option>
-                            <option selected value="CA">California</option>
-                          </select>
+                        <div class="form-group col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                            <label>Tamaño Chasis:</label>
+                            <select id="tipochasis" name="tipochasis" class="form-control select-picker" data-live-search="true"></select>
+                        </div>
+                        <div class="form-group col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                            <label>Refrigeracion</label>
+                            <select id='refrigeracion' name="refrigeracion" class="form-control select-picker">
+                                <option value="">Seleccione..</option>
+                                <option value="gens">Gens</option>
+                                <option value="reef">Reef</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                            <label>Tipo Contenedor:</label>
+                            <select id='tipocontenedor' name="tipocontenedor" class="form-control select-picker" data-live-search="true"></select>
+                        </div>
                     </div>
                     <div class="row">
                           <div class="form-group col-lg-3 col-md-3 col-xs-12">
@@ -248,11 +257,10 @@ if (!isset($_SESSION['nombre'])){
     
     ?>
 <script  type="text/javascript">
-$("select").bsMultiSelect();
+
 $('.clockpicker').clockpicker({
      donetext: 'Done'
 });
-
 
  //iCheck for checkbox and radio inputs
     $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({

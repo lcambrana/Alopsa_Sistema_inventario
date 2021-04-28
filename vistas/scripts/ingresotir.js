@@ -6,7 +6,9 @@ init();
 function init(){
       listar();
       listarcomboingreso();
+      listartchasis();
       tabladanios();
+      tipo_contenedores();
        $("#formulariotir").on("submit",function(e){
        guardaryeditar(e); 
     });
@@ -39,7 +41,6 @@ function listar(){
 
 function tabladanios(){
     tabla2=$('#tablafallastir').dataTable({
-      
     }).DataTable();
 }
 function mostrarmodal(){
@@ -57,6 +58,18 @@ function listarcomboingreso(){
          $("#contenedor").html(r);
         $("#contenedor").selectpicker('refresh');
     });
+}
+function listartchasis(){
+    $.post('../ajax/daniostir.php?op=listar_tchasis',function(r){
+        $('#tipochasis').html(r);
+        $('#tipochasis').selectpicker('refresh');
+    })
+}
+function tipo_contenedores(){
+    $.post('../ajax/daniostir.php?op=listar_tcontenedor',function(r){
+        $('#tipocontenedor').html(r);
+        $('#tipocontenedor').selectpicker('refresh');
+    })
 }
 
 $("#contenedor").change(function(){
@@ -153,6 +166,44 @@ function guardaryeditar(e){
           
        }
     });
+}
+function cancelarform(){
+    limpiar();
+}
+function limpiar(){
+    
+    var now = new Date();
+    var day = ("0" + now.getDate()).slice(-2);
+    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+    var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+    var hora = now.getHours();
+    var minuto =("0" + now.getMinutes()).slice(-2);
+    var segundo = ("0" + now.getSeconds()).slice(-2);
+    var horaactual = hora + ":" + minuto + ":" + segundo;
+    $('#contenedor').val('');
+    $('#contenedor').selectpicker('refresh');
+    $('#tipochasis').val('');
+    $('#tipochasis').selectpicker('refresh');
+    $('#refrigeracion').val('');
+    $('#refrigeracion').selectpicker('refresh');
+    $('#tipocontenedor').val('');
+    $('#tipocontenedor').selectpicker('refresh');
+    $('#chassis').val('');
+    $('#fecha').val(today);
+    $('#hora').val(horaactual);
+    //tabla2.row('.selected').remove().draw( false );
+    eliminar_tabla();
+    //$("#tablafallastir tbody").children().html("");
+    
+}
+function eliminar_tabla(){
+  var elmtTable = document.getElementById('tablafallastir');
+    var tableRows = elmtTable.getElementsByTagName('tr');
+    var rowCount = tableRows.length;
+
+    for (var x=rowCount-1; x>0; x--) {
+       tabla2.row().remove().draw( false );
+    }
 }
 function enviadetallefallas(val){
     var filas=[];

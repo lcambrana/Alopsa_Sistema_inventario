@@ -31,4 +31,12 @@ class datostir{
     public function actualizar() {
         
     }
+    public function listar_tchasis(){
+        $sql="select * from tamaniochasis";
+        return ejecutarConsulta($sql);
+    }
+    public function listar_tcontenedores(){
+        $sql="select * from tipocontenedor";
+        return ejecutarConsulta($sql);
+    }
 }
