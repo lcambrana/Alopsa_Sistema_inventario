@@ -9,7 +9,7 @@ $idtir=isset($_POST['idintir'])? limpiarCadena($_POST['idintir']):"";
 $contenedor= isset($_POST['contenedor'])? limpiarCadena($_POST['contenedor']):'';
 $serietir= isset($_POST['serie_tir'])? limpiarCadena($_POST['serie_tir']):"";
 $chasis= isset($_POST['chassis'])? limpiarCadena($_POST['chassis']):"";
-$tchissis= isset($_POST['tipochasis'])? limpiarCadena($_POST['tipochasis']):'';
+$tchassis= isset($_POST['tipochasis'])? limpiarCadena($_POST['tipochasis']):'';
 $refr=isset($_POST['refrigeracion'])? limpiarCadena($_POST['refrigeracion']):'';
 $tcon= isset($_POST['tipocontenedor'])? limpiarCadena($_POST['tipocontenedor']):'';
 $fecha= isset($_POST['fecha'])? limpiarCadena($_POST['fecha']):'';
@@ -30,28 +30,25 @@ $cli= isset($_POST['cliente'])? limpiarCadena($_POST['cliente']):'';
 $dest= isset($_POST['destino'])? limpiarCadena($_POST['destino']):'';
 $nav= isset($_POST['naviera'])? limpiarCadena($_POST['naviera']):'';
 $idf = isset($_POST['idf'])? limpiarCadena($_POST['idf']):'';
+$user_id=$_SESSION['idusuario'];
 switch ($_GET['op']){
            case 'guardaryeditar':
-           if ($tmingreso==on){
-               $tipomov='Ingreso';
-           }else if($tmsalida==on){
+           if ($tmingreso=='on'){$tipomov='Ingreso'; }else if($tmsalida=='on'){
                $tipomov='Salida';
            }
-           if ($consi==on){
-               $convasio='si';
-           }else if($conno==on){
+           if ($consi=='on'){$convasio='si';}else if($conno=='on'){
                $convasio='no';
            }
-           if ($izq==on){$izqu=true;}else{$izqu=false;}
-           if ($der==on){$dere=true;}else{$dere=false;}
-           if ($fre==on){$fren=true;}else{$fren=false;}
-           if ($int==on){$inte=true;}else{$inte=false;}
-           if ($tra==on){$tras=true;}else{$tras=false;}
-           if ($tec==on){$tech=true;}else{$tech=false;}
-           if ($cha==on){$chas=true;}else{$chas=false;}
+           if ($izq=='on'){$izqu=1;}else{$izqu=0;}
+           if ($der=='on'){$dere=1;}else{$dere=0;}
+           if ($fre=='on'){$fren=1;}else{$fren=0;}
+           if ($int=='on'){$inte=1;}else{$inte=0;}
+           if ($tra=='on'){$tras=1;}else{$tras=0;}
+           if ($tec=='on'){$tech=1;}else{$tech=0;}
+           if ($cha=='on'){$chas=1;}else{$chas=0;}
            if (empty($idtir)){
-               $rspta=$datosTIR->Insertar();
-               echo $rspta ;
+               $rspta=$datosTIR->Insertar($serietir,$chasis,$tchassis,$refr,$tcon,$fecha,$hora,$tipomov,$nav,$convasio,$dest,$izqu,$dere,$fren,$inte,$tras,$tech,$chas,$obser,$cli,$contenedor,$idf,$user_id);
+               echo json_encode($rspta);
            }else{
                
            }
@@ -73,7 +70,7 @@ switch ($_GET['op']){
                     "8"=>$reg->Destino,
                     "9"=>$reg->vacio,
                     "10"=>$reg->cliente,
-                    "11"=>'<button class="btn btn-warning btn-xs" onclick="mostrar('.$reg->idtir.')"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Editar Monitoreo"></i></button>'.' '.'<button class="btn btn-danger btn-xs" onclick="dasactivar('.$reg->idtir.')"><i class="fa fa-close" data-toggle="tooltip" data-placement="top" title="Anular Monitoreo"></i></button> '
+                    "11"=>'<button class="btn btn-warning btn-xs" onclick="mostrar('.$reg->idtir.')"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Editar Datos TIR"></i></button>'.' '.'<button class="btn btn-danger btn-xs" onclick="dasactivar('.$reg->idtir.')"><i class="fa fa-close" data-toggle="tooltip" data-placement="top" title="Anular TIR"></i></button>'.' '.'<button class="btn btn-success btn-xs" onclick="cerrartir('.$reg->idtir.')"><i class="fa fa-lock" data-toggle="tooltip" data-placement="top" title="Cerrar TIR"></i></button> '
                 );
             }
             $results=array(
@@ -103,7 +100,7 @@ switch ($_GET['op']){
                 .'<div class="form-group col-lg-3 col-md-3 col-xs-12"><label>Licencia</label><input type="text" class="form-control" value="'.$row['Licencias'].'" disabled="true"></div>'
                 .'<div class="form-group col-lg-3 col-md-3 col-xs-12"><label>Placas</label><input type="text" class="form-control" value="'.$row['Placas'].'" disabled="true"></div>'
                 .'<div class="form-group col-lg-2 col-md-3 col-xs-12"><label>Codigo</label><input type="text" class="form-control" value="'.$row['Codigo_Piloto_Naviera'].'" disabled="true"></div>'
-                .'<div class="form-group col-lg-3 col-md-3 col-xs-12"><label>Destino</label><input type="text" class="form-control" id="destino" name="destino" value="'.$row['Destino'].'" disabled="true"><input type="hidden" id="idf" name="idf" value="'.$row['Id_f'].'"></div>';
+                .'<div class="form-group col-lg-3 col-md-3 col-xs-12"><label>Destino</label><input type="text" class="form-control"  value="'.$row['Destino'].'" disabled="true"><input type="hidden" id="destino" name="destino" value="'.$row['Destino'].'"><input type="hidden" id="idf" name="idf" value="'.$row['Id_f'].'"></div>';
 
             }
             break;
@@ -151,12 +148,17 @@ switch ($_GET['op']){
                  }
            }
            if ($insertado>=1){
-               echo 'Se ha Insertado los Datos Tir';
+               echo 'In Se ha Insertado los Datos Tir';
            }else {
-               echo 'Error: Error al Grabar';
+               echo 'Error: Error al Grabar notificar al administrador';
            }
            break;
        case 'crearselect':
            echo '<div class="form-group col-lg-2 col-md-3 col-xs-12"><label>Posicion</label><select class="form-control" id="posicion" name="Posicion"><option value="izq">Izquierda</option><option value="der">Derecha</option></select></div>';
            break;
+       case 'mostrartir':
+           $id_tir=$_REQUEST['idtir'];
+           $rspta=$datosTIR->mostrar_tir($id_tir);
+           echo json_encode($rspta);
+               break;
 }

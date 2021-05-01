@@ -181,9 +181,10 @@ function guardaryeditar(e){
        data: formdata,
        contentType: false,
        processData: false,
-       
-       success: function(datos){
-           var cadena=datos.substring(0,2);
+       datatype:"json",
+       success: function(data){
+           var datos=JSON.parse(data);
+           var cadena=datos.idtir;
            if (cadena>=0){
                enviadetallefallas(cadena)
            }else if (datos=='Er'){
@@ -267,7 +268,54 @@ function enviadetallefallas(val){
        type:"POST",
        data:{datosfilas:JSON.stringify(filas)},
        success:function(data){
+           var cadena=data.substring(0,2);
+           if (cadena=='In'){
+               swal({icon:'success',title:'Ingreso TIR',text:'Se ha Ingresado correctamente el TIR'});
+               tabla.ajax.reload();
+               $('#getmodaltir').modal('toggle');
+               limpiar();
+           }else if(cadena=='Er'){
+                  swal({icon:'error',title:'Error al Grabar', text:data});
+               $('#getmodaltir').modal('toggle');  
+               limpiar();
+           }
+           
            console.log(data);
        }
    });
+}
+function mostrar(val){
+    $.post("../ajax/daniostir.php?op=mostrartir",{idtir:val},
+    function(data,status){
+        datostir=JSON.parse(data);
+         mostraringreso(datostir.idingreso);
+        $('#idintir').val(datostir.idtir);
+        $('#serie_tir').val(datostir.SerieTir);
+        $('#contenedor').val(datostir.idingreso);
+        $('#contenedor').selectpicker('refresh');
+        $('#idingreso').val(datostir.idingreso);
+        $('#tipochasis').val(datostir.tipochassis);
+        $('#tipochasis').selectpicker('refresh');
+        $('#refrigeracion').val(datostir.refrigeracion);
+        $('#refrigeracion').selectpicker('refresh');
+        $('#tipocontenedor').val(datostir.tipocontenedor);
+        $('#tipocontenedor').selectpicker('refresh');
+        $('#fecha').val(datostir.fecha);
+        $('#hora').val(datostir.hora);
+        if (datostir.fallaizq==1){
+           
+              var c = $("#izquierda");
+                if (c.is(":checked")) {
+                     $('#izquierda').prop('checked', false);
+                } else {
+                     $('#izquierda').prop('checked', true);
+                }
+                 $('#izquierda').prop('checked', true).checkbox('refresh');
+          
+        }
+        $('#chassis').val(datostir.chassis);
+        mostrarmodal();
+    }
+    );
+    
 }

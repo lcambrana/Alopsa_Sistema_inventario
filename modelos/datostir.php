@@ -26,9 +26,9 @@ class datostir{
         $sql="CALL insert_fallastir($id,'$ubicacion','$descd',$op,'$obser','$pos')";
         return ejecutarConsulta($sql);
     }
-    public function Insertar(){
-        $sql="CALL insert_tir()";
-        return ejecutarConsulta($sql);
+    public function Insertar($serietir,$nochasis,$tchasis,$refre,$tcnte,$fecha,$hora,$tmov,$naviera,$vacio,$detino,$fiz,$fder,$ffr,$fint,$ftra,$fte,$fcha,$cliente,$observ,$idingreso,$idf,$idusuario){
+        $sql="CALL insert_tir('$serietir','$nochasis','$tchasis','$refre','$tcnte','$fecha','$hora','$tmov','$naviera','$vacio','$detino',$fiz,$fder,$ffr,$fint,$ftra,$fte,$fcha,'$observ','$cliente','$idingreso',$idf,$idusuario)";
+        return ejecutarConsultaSimpleFila($sql);
     }
     
     public function actualizar() {
@@ -41,5 +41,9 @@ class datostir{
     public function listar_tcontenedores(){
         $sql="select * from tipocontenedor";
         return ejecutarConsulta($sql);
+    }
+    public function mostrar_tir($idtir){
+        $sql="CALL mostrar_datos_tir($idtir)";
+        return ejecutarConsultaSimpleFila($sql);
     }
 }
