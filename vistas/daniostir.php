@@ -209,20 +209,22 @@ if (!isset($_SESSION['nombre'])){
                                 </div>
                             </div>
                             <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <table id="tablafallastir" class="tabla table-responsive table-striped ">
-                                <thead>
-                                    <th>#</th>
-                                    <th>Ubicacion</th>
-                                    <th>Descripcion daño</th>
-                                    <th>Opcion</th>
-                                    <th>posicion</th>
-                                    <th>Observaciones</th>
-                                    <th>Borrar</th>
-                                </thead>
-                                <tbody id="table_data">
-                                
-                                </tbody>
-                            </table>
+                               <div class="panel-body table-responsive"> 
+                                    <table id="tablafallastir" class="table table-striped " style="width: 100%;">
+                                        <thead>
+                                            <th>#</th>
+                                            <th>Ubicacion</th>
+                                            <th>Descripcion daño</th>
+                                            <th>Opcion</th>
+                                            <th>posicion</th>
+                                            <th>Observaciones</th>
+                                            <th>Borrar</th>
+                                        </thead>
+                                        <tbody id="table_data">
+
+                                        </tbody>
+                                    </table>
+                               </div>
                             </div>
                         </div>
                             <div class="row">
@@ -250,6 +252,37 @@ if (!isset($_SESSION['nombre'])){
         
     </div>
 </div> 
+<div class="modal fade" id="getmodalatir" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidde="true"  data-backdrop="static" 
+  data-keyboard="false">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Autorizacion de Anulacion</h4>
+            </div>
+            <div class="modal-body">
+                <form action="" name="formularioanulatir" id="formularioanulatir" method="POST">
+                    <div class="form-group col-lg-12 col-md-12 col-xs-12">
+                        <input type="hidden" id="id_tiranular" name="id_tiranular">
+                        <input type="hidden" id="idb" name="idb">
+                        <input type="hidden" id="idp" name="idp">
+                        <label>Usuario:</label>
+                        <input type="text" class="form-control" name="usuario" id="usuario">
+                        <label>Contraseña:</label>
+                        <input type="password" class="form-control" name="password" id="password">
+                    </div>
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <button class="btn btn-primary" type="submit" id="btnGuardar2"><i class="fa fa-close"></i>  Anular</button>
+                        <button class="btn btn-danger pull-right" data-dismiss="modal" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                
+            </div>
+        </div>
+    </div>
+</div>
     <?php    
     }else{
         require 'noacceso.php';

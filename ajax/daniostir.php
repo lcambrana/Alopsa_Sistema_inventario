@@ -4,6 +4,8 @@ if (strlen(session_id())<1)
     session_start();
 
 require '../modelos/datostir.php';
+require '../modelos/bitacora.php';
+date_default_timezone_set("America/Guatemala");
 $datosTIR=new datostir;
 $idtir=isset($_POST['idintir'])? limpiarCadena($_POST['idintir']):"";
 $contenedor= isset($_POST['contenedor'])? limpiarCadena($_POST['contenedor']):'';
@@ -50,7 +52,9 @@ switch ($_GET['op']){
                $rspta=$datosTIR->Insertar($serietir,$chasis,$tchassis,$refr,$tcon,$fecha,$hora,$tipomov,$nav,$convasio,$dest,$izqu,$dere,$fren,$inte,$tras,$tech,$chas,$obser,$cli,$contenedor,$idf,$user_id);
                echo json_encode($rspta);
            }else{
-               
+               $rspta=$datosTIR->actualizar($idtir,$serietir,$chasis,$tchassis,$refr,$tcon,$fecha,$hora,$tipomov,$nav,$convasio,$dest,$izqu,$dere,$fren,$inte,$tras,$tech,$chas,$obser,$cli,$contenedor,$idf);
+               echo json_encode($rspta);
+               //echo $rspta ? 'Se Actualizo correctamente el TIR':'Error al actualizar el TIR';
            }
            
            break;
@@ -127,9 +131,52 @@ switch ($_GET['op']){
                echo '<option value='.$reg->descripcion.'>'.$reg->descripcion.'</option>';
            }
            break;
-
+       case 'actualizadetalle':
+           $dfilas= json_decode($_POST['datosfilas'],true);
+           $idtir=$_POST['id_tir'];
+           $cont=0;
+           $notir=0;
+           $counitem=0;
+           foreach ($dfilas as $filas){
+               $item= substr($filas['val'], -2);
+                $ubica=$filas['ubic'];
+                $desc=$filas['descripd'];
+                $op=$filas['opcion'];
+                $ob=$filas['obser'];
+                $pos=$filas['posicion'];
+                if ($op=='SI'){
+                    $op1=1;
+                }else{$op1=0;}
+               $rspta=$datosTIR->consultar_item($item,$idtir);
+               if ($rspta==1){
+                   $rspta=$datosTIR->Actualizar_detalle($id_det, $idtir, $ubicacion, $descd, $op, $pos, $obser);
+                   if ($rspta==true){
+                       $cont=$cont+1;
+                     $notir=$idtir;
+                   }
+               } else if ($rspta==0){
+                   $rspta=$datosTIR->inserta_detalle_tir($idtir,$ubica,$desc,$op1,$pos,$ob);
+                    if($rspta==true){
+                     $cont=$cont+1;
+                     $notir=$idtir;
+                    }
+                   
+               }       
+           }
+           if ($cont>=1){
+                $bitacora=new bitacora();
+                $hoy = date("Y/m/d");
+                $hora_actual=date("H:i:s");
+                $bitacora->insertar_bitacora('Actualizar', $hoy, $hora_actual,$_SESSION['nombre'] ,'Se Actualiza TIR numero '.$notir,'datostir');
+            echo 'Up Se ha actualizados los datos del TIR seleccionado';
+                
+           }else{
+                echo 'Error: Error al actualizar notificar al administrador';
+           }
+           break;
        case 'enviardetalle':
-            $insertado=0;
+           $insertado=0;
+           $notir=0;
            $dfilas = json_decode($_POST['datosfilas'],true);
            foreach ($dfilas as $filas){
                $item=$filas['val'];
@@ -145,10 +192,16 @@ switch ($_GET['op']){
                  $rspta=$datosTIR->inserta_detalle_tir($item,$ubica,$desc,$op1,$pos,$ob);
                  if($rspta==true){
                      $insertado=$insertado+1;
+                     $notir=$item;
                  }
            }
            if ($insertado>=1){
-               echo 'In Se ha Insertado los Datos Tir';
+               
+                $bitacora=new bitacora();
+                $hoy = date("Y/m/d");
+                $hora_actual=date("H:i:s");
+                $bitacora->insertar_bitacora('Insertar', $hoy, $hora_actual,$_SESSION['nombre'] ,'Se Inserta TIR numero '.$notir,'datostir');
+                echo 'In Se ha Insertado los Datos TIR';
            }else {
                echo 'Error: Error al Grabar notificar al administrador';
            }
@@ -171,7 +224,7 @@ switch ($_GET['op']){
                if ($reg->opcionfalla==1)
                {$opcion='SI';}else{$opcion='NO';}
                $datos[]=array(
-                   '0'=>$contador,
+                   '0'=>$contador.' - '.$reg->idfalla_tir,
                    '1'=>$reg->ubicacion,
                    '2'=>$reg->falla,
                    '3'=>$opcion,
@@ -188,5 +241,18 @@ switch ($_GET['op']){
            );
            echo json_encode($resultas);
            break;
-               
+        case 'desactivar':
+            $iddtir=$_REQUEST['id_dtir'];
+            $usuarioanula=$_REQUEST['usuarioa'];
+            $rspta=$datosTIR->desactivar_tir($iddtir);
+            if ($rspta==true){
+                
+                $bitacora=new bitacora();
+                $hoy = date("Y/m/d");
+                $hora_actual=date("H:i:s");
+                $bitacora->insertar_bitacora('anular', $hoy, $hora_actual,$usuarioanula ,'Se anula TIR numero '.$iddtir,'datostir');
+            }
+            echo $rspta ? 'El TIR Seleccionado fue desactivado Satisfactoriamente':'No se pudo Desactivar el Documento TIR';
+               break;
+        
 }

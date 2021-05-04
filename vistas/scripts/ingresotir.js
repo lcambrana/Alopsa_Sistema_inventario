@@ -11,7 +11,10 @@ function init(){
       tipo_contenedores();
        $("#formulariotir").on("submit",function(e){
        guardaryeditar(e); 
-    });
+        });
+        $('#formularioanulatir').on("submit",function(e){
+            validarusuario(e);
+        })
 }
 
 function listar(){
@@ -104,6 +107,11 @@ $('#agregar').click(function(){
     var observacion = $('#observacionf').val();
     var pos =document.getElementById("posicion");
     var posi
+    var count=tabla2.rows().count();
+    if (count==0){
+        i=1;
+    }else{i=count+1;
+    }
     if ( $('#ubicacion').val()=='llantas' || $('#ubicacion').val()=='marcham'){
         posi=pos.options[pos.selectedIndex].text;
     }else {posi="No Aplica";};
@@ -260,6 +268,7 @@ function eliminar_tabla(){
     }
 }
 function enviadetallefallas(val){
+    var idtir=$('#idintir').val();
     var filas=[];
     $('#tablafallastir tbody tr').each(function(){
         var ubic=$(this).find('td').eq(1).text();
@@ -278,7 +287,8 @@ function enviadetallefallas(val){
         };
         filas.push(fila);
     });
-   $.ajax({
+    if (typeof idtir === 'undefined'){
+    $.ajax({
        url:'../ajax/daniostir.php?op=enviardetalle',
        type:"POST",
        data:{datosfilas:JSON.stringify(filas)},
@@ -290,14 +300,35 @@ function enviadetallefallas(val){
                $('#getmodaltir').modal('toggle');
                limpiar();
            }else if(cadena=='Er'){
-                  swal({icon:'error',title:'Error al Grabar', text:data});
+               swal({icon:'error',title:'Error al Grabar', text:data});
                $('#getmodaltir').modal('toggle');  
                limpiar();
            }
            
            console.log(data);
        }
-   });
+      });
+    }else{
+        $.ajax({
+            url:'../ajax/daniostir.php?op=actualizadetalle',
+            type:'POST',
+            data:{datosfila:JSON.stringify(filas),id_tir:idtir},
+            success:function(data){
+                var cadena=data.substring(0,2);
+                if (cadena=='Up'){
+                    swal({icon:'success',title:'Actualizacion TIR',text:'Se ha Modificado correctamente el TIR'});
+                    tabla.ajax.reload();
+                    $('#getmodaltir').modal('toggle');
+                    limpiar();
+                }else if(cadena=='Er'){
+                      swal({icon:'error',title:'Error al Actualizar', text:data});
+                        $('#getmodaltir').modal('toggle');  
+                        limpiar();
+                }
+                 console.log(data);
+            }
+        });
+  }
 }
 function mostrar(val){
     $.post("../ajax/daniostir.php?op=mostrartir",{idtir:val},
@@ -381,4 +412,60 @@ function llenartabla_detalle(val){
     });
     mostrarmodal();
      
+}
+function dasactivar(val){
+    $('#getmodalatir').modal('show');
+    $('#id_tiranular').val(val);
+}
+
+function validarusuario(e){
+    e.preventDefault();
+    $("#btnGuardar2").prop("disabled",false);
+     var usuario=$("#usuario").val();
+    var password=$("#password").val();
+    if ($("#usuario").val()==""){
+        swal({ title: "Parametro Requerido", text:"Debe de Ingresar su usuario para anular el ingreso"});
+    }else if ($("#password").val()=="") {
+        swal({title:"Parametro Requerido",text:'Debe de Ingresar su contraseña para continuar'});
+    }else{
+        $.post("../ajax/usuario.php?op=validaranulacion",{"logina":usuario,"clavea":password},
+        function(data){
+            if (data!="null"){
+                var idanular=$("#id_tiranular").val();
+                desactivar_tir(idanular,usuario);
+            }else{
+                swal({title:'Anulacion Cancelada',title:"No cuenta con el acceso para anular el ingreso"})
+            }
+        }
+        );
+    }
+}
+
+function desactivar_tir(idtir,usuario_anula){
+  swal({
+  title: "Anulacion de Registro",
+  text: "Esta seguro de Anular El TIR seleccionado",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+      $.post("../ajax/daniostir.php?op=desactivar", {id_dtir : idtir,usuarioa:usuario_anula}, function(e){
+                            var cadena=e.substring(0,2);
+                            if (cadena=="El"){
+                                
+				swal({icon:'success',title:'Anulacion de TIR',title:e});
+                            }else if (cadena=="No"){
+                                swal({icon:'warning',title:'Anulacion de TIR',title:e});
+                            }
+                                $("#usuario").val('');
+                                $("#password").val('');
+                                $('#getmodalatir').modal('toggle');
+				tabla.ajax.reload();
+			});
+  } else {
+    swal("se ha cancelo la accion!");
+  }
+});
 }

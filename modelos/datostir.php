@@ -26,13 +26,18 @@ class datostir{
         $sql="CALL insert_fallastir($id,'$ubicacion','$descd',$op,'$obser','$pos')";
         return ejecutarConsulta($sql);
     }
+    public function Actualizar_detalle($id_det,$idtir,$ubicacion,$descd,$op,$pos,$obser){
+        $sql="CALL actualizar_fallastir($id_det,$idtir,'$ubicacion','$descd',$pos,'$obser','$pos')";
+        return ejecutarConsulta($sql);
+    }
     public function Insertar($serietir,$nochasis,$tchasis,$refre,$tcnte,$fecha,$hora,$tmov,$naviera,$vacio,$detino,$fiz,$fder,$ffr,$fint,$ftra,$fte,$fcha,$cliente,$observ,$idingreso,$idf,$idusuario){
         $sql="CALL insert_tir('$serietir','$nochasis','$tchasis','$refre','$tcnte','$fecha','$hora','$tmov','$naviera','$vacio','$detino',$fiz,$fder,$ffr,$fint,$ftra,$fte,$fcha,'$observ','$cliente','$idingreso',$idf,$idusuario)";
         return ejecutarConsultaSimpleFila($sql);
     }
     
-    public function actualizar() {
-        
+    public function actualizar($idtir,$serietir,$nochasis,$tchasis,$refre,$tcnte,$fecha,$hora,$tmov,$naviera,$vacio,$detino,$fiz,$fder,$ffr,$fint,$ftra,$fte,$fcha,$cliente,$observ,$idingreso,$idf) {
+        $sql="CALL actualizar_tir($idtir,'$serietir','$nochasis','$tchasis','$refre','$tcnte','$fecha','$hora','$tmov','$naviera','$vacio','$detino',$fiz,$fder,$ffr,$fint,$ftra,$fte,$fcha,'$observ','$cliente','$idingreso',$idf)";
+        return ejecutarConsultaSimpleFila($sql);
     }
     public function listar_tchasis(){
         $sql="select * from tamaniochasis";
@@ -50,4 +55,12 @@ class datostir{
         $sql="select * from fallas_tir where id_datostir=$idtir";
         return ejecutarConsulta($sql);
     } 
+    public function desactivar_tir($idtir){
+        $sql="update datostir set estado='Anulado' where idtir=$idtir";
+        return ejecutarConsulta($sql);
+    }
+    public function consultar_item($iditem,$idtir) {
+        $sql="select * from fallas_tir where idfalla_tir=$iditem and id_datostir=$idtir";
+        return numeroitem($sql);
+    }
 }
