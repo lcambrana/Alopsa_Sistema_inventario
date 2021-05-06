@@ -77,7 +77,7 @@ if (strlen(session_id())<1)
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Cambiar Contraseña</a>
+                 <!-- <a href="#" class="btn btn-default btn-flat">Cambiar Contraseña</a>-->
                 </div>
                 <div class="pull-right">
                   <a href="../ajax/usuario.php?op=salir" class="btn btn-default btn-flat">Salir</a>

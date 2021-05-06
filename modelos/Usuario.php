@@ -108,6 +108,14 @@ public function consulta_usuario($usuario){
     }
     
 }
+public function insertar_ingresos($idusuario,$nombre,$fecha,$hora){
+    $sql="insert into usuarios_activos (usuarios,nombre_usuario,fecha,hora) values ('$idusuario','$nombre','$fecha','$hora')";
+    ejecutarConsulta($sql);
+}
+public function eliminar_session($idusuario){
+    $sql="delete from usuarios_activos where usuarios='$idusuario'";
+    ejecutarConsulta($sql);
+}
 }
 
  ?>

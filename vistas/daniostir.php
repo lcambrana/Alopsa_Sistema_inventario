@@ -65,7 +65,7 @@ if (!isset($_SESSION['nombre'])){
 
                     <div class="row">
                           <div class="form-group col-lg-1 col-md-12 col-sm-12 col-xs-12">
-                                <input id="idintir" name="idintir" type="hidden">
+                              <input id="idintir" name="idintir" type="hidden">
                               <label>Serie:</label>
                             <input type="text" class="form-control" id="serie_tir" name="serie_tir" value="A">
                         </div>
@@ -287,6 +287,80 @@ if (!isset($_SESSION['nombre'])){
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="getmodalcerrar" tabindex="-1" role="dialog" aria-labelledby="myModalLbael" aria-hidde="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="titulo2" name="titulo2"></h4>
+            </div>
+            <div class="modal-body">
+                <form name="formulario_cierre" id="formulario_cierre" method="POST">
+                    <div class="row">
+                        <div class="form-group col-lg-2 col-md-12 col-xs-12">
+                           <input type="hidden" id="idtircierre" name="idtircierre">
+                            <label>serie</label>
+                            <input type="text" id="seriec" name="seriec" class="form-control" disabled="true">
+                        </div>
+                        <div class="form-group col-lg-2 col-md-12 col-xs-12">
+   
+                              <label>Contenedor:</label>
+                                <select name="contenedor2" id="contenedor2" class="form-control select-picker" data-live-search="true">
+                                </select>
+                              <input type="hidden" id="idingresoc" name="idingresoc">
+                        </div>
+                        <div id="datosingreso2"></div>
+               
+                        <div class="form-group col-lg-3 col-md-3 col-xs-12">
+                            <label> GATE IN <input type="checkbox" class="minimal" id="checkinc" name="checkinc" ></label>
+                            <label> GATE OUT <input type="checkbox" class="minimal" id="checkoutc" name="checkoutc" ></label>
+                           
+                        </div>
+                        <div class="form-group col-lg-2 col-md-3 col-xs-12">
+                            <label>chassis</label>
+                            <input type="text" class="form-control" id="chassisc" name="chassisc" disabled="">
+                        </div>
+                        <div class="form-group col-lg-3 col-md-12 col-xs-12">
+                            <label>Fecha</label>
+                            <input type="date" id="fechac" name="fechac" class="form-control" disabled="">
+                        </div>
+                        <div class="form-group col-lg-2 col-md-12 col-xs-12">
+                            <label>Hora</label>
+                            <input type="time" id="horac" name="horac" class="form-control" disabled="">
+                        </div>
+                    </div>
+                     <div class="box box-info">
+                        <div class="box-header">
+                            <h5 class="box-title">Daños Contenedor</h5>
+                        </div>
+                         <div class="box-body">
+                             <div class="form-group col-lg-2">
+                                <div align="center">
+                                <label>Izquierda</label>
+                                  <input type="checkbox" class="flat-red" id="izquierdac" name="izquierdac">
+                                </div>
+                            </div>
+                             <div class="form-group col-lg-2">
+                                 <div align="center">
+                                     <label>Derecha</label>
+                                     <input type="checkbox" class="flat-red" id="derechac" name="derechac">
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                    <p></p>
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <button class="btn btn-success" type="submit" id="btnGuardar3"><i class="fa fa-lock"></i>  Cerrar</button>
+                        <button class="btn btn-danger pull-right" data-dismiss="modal" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
     <?php    
     }else{
         require 'noacceso.php';

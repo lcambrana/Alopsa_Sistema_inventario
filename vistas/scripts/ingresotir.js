@@ -62,6 +62,12 @@ function listarcomboingreso(){
         $("#contenedor").selectpicker('refresh');
     });
 }
+function listarcomboingreso2(){
+    $.post("../ajax/daniostir.php?op=listaringreso",function(r){
+         $("#contenedor2").html(r);
+        $("#contenedor2").selectpicker('refresh');
+    });
+}
 function listartchasis(){
     $.post('../ajax/daniostir.php?op=listar_tchasis',function(r){
         $('#tipochasis').html(r);
@@ -79,6 +85,9 @@ $("#contenedor").change(function(){
      var idingreso=$("#contenedor").val();
     mostraringreso(idingreso);
 });
+$("#contenedor2").change(function(){
+    mostraringresoc($("#idtircierre").val());
+})
 $("#ubicacion").change(function(){
     $('#select_esp').html("");
     var opcionu=$("#ubicacion").val();
@@ -149,6 +158,17 @@ function mostraringreso(val){
        datatype: "json",
        success:function(resp){
             $('#datosingreso').html(resp);
+       }
+    });
+}
+function mostraringresoc(val){
+     $.ajax({
+       url:'../ajax/daniostir.php?op=mostraringreso',
+       data:{iding:val},
+       type: "get",
+       datatype: "json",
+       success:function(resp){
+            $('#datosingreso2').html(resp);
        }
     });
 }
@@ -474,5 +494,27 @@ function desactivar_tir(idtir,usuario_anula){
 });
 }
 function cerrartir(val){
-     $('#getmodaltir').modal('show');
+    listarcomboingreso2();
+    $('#idtircierre').val(val);
+    
+     $.post("../ajax/daniostir.php?op=mostrartir",{idtir:val},
+    function(data,status){
+        datostirc=JSON.parse(data);
+        mostraringresoc(val);
+          $('#idingresoc').val(datostirc.idingreso);
+        $('#seriec').val(datostirc.SerieTir);
+        $('#contenedor2').val(datostirc.idingreso);
+        $('#contenedor2').selectpicker('refresh');
+        $('#chassisc').val(datostirc.chassis);
+        $('#fechac').val(datostirc.fecha);
+        $('#horac').val(datostirc.hora);
+        $('#checkinc').prop('checked',false);
+        $('#checkinc').iCheck('update');
+        $('#checkoutc').prop('checked',true);
+        $('#checkoutc').iCheck('update');
+        $('#checkinc').attr('disabled',!$('#vaciono').attr('disabled'));
+        $('#checkinc').iCheck('update');
+    });
+    $('#titulo2').html('Cierre de TIR No. ' + val) ;
+    $('#getmodalcerrar').modal('show');
 }

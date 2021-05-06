@@ -1,9 +1,9 @@
 <?php 
 session_start();
 require_once "../modelos/Usuario.php";
-
+require '../modelos/bitacora.php';
 $usuario=new Usuario();
-
+$b=new bitacora();
 $idusuarioc=isset($_POST["idusuarioc"])? limpiarCadena($_POST["idusuarioc"]):"";
 $clavec=isset($_POST["clavec"])? limpiarCadena($_POST["clavec"]):"";
 $idusuario=isset($_POST["idusuario"])? limpiarCadena($_POST["idusuario"]):"";
@@ -183,8 +183,11 @@ switch ($_GET["op"]) {
                         in_array(6, $valores)?$_SESSION['ingresov']=1:$_SESSION['ingresov']=0;
                         in_array(7, $valores)?$_SESSION['ingresomov']=1:$_SESSION['ingresomov']=0;
 
-
+                        
 		}
+           
+                $b->insertar_bitacora('Ingreso', date("Y-m-d"), date("H:i:s"), $_SESSION['nombre'], 'Inicio de Sesion-Ingreso al sistema', '');
+                $usuario->insertar_ingresos($_SESSION['idusuario'],$_SESSION['nombre'],date("Y-m-d"),date("H:i:s"));
 		echo json_encode($fetch);
 
 	break;
@@ -203,6 +206,8 @@ switch ($_GET["op"]) {
                 echo json_encode($fetch);
             break;
 	case 'salir':
+             $b->insertar_bitacora('Salida', date("Y-m-d"), date("H:i:s"), $_SESSION['nombre'], 'Finalizacion de session', '');
+            $usuario->eliminar_session($_SESSION['idusuario']);
 		//Limpiamos las variables de sesión   
         session_unset();
         //Destruìmos la sesión
