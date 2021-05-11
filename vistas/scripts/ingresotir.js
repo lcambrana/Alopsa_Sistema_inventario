@@ -589,8 +589,10 @@ function cerrar_tir(e){
              if (c=='Se'){
                   swal({icon:'success',title:'Cierre TIR',text:resp});
                   tabla.ajax.reload();
+                  $('#getmodalcerrar').modal('toggle');
              }else if(c=='Er'){
                   swal({icon:'Error',title:'Error al Grabar',text:resp})
+                  $('#getmodalcerrar').modal('toggle');
              }
          }
     });

@@ -274,7 +274,7 @@ switch ($_GET['op']){
             if ($rspta==true){
                 
                 $bitacora=new bitacora();
-                $hoy = date("Y/m/d");
+                $hoy = date("Y-m-d");
                 $hora_actual=date("H:i:s");
                 $bitacora->insertar_bitacora('anular', $hoy, $hora_actual,$usuarioanula ,'Se anula TIR numero '.$iddtir,'datostir');
             }
@@ -286,10 +286,10 @@ switch ($_GET['op']){
                 $user_idc=$_SESSION['idusuario'];
                 $hoy = date("Y/m/d");
                 $hora_actual=date("H:i:s");
-                $rspta=$datosTIR->insertar_cierre($idtirc,$observacionesc,$user_idc,$hoy,$hora);
+                $rspta=$datosTIR->insertar_cierre($idtirc,$observacionesc,$user_idc,$hoy,$hora_actual);
                 if ($rspta==true){
                 $bitacora=new bitacora();
-                  $bitacora->insertar_bitacora('Insertar', $hoy, $hora_actual,$_SESSION['nombre'] ,'Cierre de TIR No. '.$iddtir,'datostir');
+                  $bitacora->insertar_bitacora('Insertar', $hoy, $hora_actual,$_SESSION['nombre'] ,'Cierre de TIR No. '.$idtirc,'datostir');
                 }
                  echo $rspta ? 'Se ha cerrado el TIR Satisfactoriamente.':'Error. No se pudo Desactivar el Documento TIR';
                break;

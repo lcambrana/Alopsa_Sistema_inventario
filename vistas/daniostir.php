@@ -410,7 +410,7 @@ if (!isset($_SESSION['nombre'])){
                     </div>
                     <div class="form-group col-lg-6 col-md-12 col-sm-12 col-xs-12">
                         <label>Observaciones</label>
-                        <textarea id="observacionesc" name="obarvacionesc" class="form-control"></textarea>
+                        <textarea id="observacionesc" name="observacionesc" class="form-control"></textarea>
                     </div>
                     <p></p>
                     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
