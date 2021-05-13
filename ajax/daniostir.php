@@ -7,6 +7,7 @@ require '../modelos/datostir.php';
 require '../modelos/bitacora.php';
 date_default_timezone_set("America/Guatemala");
 $datosTIR=new datostir;
+$bitacora=new bitacora();
 $idtir=isset($_POST['idintir'])? limpiarCadena($_POST['idintir']):"";
 $contenedor= isset($_POST['contenedor'])? limpiarCadena($_POST['contenedor']):'';
 $serietir= isset($_POST['serie_tir'])? limpiarCadena($_POST['serie_tir']):"";
@@ -288,10 +289,20 @@ switch ($_GET['op']){
                 $hora_actual=date("H:i:s");
                 $rspta=$datosTIR->insertar_cierre($idtirc,$observacionesc,$user_idc,$hoy,$hora_actual);
                 if ($rspta==true){
-                $bitacora=new bitacora();
+                
                   $bitacora->insertar_bitacora('Insertar', $hoy, $hora_actual,$_SESSION['nombre'] ,'Cierre de TIR No. '.$idtirc,'datostir');
                 }
                  echo $rspta ? 'Se ha cerrado el TIR Satisfactoriamente.':'Error. No se pudo Desactivar el Documento TIR';
                break;
-        
+           case 'eliminar_detalle':
+               $id_dtir=substr($_REQUEST['iddet_tir'], -2);
+               $id_tir=$_REQUEST['id_tir'];
+               $rspta=$datosTIR->eliminarDetalle_tir($id_dtir,$id_tir);
+               if ($rspta==true){
+                    $hoy = date("Y/m/d");
+                    $hora_actual=date("H:i:s");
+                   $bitacora->insertar_bitacora('Eliminacion', $hoy, $hora_actual, $_SESSION['nombre'], 'Eliminacion de detalle no. '.$id_dtir, 'fallas_tir');
+               }
+               echo $rspta ? 'Se ha realizado la Eliminacion de detalle seleccionado.':'Error. no se ha eliminado el detalle seleccionado';
+               break;
 }

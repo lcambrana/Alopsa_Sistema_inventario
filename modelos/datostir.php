@@ -67,4 +67,8 @@ class datostir{
         $sql="Call Cierre_Tir($idtirc,'$observaciones',$idusuario,'$fecha','$hora')";
         return ejecutarConsulta($sql);
     }
+    public function eliminarDetalle_tir($iddetir,$idtir){
+        $sql="delete from fallas_tir where idfalla_tir=$iddetir and id_datostir=$idtir";
+        return ejecutarConsulta($sql);
+    }
 }

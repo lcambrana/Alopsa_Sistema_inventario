@@ -142,10 +142,44 @@ $('#agregar').click(function(){
     
 });
 
-$(document).on('click','.btn_remove', function(){
+/*$(document).on('click','.btn_remove', function(){
+ 
+});*/
+$('#tablafallastir').on('click','.btn_remove',function(){
+    var currentRow=$(this).closest("tr");
+    var col1=currentRow.find("td:eq(0)").html();
+   
+    
+    var idtir=$('#idintir').val();
+    if (idtir==""){
        tabla2.row('.selected').remove().draw( false );  
        i=i-1;
-});
+   }else {
+    
+       swal({
+           title:"Eliminacion de Item",
+           text: "Esta seguro de eliminar el item del detalle seleccionado",
+           icon: "warning",
+           buttons: true,
+           dangerMode: true,
+       }).then((willDelete) => {
+           if (willDelete){
+                $.post("../ajax/daniostir.php?op=eliminar_detalle",{iddet_tir:col1,id_tir:idtir},function(e){
+                    var c=e.substring(0,2);
+                    if (c=="Se"){
+                        swal({icon:'success',title:'Detalle de TIR',title:e});
+                        tabla2.row('.selected').remove().draw( false );  
+                    }else if (c=="Er"){
+                        swal({icon:'Error',title:'Error al Grabar',text:resp})
+                    }
+                });
+                
+            }else{
+                swal("Accion Cancelada");
+           }
+       });
+   }
+})
  $('#tablafallastir tbody').on( 'click', 'tr', function () {
         if ( $(this).hasClass('selected') ) {
             $(this).removeClass('selected');
@@ -277,7 +311,7 @@ function limpiar(){
     $('#techo').iCheck('update');
     $('#chasis').prop('checked',false);
     $('#chasis').iCheck('update');
-    
+    $('#idintir').val("");
     listarcomboingreso();
     eliminar_tabla();
     
@@ -451,7 +485,7 @@ function llenartabladetallec(val){
                    type:"get",
                    dataType: 'json',
                    error:function(e){
-                       console.log(e.responseText);
+                       alert(e.responseText);
                    },
                    
                }
