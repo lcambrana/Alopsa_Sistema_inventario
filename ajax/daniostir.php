@@ -5,6 +5,7 @@ if (strlen(session_id())<1)
 
 require '../modelos/datostir.php';
 require '../modelos/bitacora.php';
+
 date_default_timezone_set("America/Guatemala");
 $datosTIR=new datostir;
 $bitacora=new bitacora();

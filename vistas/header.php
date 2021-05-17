@@ -1,6 +1,11 @@
  <?php 
+ 
 if (strlen(session_id())<1) 
   session_start();
+require '../ajax/sessionphp.php';
+date_default_timezone_set("America/Guatemala");
+$sessiones=new sessiones();
+$sessiones->tiempoactivo();
   ?>
  <!DOCTYPE html>
 <html>
