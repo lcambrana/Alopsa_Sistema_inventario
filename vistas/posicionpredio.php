@@ -40,7 +40,36 @@ if (!isset($_SESSION['nombre'])){
         </div>
     </section>
 </div>
-       <?php
+<div class="modal fade" id="getmodalcpos" name="getmodalcpos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidde="true"  data-backdrop="static"   data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="titulo" name="titulo"></h4>
+            </div>
+            <div class="modal-body">
+                <form name="formularioposcon" id="formularioposcon" method="POST">
+                    <div class="box box-info">
+                        <div class="box-body">
+                            <div class="form-group col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                                <label>Contenedor:</label>
+                                <select name="contenedor" id='contenedor' class="form-control select-picker" data-live-search='true'>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                         <button class="btn btn-primary" type="submit" id="btnGuardar"><i class="fa fa-save"></i>  Grabar</button>
+                        
+                        <button class="btn btn-danger pull-right" onclick="cancelarform()" data-dismiss="modal" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<?php
        
     }else{
         require 'noacceso.php';

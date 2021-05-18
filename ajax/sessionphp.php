@@ -19,9 +19,9 @@ class sessiones{
                 {
                     //Removemos sesión.
                    
-                    session_unset();
+                    //session_unset();
                     //Destruimos sesión.
-                    session_destroy();              
+                   // session_destroy();              
                     //Redirigimos pagina.
                     //header("Location: ../vistas/login.html");
                     header("Location: ../ajax/usuario.php?op=salir");
