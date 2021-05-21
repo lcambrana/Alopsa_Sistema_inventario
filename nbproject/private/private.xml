@@ -5,16 +5,17 @@
         <group>
             <file>file:/C:/xampp/htdocs/inv_contenedores/modelos/datostir.php</file>
             <file>file:/C:/xampp/htdocs/inv_contenedores/ajax/daniostir.php</file>
+            <file>file:/C:/xampp/htdocs/inv_contenedores/vistas/ingresosm.php</file>
             <file>file:/C:/xampp/htdocs/inv_contenedores/vistas/scripts/ingresotir.js</file>
+            <file>file:/C:/xampp/htdocs/inv_contenedores/vistas/scripts/ingresosm.js</file>
             <file>file:/C:/xampp/htdocs/inv_contenedores/vistas/posicionpredio.php</file>
             <file>file:/C:/xampp/htdocs/inv_contenedores/vistas/header.php</file>
             <file>file:/C:/xampp/htdocs/inv_contenedores/config/Conexion.php</file>
+            <file>file:/C:/xampp/htdocs/inv_contenedores/public/js/jquery-3.1.1.min.js</file>
             <file>file:/C:/xampp/htdocs/inv_contenedores/ajax/posicionprecon.php</file>
             <file>file:/C:/xampp/htdocs/inv_contenedores/modelos/posicion_contenedor_predio.php</file>
-            <file>file:/C:/xampp/htdocs/inv_contenedores/vistas/dashboard.php</file>
             <file>file:/C:/xampp/htdocs/inv_contenedores/ajax/usuario.php</file>
             <file>file:/C:/xampp/htdocs/inv_contenedores/vistas/scripts/posicionprecont.js</file>
-            <file>file:/C:/xampp/htdocs/inv_contenedores/ajax/flotatransporte.php</file>
             <file>file:/C:/xampp/htdocs/inv_contenedores/vistas/daniostir.php</file>
         </group>
     </open-files>

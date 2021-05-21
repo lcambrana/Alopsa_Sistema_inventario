@@ -12,7 +12,21 @@ function init(){
 }
 
 function listar(){
-    tabla=$('#tbllistaposicionc').dataTable().DataTable();
+    tabla=$('#tbllistaposicionc').dataTable({
+        'aProcessing':true,
+        'aServerSide':true,
+        'ajax':{
+          url:'../ajax/posicionprecon.php?op=listarpos',
+          type:'get',
+          dataType: 'json',
+          error:function(e){
+              console.log(e.responseText);
+          }
+        },
+        "bDestroy":true,
+        "iDisplayLength":10,
+        "order":[[0,"asc"]]
+    }).DataTable();
 }
 function mostrarmodal(){
     var idposcontenedor=$('#idposcont').val();
@@ -152,11 +166,19 @@ function guardar_editar(e){
             contentType: false,
             processData: false,
             datatype:'json',
-            success:function(d){
+            success:function(da){
+                var d=da.substring(0,2);
+                if(d=='Se'){
+                    swal({icon:'success',title:'Posicion Contenedor',text:da});
+                    tabla.ajax.reload();
+                    $('#getmodalcpos').modal('toggle');
+                }else if(d=='Er'){
+                    swal({icon:'success',title:'Error al Grabar Posicion de Contenedor',text:da});
+                }
                 
             },
-            error:function(d){
-                
+            error:function(xhr, ajaxOptions, thrownError){
+                 alert(thrownError);
             }
         });
     }else{
@@ -170,6 +192,7 @@ function guardar_editar(e){
  
 $("#contenedor").change(function(){
     var idingreso=$('#contenedor').val();
+     $("#idingreso").val(idingreso);
     mostraringreso(idingreso);
 });
 $('#patio').change(function(){

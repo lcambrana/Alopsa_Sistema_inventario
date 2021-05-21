@@ -49,6 +49,7 @@ $("#frmAcceso").on('submit',function(e)
         else
         {
             swal({icon: "error", title:"Error de Autenticacion", text: "Usuario y/o Password incorrectos"});
+            
         }
     });
 })

@@ -185,13 +185,15 @@ switch ($_GET["op"]) {
                         in_array(5, $valores)?$_SESSION['Datosm']=1:$_SESSION['Datosm']=0;
                         in_array(6, $valores)?$_SESSION['ingresov']=1:$_SESSION['ingresov']=0;
                         in_array(7, $valores)?$_SESSION['ingresomov']=1:$_SESSION['ingresomov']=0;
-
+                        
+                $sessiones->tiempoactivo();
+                $b->insertar_bitacora('Ingreso', date("Y-m-d"), date("H:i:s"), $_SESSION['nombre'], 'Inicio de Sesion-Ingreso al sistema', '');
+                $usuario->insertar_ingresos($_SESSION['idusuario'],$_SESSION['nombre'],date("Y-m-d"),date("H:i:s"));    
+                        
                         
 		}
                 
-                $sessiones->tiempoactivo();
-                $b->insertar_bitacora('Ingreso', date("Y-m-d"), date("H:i:s"), $_SESSION['nombre'], 'Inicio de Sesion-Ingreso al sistema', '');
-                $usuario->insertar_ingresos($_SESSION['idusuario'],$_SESSION['nombre'],date("Y-m-d"),date("H:i:s"));
+                
 		echo json_encode($fetch);
 
 	break;

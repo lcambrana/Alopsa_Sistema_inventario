@@ -35,4 +35,26 @@ class posicion_cont_predio{
         return ejecutarConsulta($sql);
         
     }
+    public function insertar($fecha,$hora,$idpatio,$idarea,$idbloque,$idfila,$altura,$idusario,$idingreso,$idf,$observaciones,$idaltura){
+        $insertado=true;
+        $actualizado=true;
+        $sql="CALL insertar_posicion_con('$fecha','$hora',$idpatio,$idarea,$idbloque,$idfila,$altura,$idusario,$idingreso,$idf,'$observaciones')";
+        $insertado= ejecutarConsulta($sql);
+        if ($insertado==true){
+            $sql2="update altura_predio set estado='Asignado',id_ingresoc=$idingreso where id_altura=$idaltura";
+            $actualizado=ejecutarConsulta($sql2);
+        
+        if ($actualizado==true){
+            return true;
+        }else{
+            return false;
+        }
+        }else{
+            return false;
+        }
+    }
+    public function listar_cont_pos(){
+        $sql="CALL mostrar_cont_pos()";
+        return ejecutarConsulta($sql);
+    }
 }

@@ -30,6 +30,7 @@ if (!isset($_SESSION['nombre'])){
                                 <th>Bloque</th>
                                 <th>Fila</th>
                                 <th>Altura</th>
+                                <th>Observaciones</th>
                                 <th>Opciones</th>
                                 </thead>
                             </table>
@@ -54,6 +55,7 @@ if (!isset($_SESSION['nombre'])){
                             <div class="form-group col-lg-3 col-md-12 col-sm-12 col-xs-12">
                                 <label>Fecha</label>
                                 <input type="date" id="fechai" name="fechai" class="form-control" value="<?php echo date("Y-m-d"); ?>">
+                                <input type="hidden" id="idposcont" name="idposcont">
                             </div>
                             <div class="form-group col-lg-3 col-md-12 col-sm-12 col-xs-12">
                                 <label>Hora:</label>
@@ -68,6 +70,7 @@ if (!isset($_SESSION['nombre'])){
                                 <label>Contenedor:</label>
                                 <select name="contenedor" id='contenedor' class="form-control select-picker" data-live-search='true'>
                                 </select>
+                                <input type="hidden" id="idingreso" name="idingreso">
                             </div>
                             <div id="datosingreso"></div>
                             <div class="form-group col-lg-3 col-md-12 col-xs-12">
