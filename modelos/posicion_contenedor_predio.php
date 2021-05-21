@@ -57,4 +57,8 @@ class posicion_cont_predio{
         $sql="CALL mostrar_cont_pos()";
         return ejecutarConsulta($sql);
     }
+    public function mostrar($id){
+        $sql="select * from contenedor_posicion_patio where id_conte_posi=$id";
+        return ejecutarConsultaSimpleFila($sql);
+    }
 }

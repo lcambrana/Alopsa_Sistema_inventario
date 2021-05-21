@@ -189,7 +189,36 @@ function guardar_editar(e){
         })
     };
 }
- 
+function mostrar(id){
+    $.post("../ajax/posicionprecon.php?op=mostrar",{idposcont:id},
+        function(data,status){
+            datos=JSON.parse(data);
+            $('idposcont').val(datos.id_conte_posi);
+            $('#fechai').val(datos.fecha);
+            $('#hora').val(datos.hora);
+            $('#contenedor').val(datos.id_ingre_m);
+            $('#contenedor').selectpicker('refresh');
+            $('#patio').val(datos.idpatio);
+            $('#patio').selectpicker('refresh');
+            $("#areap").val(false).trigger("change");
+            $('#areap').val(datos.idarea);
+            
+            $('#areap').selectpicker('refresh');
+            $('#bloque').val(datos.idbloque);
+            $('#bloque').selectpicker('refresh');
+            $('#fila').val(datos.idfila);
+            $('#fila').selectpicker('refresh');
+            $('#noaltura').val(datos.altura);
+            $('#observaciones').val(datos.observaciones);
+            
+            mostraringreso(datos.id_ingre_m);
+            mostrarmodal();
+        }
+                
+                        
+    );
+   
+}
 $("#contenedor").change(function(){
     var idingreso=$('#contenedor').val();
      $("#idingreso").val(idingreso);

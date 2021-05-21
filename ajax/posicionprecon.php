@@ -113,6 +113,11 @@ switch ($_GET['op']){
         );
         echo json_encode($results);
         break;
+    case 'mostrar':
+        $id_poscon=$_REQUEST['idposcont'];
+        $rspta=$posicion_conte->mostrar($id_poscon);
+        echo json_encode($rspta);
+        break;
 }
 
 ?>
