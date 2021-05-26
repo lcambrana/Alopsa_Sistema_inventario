@@ -9,6 +9,9 @@ function init(){
       $("#formularioposcon").on('submit',function(e){
          guardar_editar(e); 
       });
+      $("#formularioanulacion").on('submit',function(e){
+          validarusuario(e);
+      })
 }
 
 function listar(){
@@ -96,6 +99,12 @@ function limpiar(){
     $('#fila').selectpicker('refresh');
     $('#noaltura').val('');
     $('#observaciones').val('');
+    $('#area_p').val('');
+    $('#idposcont').val('');
+    $('#bloque_p').val('');
+    $('#fila_p').val('');
+    $('idingreso').val('');
+    $('#contenedor').removeAttr('disabled');
     mostraringreso(0);
 }
 function guardar_editar(e){
@@ -173,7 +182,9 @@ function guardar_editar(e){
                     tabla.ajax.reload();
                     $('#getmodalcpos').modal('toggle');
                 }else if(d=='Er'){
-                    swal({icon:'success',title:'Error al Grabar Posicion de Contenedor',text:da});
+                    swal({icon:'warning',title:'Error al Grabar Posicion de Contenedor',text:da});
+                }else {
+                    swal('Error: -> '. e);
                 }
                 
             },
@@ -193,31 +204,100 @@ function mostrar(id){
     $.post("../ajax/posicionprecon.php?op=mostrar",{idposcont:id},
         function(data,status){
             datos=JSON.parse(data);
-            $('idposcont').val(datos.id_conte_posi);
+            $('#idposcont').val(datos.id_conte_posi);
             $('#fechai').val(datos.fecha);
             $('#hora').val(datos.hora);
             $('#contenedor').val(datos.id_ingre_m);
             $('#contenedor').selectpicker('refresh');
             $('#patio').val(datos.idpatio);
+            $('#patio').val(datos.idpatio).change();
             $('#patio').selectpicker('refresh');
-            $("#areap").val(false).trigger("change");
+            $('#area_p').val(datos.idarea);
+            $('#bloque_p').val(datos.idbloque);
+            $('#fila_p').val(datos.idfila);
             $('#areap').val(datos.idarea);
-            
             $('#areap').selectpicker('refresh');
+             mostraringreso(datos.id_ingre_m);
+            $('#areap').val(datos.idarea).change();
+            $('#bloque').val(datos.idbloque).change();
             $('#bloque').val(datos.idbloque);
             $('#bloque').selectpicker('refresh');
+            $('#idingreso').val(datos.id_ingre_m);
             $('#fila').val(datos.idfila);
+            $('#fila').val(datos.idfila).change();
             $('#fila').selectpicker('refresh');
-            $('#noaltura').val(datos.altura);
+         
             $('#observaciones').val(datos.observaciones);
-            
-            mostraringreso(datos.id_ingre_m);
+            $('#contenedor').prop("disabled", true);
+            $('#contenedor').selectpicker('refresh');
             mostrarmodal();
         }
                 
                         
     );
    
+}
+function dasactivar(val,val2){
+    $('#idposconta').val(val);
+    $('#idaltura').val(val2)
+    $('#getmodalanp').modal('show');
+}
+function cancelar_anu(){
+    $('#usuario').val('');
+    $('#password').val('');
+}
+function validarusuario(e){
+    e.preventDefault();
+    $('#btnGuardar2').prop('disabled',false);
+         var usuario=$("#usuario").val();
+    var password=$("#password").val();
+    if ($("#usuario").val()==""){
+        swal({ title: "Parametro Requerido", text:"Debe de Ingresar su usuario para anular el ingreso"});
+    }else if ($("#password").val()=="") {
+        swal({title:"Parametro Requerido",text:'Debe de Ingresar su contraseña para continuar'});
+    }else{
+        $.post("../ajax/usuario.php?op=validaranulacion",{"logina":usuario,"clavea":password},
+        function(data){
+            if (data!="null"){
+                var idanular=$("#idposconta").val();
+                var id_al=$('#idaltura').val();
+                desactivar_pos(idanular,id_al);
+            }else{
+                swal({title:'Anulacion Cancelada',title:"No cuenta con el acceso para anular el ingreso"})
+            }
+        }
+        );
+    }
+}
+function desactivar_pos(idanular,id_al){
+    swal({
+        title: "Anulacion de Registro",
+        text: "Esta seguro de Anular la Posicion actual del Contenedor",
+        icon: "warning",
+        buttons: true,
+        dangerMode:true,
+    })
+            .then((willDelete)=>{
+                if (willDelete){
+                    $.post("../ajax/posicionprecon.php?op=desactivar",{idposcon:idanular,idaltura:id_al},function(e){
+                       var c=e.substring(0,2);
+                       if (c=="Se"){
+                           swal({icon:'success',title:'Anulacion de Posicion Contenedor',title:e});
+                       }else if (c=="No"){
+                            swal({icon:'warning',title:'Anulacion de Posicion Contenedor',title:e});
+                       }else{
+                           swal("Error: "+ e );
+                       }
+                                $("#usuario").val('');
+                                $("#password").val('');
+                                $('#getmodalanp').modal('toggle');
+				tabla.ajax.reload();
+                    });
+                }else{
+                    swal("Se ha Cancelado la Accion por el Usuario!");
+                    $('#getmodalanp').modal('toggle');
+                }
+            });
 }
 $("#contenedor").change(function(){
     var idingreso=$('#contenedor').val();
@@ -226,6 +306,7 @@ $("#contenedor").change(function(){
 });
 $('#patio').change(function(){
    var idpatio=$('#patio').val();
+   var idpos=$('#idposcont').val();
    $.ajax({
       url:'../ajax/posicionprecon.php?op=listararea',
       data:{id_patio:idpatio},
@@ -234,8 +315,11 @@ $('#patio').change(function(){
       success:function(r){
           $('#areap').removeAttr('disabled');
           $('#areap').html(r);
-          $('#areap').selectpicker('refresh');
-          
+         
+          if ( idpos !== ''){
+              $('#areap').val(idpos);
+          }
+           $('#areap').selectpicker('refresh');
       },
       error:function(r){
         console.log(r);  
@@ -243,7 +327,11 @@ $('#patio').change(function(){
    });
 });
 $('#areap').change(function(){
-   var idarea=$('#areap').val();
+    var idarea=$('#areap').val();
+    if (idarea==null){
+        idarea=$('#area_p').val();
+    }
+    var idblo=$('#bloque_p').val();
    $.ajax({
        url:'../ajax/posicionprecon.php?op=listarbloque',
        data:{id_area:idarea},
@@ -252,6 +340,9 @@ $('#areap').change(function(){
        success:function(r){
            $('#bloque').removeAttr('disabled');
            $('#bloque').html(r);
+           if (idblo !== ''){
+               $('#bloque').val(idblo);
+           }
            $('#bloque').selectpicker('refresh');
        },
        error:function(r){
@@ -261,6 +352,10 @@ $('#areap').change(function(){
 });
 $('#bloque').change(function(){
    var idbloque=$('#bloque').val();
+   if (idbloque==null){
+       idbloque=$('#bloque_p').val()
+   }
+   var idfil=$('#fila_p').val();
    $.ajax({
       url:'../ajax/posicionprecon.php?op=listarfila',
       data:{id_bloque:idbloque},
@@ -269,6 +364,9 @@ $('#bloque').change(function(){
       success:function(r){
           $('#fila').removeAttr('disabled');
           $('#fila').html(r);
+          if (idfil !== '' ){
+              $('#fila').val(idfil);
+          }
           $('#fila').selectpicker('refresh');
       },
       error:function(r){
@@ -278,6 +376,9 @@ $('#bloque').change(function(){
 });
 $('#fila').change(function(){
     var idfila=$('#fila').val();
+    if (idfila==null){
+        idfila=$('#fila_p').val();
+    }
     $.ajax({
         url:'../ajax/posicionprecon.php?op=alturafila',
         data:{id_fila:idfila},

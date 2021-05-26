@@ -96,7 +96,10 @@ if (!isset($_SESSION['nombre'])){
                                 <label>Observaciones</label>
                                 <textarea id="observaciones" name="observaciones" class="form-control"></textarea>
                             </div>
-                        </div>
+                            <input type="hidden" id="area_p" name="area_p">
+                            <input type="hidden" id="bloque_p" name="bloque_p">
+                            <input type="hidden" id="fila_p" name="fila_p">
+                        </div> 
                     </div>
                     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                          <button class="btn btn-primary" type="submit" id="btnGuardar"><i class="fa fa-save"></i>  Grabar</button>
@@ -106,6 +109,35 @@ if (!isset($_SESSION['nombre'])){
                 </form>
             </div>
             <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="getmodalanp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidde="true"  data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Autorizacion de Anulacion</h4>
+            </div>
+            <div class="modal-body">
+                <form action="" name="formularioanulacion" id="formularioanulacion" method="POST">
+                    <div class="form-group col-lg-12 col-md-12 col-xs-12">
+                        <input type="hidden" id="idposconta" name="idposconta">
+                        <input type="hidden" id="idaltura" name="idaltura">
+                        <label>Usuario:</label>
+                        <input type="text" class="form-control" name="usuario" id="usuario">
+                        <label>Contraseña:</label>
+                        <input type="password" class="form-control" name="password" id="password">
+                    </div>
+                     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <button class="btn btn-primary" type="submit" id="btnGuardar2"><i class="fa fa-close"></i>  Anular</button>
+                        <button class="btn btn-danger pull-right" onclick="cancelar_anu();" data-dismiss="modal" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                    </div>
+                </form>
+            </div>
+             <div class="modal-footer">
+                
+            </div>
         </div>
     </div>
 </div>

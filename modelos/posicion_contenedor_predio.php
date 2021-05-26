@@ -38,7 +38,7 @@ class posicion_cont_predio{
     public function insertar($fecha,$hora,$idpatio,$idarea,$idbloque,$idfila,$altura,$idusario,$idingreso,$idf,$observaciones,$idaltura){
         $insertado=true;
         $actualizado=true;
-        $sql="CALL insertar_posicion_con('$fecha','$hora',$idpatio,$idarea,$idbloque,$idfila,$altura,$idusario,$idingreso,$idf,'$observaciones')";
+        $sql="CALL insertar_posicion_con('$fecha','$hora',$idpatio,$idarea,$idbloque,$idfila,$altura,$idusario,$idingreso,$idf,'$observaciones',$idaltura)";
         $insertado= ejecutarConsulta($sql);
         if ($insertado==true){
             $sql2="update altura_predio set estado='Asignado',id_ingresoc=$idingreso where id_altura=$idaltura";
@@ -53,6 +53,10 @@ class posicion_cont_predio{
             return false;
         }
     }
+    public function actualizar($idposicion,$fecha,$hora,$idpatio,$idarea,$idbloque,$idfila,$altura,$idingreso,$idf,$observaciones,$idaltura){
+        $sql="CALL actualizar_Posicion_con($idposicion,'$fecha','$hora',$idpatio,$idarea,$idbloque,$idfila,$altura,$idingreso,$idf,'$observaciones',$idaltura)";
+        return ejecutarConsulta($sql);
+    }
     public function listar_cont_pos(){
         $sql="CALL mostrar_cont_pos()";
         return ejecutarConsulta($sql);
@@ -60,5 +64,14 @@ class posicion_cont_predio{
     public function mostrar($id){
         $sql="select * from contenedor_posicion_patio where id_conte_posi=$id";
         return ejecutarConsultaSimpleFila($sql);
+    }
+    public function desactivar($id,$ida){
+        $sw=true;
+        $sql="Update contenedor_posicion_patio set estado='Anulado' where id_conte_posi=$id";
+        $sw= ejecutarConsulta($sql);
+        if ($sw==true){
+            $sql2="update altura_predio set estado='Sin Asignar', id_ingresoc=0 where id_altura=$ida";
+            return ejecutarConsulta($sql) or false;
+        }
     }
 }
