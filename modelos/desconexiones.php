@@ -19,7 +19,7 @@ class desconexiones{
         return ejecutarConsulta($sql);
     }
     public function listarconexiones(){
-        $sql="select a.Id,b.No_Contenedor from conexion a inner join ingreso_maestro b on a.Id_ingreso=b.Id_Ingreso where a.Estado='Activo' and b.Estado='Ingresado'";
+        $sql="select a.Id,b.No_Contenedor from conexion a inner join ingreso_maestro b on a.Id_ingreso=b.Id_Ingreso where a.Estado='Activo' and b.Estado in('Ingresado','Asignado')";
         return ejecutarConsulta($sql);
     }
     public function datosconexion($id){

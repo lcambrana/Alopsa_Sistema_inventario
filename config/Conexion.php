@@ -29,18 +29,33 @@ function ejecutarConsultaSimpleFila($sql){
 
             $query=$conexion->query($sql);
             $row=$query->fetch_assoc();
+            if ($query==false){
+                $fila='errores.txt';
+                $errorconsulta=date('l jS \of F Y h:i:s A'). " - " . mysqli_errno($conexion). " : " . mysqli_error($conexion) . ' - ' . $sql ."\n";
+                file_put_contents($fila, $errorconsulta, FILE_APPEND | LOCK_EX);
+            }
             return $row;
 }
 
 function ejecutarConsulta_retornarID($sql){
 global $conexion;
 $query=$conexion->query($sql);
+ if ($query==false){
+                $fila='errores.txt';
+                $errorconsulta=date('l jS \of F Y h:i:s A'). " - " . mysqli_errno($conexion). " : " . mysqli_error($conexion) . ' - ' . $sql ."\n";
+                file_put_contents($fila, $errorconsulta, FILE_APPEND | LOCK_EX);
+            }
 return $conexion->insert_id;
 }
 function numeroitem($sql){
     global $conexion;
     $result=$conexion->query($sql);
     $rowcount=mysqli_num_rows($result);
+     if ($query==false){
+                $fila='errores.txt';
+                $errorconsulta=date('l jS \of F Y h:i:s A'). " - " . mysqli_errno($conexion). " : " . mysqli_error($conexion) . ' - ' . $sql ."\n";
+                file_put_contents($fila, $errorconsulta, FILE_APPEND | LOCK_EX);
+            }
     return $rowcount;
 }
 function limpiarCadena($str){

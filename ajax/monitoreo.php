@@ -62,7 +62,7 @@ switch ($_GET['op']){
         }
         break;
     case 'mostraringreso':
-        $idingreso=$_REQUEST['idingreso'];
+        $idingreso=$_REQUEST['id_ingreso'];
         $rspta=$monitoreo->datosingreso($idingreso);
         while ($row = mysqli_fetch_array($rspta)){
         echo '<div class="form-group col-lg-2 col-md-3 col-xs-12"><label>Tara:</label><input type="text" class="form-control" id="tara" name="tara" value="'.$row['tara'].'" disabled="true"></div>'

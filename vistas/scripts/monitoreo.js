@@ -57,7 +57,7 @@ function mostraringreso(val){
     
     $.ajax({
        url:'../ajax/monitoreo.php?op=mostraringreso',
-       data:{idingreso:val},
+       data:{id_ingreso:val},
        type: "get",
        datatype:"json",
        success: function(resp){

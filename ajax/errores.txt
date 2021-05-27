@@ -27,3 +27,4 @@ Wednesday 26th of May 2021 08:25:14 AM-1146 : Table 'sis_invcon.posicion' doesn'
 Wednesday 26th of May 2021 08:25:34 AM-1146 : Table 'sis_invcon.posicion' doesn't exist
 Wednesday 26th of May 2021 08:25:37 AM-1146 : Table 'sis_invcon.posicion' doesn't exist
 Wednesday 26th of May 2021 08:25:40 AM-1146 : Table 'sis_invcon.posicion' doesn't exist
+Thursday 27th of May 2021 10:00:36 PM - 1146 : Table 'sis_invcon.posicion' doesn't exist - CALL listar_asignaciones()

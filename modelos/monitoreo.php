@@ -24,7 +24,7 @@ class monitoreo_c{
         return ejecutarConsulta($sql);
     }
     public function listar_ingreso(){
-        $sql="select a.Id,b.No_Contenedor from conexion a INNER join ingreso_maestro b on a.Id_ingreso=b.Id_Ingreso where a.Estado='Activo'";
+        $sql="select a.Id_Ingreso Id,b.No_Contenedor from conexion a INNER join ingreso_maestro b on a.Id_ingreso=b.Id_Ingreso where a.Estado='Activo'";
         return ejecutarConsulta($sql);
     }
     public function datosingreso($ingreso){
