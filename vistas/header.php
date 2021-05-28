@@ -143,9 +143,9 @@ if ($_SESSION['ingresoc']==1) {
           <ul class="treeview-menu">
           <li><a href="desconexiones.php"><i class="fa fa-minus-circle"></i>Desconexion</a></li>
           </ul>
-            <ul class="treeview-menu">
+          <!--<ul class="treeview-menu">
           <li><a href="asignaciones.php"><i class="fa fa-plus-square"></i>Asignaciones</a></li>
-          </ul>
+          </ul>-->
             <ul class="treeview-menu">
           <li><a href="exportacion.php"><i class="fa fa-share-alt"></i>Exportaciones</a></li>
           </ul>

@@ -28,3 +28,9 @@ Wednesday 26th of May 2021 08:25:34 AM-1146 : Table 'sis_invcon.posicion' doesn'
 Wednesday 26th of May 2021 08:25:37 AM-1146 : Table 'sis_invcon.posicion' doesn't exist
 Wednesday 26th of May 2021 08:25:40 AM-1146 : Table 'sis_invcon.posicion' doesn't exist
 Thursday 27th of May 2021 10:00:36 PM - 1146 : Table 'sis_invcon.posicion' doesn't exist - CALL listar_asignaciones()
+Thursday 27th of May 2021 10:52:43 PM - 1146 : Table 'sis_invcon.posicion' doesn't exist - CALL listar_asignaciones()
+Thursday 27th of May 2021 10:52:50 PM - 1146 : Table 'sis_invcon.posicion' doesn't exist - CALL datosingreso_asig('1')
+Thursday 27th of May 2021 10:52:50 PM - 1064 : You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 - select * from posicion where idbloque=
+Thursday 27th of May 2021 10:52:59 PM - 1146 : Table 'sis_invcon.posicion' doesn't exist - CALL datosingreso_asig('')
+Thursday 27th of May 2021 10:52:59 PM - 1064 : You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 - select * from posicion where idbloque=
+Friday 28th of May 2021 03:58:22 AM - 1305 : PROCEDURE sis_invcon.mostrar_exportacion does not exist - call mostrar_exportacion()
