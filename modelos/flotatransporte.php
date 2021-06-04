@@ -44,5 +44,13 @@ class flota{
         $sql ="select Id_f,Nombre_de_Piloto from flota_transporte where estado='1'";
         return ejecutarConsulta($sql);
     }
+    public function insertar_p($nombrepiloto,$licenciapiloto,$placapiloto,$cabezalpiloto,$codnaviera,$transportepiloto) {
+        $sql="Insert into flota_transporte (Nombre_de_Piloto,Licencias,Placas,Cabezal,Codigo_Piloto_Naviera,Transporte,Estado)values('$nombrepiloto','$licenciapiloto','$placapiloto','$cabezalpiloto','$codnaviera','$transportepiloto',1)";
+        return ejecutarConsulta($sql);
+    }
+    public function existe_piloto($lincencia){
+        $sql="select * from flota_transporte where Licencias='$lincencia'";
+        return numeroitem($sql);
+    }
     
 }

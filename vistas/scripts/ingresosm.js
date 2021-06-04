@@ -12,6 +12,9 @@ function init(){
     $("#formularioauto").on("submit",function(e){
         validarusuario(e);
     });
+    $('#formulario_pilotos').on("submit",function(e){
+        guardarpiloto(e);
+    })
 }
 function listar_bloque(){
     $.post("../ajax/bloque_posicion.php?op=listar_bloques",function(r){
@@ -45,7 +48,9 @@ function cancelarform(){
     limpiar();
     mostrarform(false);
 }
-
+function mostrarmodalpiloto(){
+    $('#mostrarmodalpiloto').modal('toggle');
+}
 function limpiar(){
     var now = new Date();
     var day = ("0" + now.getDate()).slice(-2);
@@ -159,6 +164,44 @@ function guardaryeditar(e){
           
        }
     });
+}
+function guardarpiloto(e){
+    e.preventDefault();
+    $('#btnGuardar_piloto').prop("disabled", false);
+    var datospiloto=new FormData($('#formulario_pilotos')[0]);
+    $.ajax({
+        url:'../ajax/flotatransporte.php?op=guardar_dpiloto',
+        type: 'POST',
+        data: datospiloto,
+        contentType: false,
+        processData: false,
+        success: function(res){
+            var r=res.substring(0,2);
+            if(r=='Se'){
+                swal({icon:'success',title:'Datos Piloto',text:res});
+                listar_pilotos();
+                 limpiardatospiloto();
+                $('#mostrarmodalpiloto').modal('toggle');
+            }else if (r=='Er'){
+                  limpiardatospiloto();
+                swal({icon:'error',title:'Error al Grabar',text:res});
+              
+            }else {
+                swal(res);
+            }
+        }
+    })
+}
+function cancelarform_piloto(){
+ limpiardatospiloto();
+}
+function limpiardatospiloto(){
+     $('#npiloto').val();
+    $('#lipiloto').val();
+    $('#plapiloto').val();
+    $('#cabezalpiloto').val();
+    $('#codnavierapiloto').val();
+    $('#transportepiloto').val();
 }
 function mostrar(id){
    $.post("../ajax/datosmaestro.php?op=mostrardatos",{idingreso:id},

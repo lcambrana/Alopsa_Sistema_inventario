@@ -82,6 +82,24 @@ switch ($_GET["op"]){
                         echo '<option value='.$reg->Id_f.'>'.$reg->Nombre_de_Piloto.'</option>';
                     }
             break;
+    case 'guardar_dpiloto':
+        $nombrepilot= isset($_POST['npiloto'])? limpiarCadena($_POST['npiloto']):'';
+        $licenciapiloto= isset($_POST['lipiloto'])? limpiarCadena($_POST['lipiloto']):'';
+        $placapiloto=isset($_POST['plapiloto'])? limpiarCadena($_POST['plapiloto']):'';
+        $cabezalpiloto=isset($_POST['cabezalpiloto'])? limpiarCadena($_POST['cabezalpiloto']):'';
+        $codnaviera= isset($_POST['codnavierapiloto'])? limpiarCadena($_POST['codnavierapiloto']):'';
+        $transportepiloto= isset($_POST['transportepiloto'])? limpiarCadena($_POST['transportepiloto']):'';
+        $existe=0;
+        $existe=$flota->existe_piloto($licenciapiloto);
+        if ($existe==0){
+        $rspta=$flota->insertar_p($nombrepilot,$licenciapiloto,$placapiloto,$cabezalpiloto,$codnaviera,$transportepiloto);
+        echo $rspta ? "Se ha agregado al piloto correctamente" : "Error: No se pudo registrar los datos";
+        
+        }else {
+            echo "El numero de licencia del piloto ya se encuentra ingresado";
+        }
+        
+        break;
     
 }
 
