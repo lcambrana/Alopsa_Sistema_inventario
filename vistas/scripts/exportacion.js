@@ -76,6 +76,8 @@ function limpiar(){
     $('#idingresoc').val('');
     $('#contenedor').val('');
     $('#contenedor').selectpicker('refresh');
+    $('#nompiloto').val('');
+    $('#licenciap').val('');
     mostraringresom(0);
 }
 function cancelarform(){
@@ -123,6 +125,8 @@ function mostrar(val){
             $('#contenedor').val(data.id);
             $('#contenedor').selectpicker('refresh');
             $('#idingresoc').val(data.id);
+            $('#nompiloto').val(data.nopiloto);
+            $('#licenciap').val(data.licenciapiloto);
             mostraringresom(data.id);
             mostrarmodal();
         }

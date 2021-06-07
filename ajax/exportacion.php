@@ -13,6 +13,8 @@ $fechaasign=isset($_POST['fecha_asig'])? limpiarCadena($_POST['fecha_asig']):'';
 $horaexpo=isset($_POST['hora'])? limpiarCadena($_POST['hora']):'';
 $ingreso=isset($_POST['idingresoc'])? limpiarCadena($_POST['idingresoc']):'';
 $idflota= isset($_POST['idf'])? limpiarCadena($_POST['idf']):'';
+$nompiloto=isset($_POST['nompiloto'])? limpiarCadena($_POST['nompiloto']):'';
+$licenciap= isset($_POST['licenciap'])? limpiarCadena($_POST['licenciap']):'';
 $user_id=$_SESSION['idusuario'];
 $hoy = date("Y/m/d");
 $hora_actual=date("H:i:s");
@@ -70,13 +72,13 @@ switch ($_GET['op']){
         break;
     case 'guardareditar':
         if (empty($idexpo)){
-            $rspta=$exportacion_c->insertar($fechaexpo,$horaexpo,$fechaasign,$ingreso,$idflota,$user_id);
+            $rspta=$exportacion_c->insertar($fechaexpo,$horaexpo,$fechaasign,$ingreso,$idflota,$user_id,$nompiloto,$licenciap);
             if ($rspta==true){
                 $bitacora->insertar_bitacora('Insertar', $hoy, $hora_actual, $_SESSION['nombre'], 'Inserta nueva exportacion', 'exportacion');
             }
             echo $rspta ? 'Se inserto el registro de la exportacion existosamente ': 'Error se ha generado un error al insertar el registro consultar log de errores' ;
         }else{
-            $rspta=$exportacion_c->actualizar($idexpo,$fechaexpo,$horaexpo,$fechaasign,$ingreso,$idflota);
+            $rspta=$exportacion_c->actualizar($idexpo,$fechaexpo,$horaexpo,$fechaasign,$ingreso,$idflota,$nompiloto,$licenciap);
             if ($rspta==true){
                 $bitacora->insertar_bitacora('Actualizar', $hoy, $hora_actual, $_SESSION['nombre'], 'Se actualiza el registro no. '.$idexpo , 'exportacion');
             }

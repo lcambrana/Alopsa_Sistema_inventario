@@ -18,10 +18,10 @@ class exportacion{
         $sql="CALL datosingreso_exp($id)";
         return ejecutarConsulta($sql);
     }
-    public function insertar($fechaexpo,$horaexpo,$fechaasig,$idingreso,$idflota,$user_id){
+    public function insertar($fechaexpo,$horaexpo,$fechaasig,$idingreso,$idflota,$user_id,$npiloto,$licenciap){
        $insertado=true;
        $completo=true;
-        $sql="CALL inserta_expo('$fechaexpo','$horaexpo','$fechaasig',$idingreso,$idflota,$user_id)";
+        $sql="CALL inserta_expo('$fechaexpo','$horaexpo','$fechaasig',$idingreso,$idflota,$user_id,'$npiloto','$licenciap')";
       
         $insertado=ejecutarConsulta($sql);
         if ($insertado==true){
@@ -32,8 +32,8 @@ class exportacion{
             return false;
         }
     }
-    public function actualizar($idexpo,$fechaexpo,$horaexpo,$fechaasig,$idingreso,$idflota){
-        $sql="call actualizar_expo($idexpo,'$fechaexpo','$horaexpo','$fechaasig',$idingreso,$idflota)";
+    public function actualizar($idexpo,$fechaexpo,$horaexpo,$fechaasig,$idingreso,$idflota,$npiloto,$licenciap){
+        $sql="call actualizar_expo($idexpo,'$fechaexpo','$horaexpo','$fechaasig',$idingreso,$idflota,'$npiloto','$licenciap')";
         return ejecutarConsulta($sql);
     }
     public function mostrar($idexpo){

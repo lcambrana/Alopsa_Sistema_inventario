@@ -57,7 +57,7 @@ if (!isset($_SESSION['nombre'])){
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+               
                 <h4 class="modal-title" id="titulo" name="titulo"></h4>
             </div>
             <div class="modal-body">
@@ -150,14 +150,14 @@ if (!isset($_SESSION['nombre'])){
                                     <input type="checkbox" class="flat-red" id="derecha" name="derecha">
                                 </div>
                             </div>
-                            <div class="form-group col-lg-1 col-md-3">
+                            <div class="form-group col-lg-1 col-md-12 col-xs-12">
                                 <div align="center">
                                     <label> Frente </label>
                                     <img src="../files/server/frente.png" alt=""/>
                                     <input type="checkbox" class="flat-red" id="frente" name="frente">
                                 </div>
                             </div>
-                            <div class="form-group col-lg-2">
+                            <div class="form-group col-lg-2 col-md-12 col-xs-12">
                                 <div align="center">
                                     <label>Interior</label>
                                     <img src="../files/server/interior.png" alt=""/>
@@ -302,7 +302,7 @@ if (!isset($_SESSION['nombre'])){
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+               
                 <h4 class="modal-title" id="titulo2" name="titulo2"></h4>
             </div>
             <div class="modal-body">

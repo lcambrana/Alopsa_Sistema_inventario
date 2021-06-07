@@ -81,7 +81,19 @@ if (!isset($_SESSION['nombre'])){
                                 <input type="hidden" id="idingresoc" name="idingresoc">
                                 </div>
                                 <div id="datoscont"></div>
+                                <div class="row">
+                                    <div class="form-group col-lg-3 col-md-12 col-xs-12">
+                                        <label>Nombre Piloto:</label>
+                                        <input type="text" class="form-control" id="nompiloto" name="nompiloto" placeholder="Piloto" required="">
+                                    </div>
+                                    <div class="form-group col-lg-3 col-md-12 col-xs-12">
+                                        <label>Licencia:</label>
+                                        <input type="text" class="form-control" id="licenciap" name="licenciap" placeholder="No. licencia" required="">
+                                    </div>
+
+                                </div>
                             </div>
+                            
                         </div>
                         
                     </div>

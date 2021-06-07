@@ -16,15 +16,16 @@ $suministro= isset($_POST['suministro'])? limpiarCadena($_POST['suministro']):""
 $idf=isset($_POST['idf'])? limpiarCadena($_POST['idf']):"";
 $temperatura= isset($_POST['temperatura'])? limpiarCadena($_POST['temperatura']):"";
 $tipoconexion= isset($_POST['tipoconexion'])? limpiarCadena($_POST['tipoconexion']):"";
+$nombremecanico = isset($_POST['mecanico'])? limpiarCadena($_POST['mecanico']):"";
 $user_id=$_SESSION['idusuario'];
 
 switch ($_GET['op']){
     case 'guardaryeditar':
         if (empty($idconexion)){
-            $rspta=$conexionc->insertar($fechaconexion, $horaconexion, $setpoint, $suministro, $retorno, $id_ingreso, $idf, $user_id,$temperatura,$tipoconexion);
+            $rspta=$conexionc->insertar($fechaconexion, $horaconexion, $setpoint, $suministro, $retorno, $id_ingreso, $idf, $user_id,$temperatura,$tipoconexion,$nombremecanico);
              echo $rspta ? 'Se realizo Exitosamente la conexion':'Error al realizar el ingreso a la conexion';
         }else{
-           $rspta=$conexionc->editar($idconexion,$fechaconexion, $horaconexion, $setpoint, $suministro, $retorno, $id_ingreso, $idf,$temperatura,$tipoconexion);
+           $rspta=$conexionc->editar($idconexion,$fechaconexion, $horaconexion, $setpoint, $suministro, $retorno, $id_ingreso, $idf,$temperatura,$tipoconexion,$nombremecanico);
            echo $rspta ? 'Se Actualizo correctaente el registro':'Error al tratar de actualizar el registro';
         }
         break;
@@ -64,7 +65,7 @@ switch ($_GET['op']){
                 .'<div class="form-group col-lg-3 col-md-3 col-xs-12"><label>Transportista</label><input type="text" class="form-control" value="'.$row['Transporte'].'" disabled="true"><input type="hidden" id="naviera" name="naviera" value="'.$row['Transporte'].'" > </div>'
                 .'<div class="form-group col-lg-3 col-md-3 col-xs-12"><label>Piloto</label><input type="text" class="form-control" value="'.$row['Nombre_de_Piloto'].'" disabled="true"></div>'
                 .'<div class="form-group col-lg-3 col-md-3 col-xs-12"><label>Licencia</label><input type="text" class="form-control" value="'.$row['Licencias'].'" disabled="true"></div>'
-                .'<div class="form-group col-lg-3 col-md-3 col-xs-12"><label>Placas</label><input type="text" class="form-control" value="'.$row['Placas'].'" disabled="true"></div>'
+                .'<div class="form-group col-lg-2 col-md-3 col-xs-12"><label>Placas</label><input type="text" class="form-control" value="'.$row['Placas'].'" disabled="true"></div>'
                 .'<div class="form-group col-lg-2 col-md-3 col-xs-12"><label>Codigo</label><input type="text" class="form-control" value="'.$row['Codigo_Piloto_Naviera'].'" disabled="true"></div>'
                 .'<div class="form-group col-lg-3 col-md-3 col-xs-12"><label>Destino</label><input type="text" class="form-control"  value="'.$row['Destino'].'" disabled="true"><input type="hidden" id="destino" name="destino" value="'.$row['Destino'].'"><input type="hidden" id="idf" name="idf" value="'.$row['Id_f'].'"></div>';
 

@@ -13,7 +13,7 @@ $setpoint= isset($_POST['setpoint'])? limpiarCadena($_POST['setpoint']):"";
 $suministro= isset($_POST['suministro'])? limpiarCadena($_POST['suministro']):"";
 $mecanico= isset($_POST['mecanico'])? limpiarCadena($_POST['mecanico']):"";
 $observaciones=isset($_POST['observaciones'])? limpiarCadena($_POST['observaciones']):"";
-$idf=isset($_POST['id_f'])? limpiarCadena($_POST['id_f']):"";
+$idf=isset($_POST['idf'])? limpiarCadena($_POST['idf']):"";
 $producto=isset($_POST['producto'])? limpiarCadena($_POST['producto']):"";
 $temperatura= isset($_POST['temperatura'])? limpiarCadena($_POST['temperatura']):"";
 $user_id=$_SESSION['idusuario'];
@@ -25,7 +25,7 @@ switch ($_GET['op']){
             echo $rspta ? 'Se Ingreso el Monitoreo Exitosamente':'Error al realizar el Monitoreo';
         }else{
             $rspta=$monitoreo->editar($id,$horamonitoreo,$retorno,$observaciones,$producto,$setpoint,$suministro,$fechamonitoreo,$mecanico,$idingreso,$idf,$temperatura);
-             echo $rspta ? "Datos actualizados correctamente" : "No se pudo actualizar los datos"; 
+             echo $rspta ? "Se ha actualizados correctamente el monitoreo" : "No se pudo actualizar los datos"; 
         }
         break;
     case 'listar':

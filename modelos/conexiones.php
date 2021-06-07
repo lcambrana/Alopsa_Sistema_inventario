@@ -6,12 +6,12 @@ class conexiones_c{
     public function __construct() {
         
     }
-    public function insertar($fechac,$horacon,$setpoint,$suministro,$retorno,$idingreso,$idf,$idusuario,$temperatura,$tipoconexion){
-        $sql="CALL insertar_cone('$fechac','$horacon',$setpoint,$suministro,$retorno,$idingreso,$idf,'$idusuario','$temperatura','$tipoconexion')";
+    public function insertar($fechac,$horacon,$setpoint,$suministro,$retorno,$idingreso,$idf,$idusuario,$temperatura,$tipoconexion,$mecanico){
+        $sql="CALL insertar_conexion('$fechac','$horacon',$setpoint,$suministro,$retorno,$idingreso,$idf,'$idusuario','$temperatura','$tipoconexion','$mecanico')";
         return ejecutarConsulta($sql);
     }
-    public function editar($idcon,$fechac,$horacon,$setpoint,$suministro,$retorno,$idingreso,$idf,$temperatura,$tipoconexion){
-         $sql="CALL actualizar_conexion($idcon,'$fechac','$horacon',$setpoint,$suministro,$retorno,$idingreso,$idf,'$temperatura','$tipoconexion')";
+    public function editar($idcon,$fechac,$horacon,$setpoint,$suministro,$retorno,$idingreso,$idf,$temperatura,$tipoconexion,$mecanico){
+         $sql="CALL actualizar_conexion($idcon,'$fechac','$horacon',$setpoint,$suministro,$retorno,$idingreso,$idf,'$temperatura','$tipoconexion','$mecanico')";
         return ejecutarConsulta($sql);
     }
     public function listar(){

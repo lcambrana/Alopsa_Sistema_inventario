@@ -90,11 +90,14 @@ function guardaryeditar(e){
                 swal({
                     icon:'success',title: 'Monitoreo',text:datos
                     });
+                    limpiar();
                     tabla.ajax.reload();
                      $('#getmodalm').modal('toggle');
                    
             }else if (d=='Er'){
                 swal({icon:'Error',title:'Error al Grabar',text:datos})
+            }else{
+                swal(datos);
             }
             
            

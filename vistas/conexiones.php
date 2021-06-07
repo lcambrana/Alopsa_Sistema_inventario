@@ -49,7 +49,7 @@ if (!isset($_SESSION['nombre'])){
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+               
                 <h4 class="modal-title" id="titulo" name="titulo"></h4>
             </div>
             <div class="modal-body">
@@ -69,7 +69,7 @@ if (!isset($_SESSION['nombre'])){
                         <label>Fecha:</label>
                         <input type="date" class="form-control" name="fechaco" id="fechaco" value="<?php  echo date("Y-m-d"); ?>">
                        </div> 
-                       <div class="form-group col-lg-2 col-md-3 col-xs-12">
+                       <div class="form-group col-lg-3 col-md-3 col-xs-12">
                         <label>Hora Monitoreo:</label>
                         <div class="input-group clockpicker">
                             <input type="text" class="form-control" name="horaconexion" id="horaconexion" value="<?php $hora2 =new DateTime("now", new DateTimeZone(' America/Guatemala')); echo $hora2->format('H:i:s'); ?>">
@@ -93,10 +93,6 @@ if (!isset($_SESSION['nombre'])){
                            </select>
                        </div>
                        <div class="form-group col-lg-3 col-md-3 col-xs-12">
-                        <label>Retorno:</label>
-                        <input type="text" class="form-control" name="retorno" id="retorno"  autocomplete="off" placeholder="Retorno" onkeyup="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
-                        </div>
-                        <div class="form-group col-lg-3 col-md-3 col-xs-12">
                         <label>Set Point:</label>
                         <input type="text" class="form-control" name="setpoint"  autocomplete="off" id="setpoint" placeholder="Set Point" onkeyup="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
                         </div>
@@ -104,13 +100,21 @@ if (!isset($_SESSION['nombre'])){
                         <label>Suministro:</label>
                         <input type="text" class="form-control" name="suministro"  autocomplete="off" id="suministro" placeholder="Suministro" onkeyup="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
                         </div>
-                        
+                        <div class="form-group col-lg-2 col-md-12 col-xs-12">
+                        <label>Retorno:</label>
+                        <input type="text" class="form-control" name="retorno" id="retorno"  autocomplete="off" placeholder="Retorno" onkeyup="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
+                        </div>
+                       <div class="form-group col-lg-3 col-md-12 col-xs-12">
+                           <label>Nombre Mecanico:</label>
+                           <input class="form-control" type="text" name="mecanico" id="mecanico" autocomplete="off" placeholder="Nombre Mecanico" onkeyup="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" >
+                       </div>
                     </div>
+                    <div class="row">
                     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <button class="btn btn-primary" type="submit" id="btnGuardar"><i class="fa fa-save"></i>  Grabar</button>
                             <button class="btn btn-danger pull-right" onclick="cancelarform()" data-dismiss="modal" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
                     </div>
-                    
+                    </div>
                 </form>
             </div>
             <div class="modal-footer"><div class="row"></div></div>
