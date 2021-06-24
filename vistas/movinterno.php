@@ -15,23 +15,235 @@ if (!isset($_SESSION['nombre'])){
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h4 class="box-title"> Movimientos Interno <button class="btn btn-success" id="btnagregar" onclick="mostrarmodal()"><i class="fa fa-plus-circle"></i>  Agregar</button> </h4>
-                    <div class="box-tools pull-right">
+                        
+                      
+                        <div class="box-tools pull-right">
                                     <a href="../vistas/dashboard.php"><button class="btn btn-info"><i class="fa fa-arrow-circle-left"></i> Volver</button></a>
                                 </div>
-                        <div class="panel-body" id="listamov_interno">
-                            <table id="tbllista_movinterno" class="table table-responsive table-striped table-condensed table-hover">
-                                <thead>
-                                <th></th>
-                                <th>Opciones</th>
-                                </thead>
-                            </table>
+                       
+                        <div class="nav-tabs-custom">
+                             <ul class="nav nav-tabs">
+                                <li ><a href="#movintcab" data-toggle="tab">Movimiento con Cabezal</a></li>
+                                <li class="active"><a href="#movinterno" data-toggle="tab">Movimientos Internos</a></li>
+                                
+                              </ul>
+                            <div class="tab-content">
+                                <div class="active tab-pane" id="movinterno">
+                                    <h4 class="box-title"> Movimientos Interno <button class="btn btn-success" id="btnagregar" onclick="mostrarmodal()"><i class="fa fa-plus-circle"></i>  Agregar</button> </h4>
+                                     <div class="panel-body" id="listamov_interno">
+                                        <table id="tbllista_movinterno" class="table table-responsive table-striped  table-bordered table-condensed table-hover">
+                                            <thead>
+                                             <th>No.</th>
+                                             <th>Semana</th>
+                                             <th>Año</th>
+                                             <th>Fecha Movi.</th>
+                                             <th>Hora Ingreso</th>
+                                             <th>Contenedor</th>
+                                             <th>Medida</th>
+                                             <th>Bloque</th>
+                                             <th>posicion</th>
+                                             <th>Cliente</th>
+                                             <th>Actividad</th>
+                                             <th>motivo</th>
+                                            <th>Opciones</th>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="movintcab">
+                                    <h4 class="box-title"> Movimientos Interno Cabezales <button class="btn btn-success" id="btnagregar" onclick="mostrarmodalc()"><i class="fa fa-plus-circle"></i>  Agregar</button> </h4>
+                                    <div class="panel-body table-responsive" id="listamov_internoc">
+                                        <table id="tbllista_movinternoc" class="table table-striped table-bordered table-condensed table-hover ">
+                                            <thead>
+                                            <th>No.</th>
+                                            <th>Semana</th>
+                                            <th>Fecha Movi.</th>
+                                            <th>Hora Ingreso</th>
+                                            <th>Contenedor</th>
+                                            <th>Cliente</th>
+                                            <th>Actividad</th>
+                                            <th>Comentario</th>
+                                            <th>Opciones</th>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal" id="getmodalmovinterno" name="getmodalmovinterno" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="titulo" name="titulo"></h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form name="formularioagregar" id="formularioagregar" method="POST">
+                                                <div class="box box-info">
+                                                    <div class="box-body">
+                                                        <div class="row">
+                                                            <input type="hidden" id="idmovinterno" name="idmovinterno"><!-- comment -->
+                                                            <div class="form-group col-lg-4 col-md-4 col-xs-4">
+                                                                <label>Semana</label>
+                                                                <input type="text" class="form-control" id="semana" name="semana" autocomplete="off" placeholder="Semana" onkeyup="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" required=""><!-- comment -->
+                                                            </div>
+                                                        
+                                                        
+                                                            <div class="form-group col-lg-4 col-md-4 col-xs-4">
+                                                                <label>Año</label>
+                                                                <input type="text" class="form-control" id="anio" name="anio" autocomplete="off" placeholder="Año" value="<?php  echo date("Y"); ?>" required="">
+                                                            </div>
+                                                            
+                                                        
+                                                            <div class="form-group col-lg-4 col-md-4 col-xs-4">
+                                                                <label>Fecha de Mov. Interno</label>
+                                                                <input type="date" class="form-control" id="fechamov" name="fechamov" autocomplete="off" placeholder="Fecha de Mov. Interno" value="<?php  echo date("Y-m-d"); ?>" required="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group col-lg-4 col-md-4 col-xs-4">
+                                                            <label>Hora Ingreso</label>
+                                                            <div class="input-group clockpicker">
+                                                                <input type="text" class="form-control" id="Hingreso" name="Hingreso" autocomplete="off" placeholder="Hora Ingreso" value="<?php $hora2 =new DateTime("now"); echo $hora2->format('H:i:s');  ?>" required="">
+                                                                <span class="input-group-addon">
+                                                                    <span class="glyphicon glyphicon-time"></span>
+                                                                </span>
+                                                            </div>
+                                                            </div>
+                                                        
+                                                        
+                                                            <div class="form-group col-lg-4 col-md-4 col-xs-4">
+                                                                <label>Contenedor</label>
+                                                                <select class="form-control select-picker" id="contenedor" name="contenedor" data-live-search="true">
+                                                                    </select>
+                                                                <input type="hidden" id="idingreso" name="idingreso">
+                                                            </div>
+                                                        
+                                                        
+                                                            <div class="form-group col-lg-4 col-md-4 col-xs-4">
+                                                                <label>Medida</label>
+                                                                <input type="text" class="form-control" id="medida" name="medida" autocomplete="off" placeholder="Medida" onkeyup="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" required="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group col-lg-4 col-md-4 col-xs-4">
+                                                                <label>Bloque</label>
+                                                                <input type="text" class="form-control" id="bloque" name="bloque" autocomplete="off" placeholder="Bloque" onkeyup="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" required="">
+                                                            </div>
+                                                        
+                                                        
+                                                            <div class="form-group col-lg-4 col-md-4 col-xs-4">
+                                                                <label>Cliente</label>
+                                                                <input type="text" class="form-control" id="cliente" name="cliente" autocomplete="off" placeholder="Cliente" onkeyup="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" required="">
+                                                            </div>
+                                                            
+                                                        
+                                                        
+                                                            <div class="form-group col-lg-4 col-md-4 col-xs-4">
+                                                                <label>Actividad</label>
+                                                                <input type="text" class="form-control" id="actividad" name="actividad" autocomplete="off" placeholder="Actividad" onkeyup="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" required="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group col-lg-4 col-md-4 col-xs-4">
+                                                                <label>Patio</label>
+                                                                <input type="text" class="form-control" id="patio" name="patio" autocomplete="off" placeholder="Patio" onkeyup="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" required="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group col-lg-6 col-md-6 col-xs-6">
+                                                            <label>Motivo</label>
+                                                            <textarea type="text" class="form-control" id="motivo" name="motivo" autocomplete="off" placeholder="Motivo" onkeyup="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" required=""></textarea>
+                                                        </div>
+                                                        </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-lg-12 col-md-12 col-xs-12">
+                                                            <button class="btn btn-primary" type="submit" id="btnGuardar"><i class="fa fa-save"></i> Guardar</button>
+                                                            <button class="btn btn-danger pull-right" onclick="cancelarform()" data-dismiss="modal" type="button"><i class="fa fa-close"></i> Cancelar</button>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                            
                         </div>
+                        
+                       
                     </div>
                 </div>
             </div>
         </div>
     </section>
+</div>
+<div class="modal" id="getmodalmovic" name="getmodalmovic" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="titulo" name="titulo"></h4>
+            </div>
+            <div class="modal-body">
+                <form name="formularioagregarc" id="formularioagregarc" method="POST">
+                    <div class="box box-info">
+                        <div class="box-body">
+                            <div class="row">
+                                <input type="hidden" id="idmovic" name="idmovic"><!-- comment -->
+                                <div class="form-group col-lg-4 col-md-4 col-xs-4">
+                                    <label>Semana</label>
+                                    <input type="text" class="form-control" id="semanac" name="semanac" autocomplete="off" placeholder="Semana" onkeyup="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" required="">
+                                </div>
+                                <div class="form-group col-lg-4 col-md-4 col-xs-4">
+                                    <label>Fecha de Mov. Interno</label>
+                                    <input type="date" class="form-control" id="fechamovc" name="fechamovc" autocomplete="off" placeholder="Fecha de Mov. Interno" value="<?php  echo date("Y-m-d"); ?>" required="">
+                                </div>
+                                <div class="form-group col-lg-4 col-md-4 col-xs-4">
+                                    <label>Hora Ingreso</label>
+                                    <div class="input-group clockpicker">
+                                        <input type="text" class="form-control" id="Hingresoc" name="Hingresoc" autocomplete="off" placeholder="Hora Ingreso" value="<?php $hora2 =new DateTime("now"); echo $hora2->format('H:i:s');  ?>" required="">
+                                         <span class="input-group-addon">
+                                         <span class="glyphicon glyphicon-time"></span>
+                                         </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-lg-4 col-md-4 col-xs-4">
+                                  <label>Contenedor</label>
+                                    <select class="form-control select-picker" id="contenedorc" name="contenedorc" data-live-search="true">
+                                        </select>
+                                      <input type="hidden" id="idingresoc" name="idingresoc">
+                                </div>
+                                <div class="form-group col-lg-4 col-md-4 col-xs-4">
+                                    <label>Cliente</label>
+                                    <input type="text" class="form-control" id="clientec" name="clientec" autocomplete="off" placeholder="Cliente" onkeyup="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" required="">
+                                </div>
+                                <div class="form-group col-lg-4 col-md-4 col-xs-4">
+                                    <label>Atividad</label>
+                                    <input type="text" class="form-control" id="actividadc" name="actividadc" autocomplete="off" placeholder="Actividad" onkeyup="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" required="">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-lg-6 col-md-6 col-xs-6">
+                                  <label>Comentario</label>
+                                    <textarea type="text" class="form-control" id="comentario" name="comentario" autocomplete="off" placeholder="Comentario" onkeyup="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" required=""></textarea>
+                                </div>
+                            </div>
+                             <div class="row">
+                                <div class="form-group col-lg-12 col-md-12 col-xs-12">
+                                    <button class="btn btn-primary" type="submit" id="btnGuardar"><i class="fa fa-save"></i> Guardar</button>
+                                    <button class="btn btn-danger pull-right" onclick="cancelarformc()" data-dismiss="modal" type="button"><i class="fa fa-close"></i> Cancelar</button>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 <?php
     } else {
@@ -39,6 +251,21 @@ if (!isset($_SESSION['nombre'])){
     }
     require 'footer.php';
     ?>
+<script>
+$('.clockpicker').clockpicker({
+    placement:'bottom',
+    donetext:'Aceptar'
+});
+
+$('.clockpickeri').clockpicker({
+    placement:'bottom',
+    donetext:'Aceptar'
+});
+$('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+      checkboxClass: 'icheckbox_flat-green',
+      radioClass   : 'iradio_flat-green'
+    })
+</script>
 <script src="scripts/movinterno.js"></script>
 <?php
 }

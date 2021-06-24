@@ -21,10 +21,10 @@ $user_id=$_SESSION['idusuario'];
 switch ($_GET['op']){
     case 'guardaryeditar':
         if (empty($id)){
-            $rspta=$monitoreo->insertar($horamonitoreo,$retorno,$observaciones,$producto,$setpoint,$suministro,$fechamonitoreo,$mecanico,$idingreso,$idf,$user_id,$temperatura);
+            $rspta=$monitoreo->insertar($horamonitoreo,$retorno,$observaciones,$setpoint,$suministro,$fechamonitoreo,$mecanico,$idingreso,$idf,$user_id,$temperatura);
             echo $rspta ? 'Se Ingreso el Monitoreo Exitosamente':'Error al realizar el Monitoreo';
         }else{
-            $rspta=$monitoreo->editar($id,$horamonitoreo,$retorno,$observaciones,$producto,$setpoint,$suministro,$fechamonitoreo,$mecanico,$idingreso,$idf,$temperatura);
+            $rspta=$monitoreo->editar($id,$horamonitoreo,$retorno,$observaciones,$setpoint,$suministro,$fechamonitoreo,$mecanico,$idingreso,$idf,$temperatura);
              echo $rspta ? "Se ha actualizados correctamente el monitoreo" : "No se pudo actualizar los datos"; 
         }
         break;
@@ -36,11 +36,11 @@ switch ($_GET['op']){
             $datosm[]=array(
                 "0"=>$reg->No_Contenedor,
                 "1"=>$reg->Hora_De_Monitoreo,
-                "2"=>$reg->Producto,
+                "2"=>$reg->suministro,
                 "3"=>$reg->Set_Point,
                 "4"=>$reg->Retorno,
-                "5"=>$reg->Bloque,
-                "6"=>$reg->Posicion,
+                "5"=>$reg->temperatura,
+                "6"=>$reg->Nombre_Del_Mecanico,
                 "7"=>$reg->Barco,
                 "8"=>$reg->Fecha_Del_Monitoreo,
                 "9"=>'<button class="btn btn-warning btn-xs" onclick="mostrar('.$reg->Id_m.')"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Editar Monitoreo"></i></button>'.' '.'<button class="btn btn-danger btn-xs" onclick="dasactivar('.$reg->Id_m.')"><i class="fa fa-close" data-toggle="tooltip" data-placement="top" title="Anular Monitoreo"></i></button> '

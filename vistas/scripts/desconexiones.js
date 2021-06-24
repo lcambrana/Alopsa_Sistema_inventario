@@ -96,6 +96,7 @@ function limpiar(){
      mostrarconexion(0);
     $('#totalhoras').val("0:00");
     $('#observaciones').val("");
+    $('#nombre_mecanico').val("");
     
 }
 $("#contenedor").change(function(){
@@ -143,6 +144,7 @@ function mostrar(id){
             $('#horadesc').val(data.Hora_De_Desconexio);
             $('#totalhoras').val(data.totalhoras);
             $('#observaciones').val(data.observaciones);
+	    $('#nombre_mecanico').val(data.nombre_mecanico);
             mostrarconexion(data.idconexion);
           mostrarmodal();
          }

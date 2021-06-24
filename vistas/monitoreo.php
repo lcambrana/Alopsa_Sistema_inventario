@@ -26,13 +26,13 @@ if (!isset($_SESSION['nombre'])){
                             <thead>
                             <th>Contenedor</th>
                             <th>Hora</th>
-                            <th>Producto</th>
+                            <th>Suministro</th>
                             <th>Set Point</th>
                             <th>Retorno</th>
                             <th>Bloque</th>
-                            <th>Posicion</th>
+                            <th>Mecanico</th>
                             <th>Barco</th>
-                            <th>fecha</th>
+                            <th>Fecha</th>
                             <th>Opciones</th>
                             </thead>
                             <tbody>

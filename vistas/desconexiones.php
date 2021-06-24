@@ -78,11 +78,15 @@ if (!isset($_SESSION['nombre'])){
                         </div>
                     </div>
                     <div class="form-group col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                        <label>Total Horas</label>
+                        <label>Total Horas:</label>
                         <input type="hidden" id="fechahorai" name="fechahorai">
                         <input type="hidden" id="fechahoraf" name="fechahoraf">
                         <input type="text" id="totalhoras" name="totalhoras" autocomplete="off" class="form-control" >
                     </div>
+                    <div class="form-group col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                            <label>Nombre Mecanico:</label>
+			    <input class="form-control" id="nombre_mecanico" name="nombre_mecanico" autocomplete="off" type="text" placeholder="Nombre Mecanico">
+		    </div>
                     <div class="form-group col-lg-5 col-md-12 col-sm-12 col-xs-12">
                         <label>Observaciones:</label>
                         <textarea class="form-control" id="observaciones" name="observaciones"  placeholder="Observaciones"></textarea>

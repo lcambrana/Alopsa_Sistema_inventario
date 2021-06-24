@@ -12,15 +12,16 @@ $totalh=isset($_POST['totalhoras'])? limpiarCadena($_POST['totalhoras']):'';
 $observaciones= isset($_POST['observaciones'])? limpiarCadena($_POST['observaciones']):'';
 $idf= isset($_POST['id_f'])? limpiarCadena($_POST['id_f']):'';
 $idingreso=isset($_POST['id_ingreso'])? limpiarCadena($_POST['id_ingreso']):'';
+$nombremecanico=isset($_POST['nombre_mecanico'])? limpiarCadena($_POST['nombre_mecanico']):'';
 $user_id=$_SESSION['idusuario'];
 
 switch ($_GET['op']){
     case 'guardaryeditar':
         if (empty($iddesc)){
-            $rspta=$desconexion->insertar($fechadesc,$horadesc,$totalh,$observaciones,$idingreso,$idf,$user_id,$idconec);
+            $rspta=$desconexion->insertar($fechadesc,$horadesc,$totalh,$observaciones,$idingreso,$idf,$user_id,$idconec,$nombremecanico);
             echo $rspta ? 'Se Ingreso la desconexion Exitosamente':'Error al realizar la desconexion';
         }else{
-            $rspta=$desconexion->actualizar($iddesc,$fechadesc,$horadesc,$totalh,$observaciones,$idingreso,$idf,$idconec);
+            $rspta=$desconexion->actualizar($iddesc,$fechadesc,$horadesc,$totalh,$observaciones,$idingreso,$idf,$idconec,$nombremecanico);
              echo $rspta ? "Se ha actualizados correctamente" : "No se pudo actualizar los datos"; 
         }
         break;

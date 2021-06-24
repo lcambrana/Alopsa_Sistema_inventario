@@ -1,3 +1,1 @@
-Friday 4th of June 2021 11:34:27 PM - 1318 : Incorrect number of arguments for PROCEDURE sis_invcon.actualizar_expo; expected 8, got 6 - call actualizar_expo(1,'2021-05-31','22:10:43','2021-05-31',4,2)
-Friday 4th of June 2021 11:39:38 PM - 1054 : Unknown column 'Mario' in 'field list' - call actualizar_expo(2,'2021-06-04','23:29:48','2021-06-04',3,3,Mario Marroquin,1225 3652541 0112)
-Friday 4th of June 2021 11:39:57 PM - 1054 : Unknown column 'Mario' in 'field list' - call actualizar_expo(2,'2021-06-04','23:29:48','2021-06-04',3,3,Mario Marroquin,1225 3652541 0112)
+Wednesday 23rd of June 2021 09:58:32 PM - 2006 : MySQL server has gone away - SELECT id_usuario,nombre_usuario,email,descripcion cargo,imagen,usuario  FROM usuarios inner join rol on usuarios.id_rol = rol.id_rol WHERE usuario='admin' AND clave='8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918' AND condicion='1'

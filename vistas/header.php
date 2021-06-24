@@ -5,7 +5,7 @@ if (strlen(session_id())<1)
 require '../ajax/sessionphp.php';
 date_default_timezone_set("America/Guatemala");
 $sessiones=new sessiones();
-$sessiones->tiempoactivo();
+//$sessiones->tiempoactivo();
 if ($_SESSION['seccionactiva']=='activo'){
     echo'<script type="text/javascript">
     alert("La ultima Sesion no fue cerrada correctamente. Sesion Actualizada");
@@ -172,20 +172,7 @@ if ($_SESSION['ingresomov']==1){
             <li><a href="movinterno.php"><i class="fa fa-recycle"></i>Movimiento Interno</a></li>
           </ul>
         </li>
-        <li class="treeview">
-        <a ref="#">
-            <i class="fa fa-cubes" ></i><span>Contenedores Vacios</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="ingresoscvacios.php"><i class="fa fa-cube"></i>Contenedores Vacios</a></li>
-          </ul>
-          <ul class="treeview-menu">
-            <li><a href="ingresoscvacios.php"><i class="fa fa-clone"></i>Despacho Vacios</a></li>
-          </ul>
-        </li>
+       
         '
      
     ;

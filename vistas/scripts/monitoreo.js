@@ -120,7 +120,7 @@ function limpiar(){
     listarcomboingreso();
     $("#horamonitoreo").val(horaactual);
     $("#fecham").val(today);
-    $("#contenedor").val(false).trigger("change");
+    //$("#contenedor").val(false).trigger("change");
     $("#idingreso").val("");
     $("#retorno").val("");
     $("#setpoint").val("");
@@ -129,6 +129,7 @@ function limpiar(){
     $("#observaciones").val("");
     $("#idmonitoreo").val("");
     $("#titulo").html("");
+	mostraringreso(0);
     
 }
 function mostrar(id){

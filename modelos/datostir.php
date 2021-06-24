@@ -11,7 +11,7 @@ class datostir{
            return ejecutarConsulta($sql);
        }
        public function listar_ingreso(){
-        $sql="select Id_Ingreso,No_Contenedor from ingreso_maestro where estado in('Ingresado','Exportado')";
+        $sql="select Id_Ingreso,No_Contenedor from ingreso_maestro where estado in('Ingresado','Exportado','Asignado')";
         return ejecutarConsulta($sql);
     }
     public function datosingreso($ingreso){

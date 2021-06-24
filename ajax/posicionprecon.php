@@ -61,7 +61,7 @@ switch ($_GET['op']){
         $rspta=$posicion_conte->listar_area($idpatio);
         echo '<option value="0">Seleccione Area</option>';
         while ($reg=$rspta->fetch_object()){
-             echo '<option value='.$reg->id_area.'>'.$reg->id_patio.'-'.$reg->area.'</option>';
+             echo '<option value='.$reg->id_area.'>'.$reg->area.'</option>';
         }    
         
         break;
@@ -70,7 +70,7 @@ switch ($_GET['op']){
         $rspta=$posicion_conte->listar_bloque($idarea);
         echo '<option value="0">Seleccione Bloque</option>';
         while ($reg=$rspta->fetch_object()){
-             echo '<option value='.$reg->id_bloque.'>'.$reg->area.'-'.$reg->Descripcion.'</option>';
+             echo '<option value='.$reg->id_bloque.'>'.$reg->Descripcion.'</option>';
         }    
         
         break;
@@ -79,7 +79,7 @@ switch ($_GET['op']){
         $rspta=$posicion_conte->listar_fila($idbloque);
         echo '<option value="0">Seleccione Fila</option>';
         while ($reg=$rspta->fetch_object()){
-             echo '<option value='.$reg->idfila.'>'.$reg->Descripcion.'-'.$reg->fila.'</option>';
+             echo '<option value='.$reg->idfila.'>'.$reg->fila.'</option>';
         } 
         break;
     case 'alturafila':

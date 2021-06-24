@@ -115,6 +115,7 @@ function limpiar(){
     $("#suministro").val("");
     $('#tipoconexion').val("");
     $('#tipoconexion').selectpicker('refresh');
+     $('#mecanico').val("");
 }
 function mostrar(id){
     $.post("../ajax/conexiones.php?op=mostrar",{idconexion:id},
@@ -130,6 +131,7 @@ function mostrar(id){
             $('#contenedor').selectpicker('refresh');
             $('#idingreso').val(data.Id_ingreso);
             $('#tipoconexion').val(data.tipoconexion);
+            $('#mecanico').val(data.mecanico);
             mostraringreso(data.Id_ingreso);
                 mostrarform();
         }

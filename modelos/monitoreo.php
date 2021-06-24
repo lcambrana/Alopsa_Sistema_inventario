@@ -7,12 +7,12 @@ class monitoreo_c{
     public function __construct() {
         
     }
-    public function insertar($horamonitoreo,$retorno,$observacion,$producto,$setpoint,$suministro,$fecha,$mecanico,$idingreso,$idf,$idusuario,$temperatura){
-        $sql="CALL insertar_monitoreo('$horamonitoreo','$retorno','$observacion','$producto','$setpoint','$suministro','$fecha','$mecanico',$idingreso,$idf,$idusuario,'$temperatura')";
+    public function insertar($horamonitoreo,$retorno,$observacion,$setpoint,$suministro,$fecha,$mecanico,$idingreso,$idf,$idusuario,$temperatura){
+        $sql="CALL insertar_monitoreo('$horamonitoreo','$retorno','$observacion','$setpoint','$suministro','$fecha','$mecanico',$idingreso,$idf,$idusuario,'$temperatura')";
         return ejecutarConsulta($sql);
     }
-    public function editar($id,$horamonitoreo,$retorno,$observacion,$producto,$setpoint,$suministro,$fecha,$mecanico,$idingreso,$idf,$temperatura){
-         $sql="CALL actualizar_monitoreo($id,'$horamonitoreo','$retorno','$observacion','$producto','$setpoint','$suministro','$fecha','$mecanico',$idingreso,$idf,'$temperatura')";
+    public function editar($id,$horamonitoreo,$retorno,$observacion,$setpoint,$suministro,$fecha,$mecanico,$idingreso,$idf,$temperatura){
+         $sql="CALL actualizar_monitoreo($id,'$horamonitoreo','$retorno','$observacion','$setpoint','$suministro','$fecha','$mecanico',$idingreso,$idf,'$temperatura')";
         return ejecutarConsulta($sql);
     }
     public function mostrarm($id){

@@ -299,7 +299,7 @@ function limpiar(){
     $('#hora').val(horaactual);
     $('#observaciones').val("");
     $('#cliente').val("");
-    $("#contenedor").val(false).trigger("change");
+    //$("#contenedor").val(false).trigger("change");
     $('#izquierda').prop('checked', false);
     $('#izquierda').iCheck('update');
     $('#derecha').prop('checked',false);
@@ -319,7 +319,7 @@ function limpiar(){
     $('#sbotella').val("");
     listarcomboingreso();
     eliminar_tabla();
-    
+    mostraringreso(0);
     
 }
 function eliminar_tabla(){

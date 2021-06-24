@@ -6,12 +6,12 @@ class desconexiones{
     public function __construct() {
         
     }
-    public function insertar($fechadesco,$horadesco,$totalhoras,$observaciones,$idingreso,$idf,$idusuario,$idconexion){
-        $sql="CALL Insertar_desconexion('$fechadesco','$horadesco','$totalhoras','$observaciones',$idf,$idingreso,$idusuario,$idconexion)";
+    public function insertar($fechadesco,$horadesco,$totalhoras,$observaciones,$idingreso,$idf,$idusuario,$idconexion,$nomecanico){
+        $sql="CALL Insertar_desconexion('$fechadesco','$horadesco','$totalhoras','$observaciones',$idf,$idingreso,$idusuario,$idconexion,'$nomecanico')";
         return ejecutarConsulta($sql);
     }
-    public function actualizar($iddesc,$fechadesco,$horadesco,$totalhoras,$observaciones,$idingreso,$idf,$idconexion){
-        $sql="CALL actualizar_desconexion($iddesc,'$fechadesco','$horadesco','$totalhoras','$observaciones',$idingreso,$idf,$idconexion)";
+    public function actualizar($iddesc,$fechadesco,$horadesco,$totalhoras,$observaciones,$idingreso,$idf,$idconexion,$nomecanico){
+        $sql="CALL actualizar_desconexion($iddesc,'$fechadesco','$horadesco','$totalhoras','$observaciones',$idingreso,$idf,$idconexion,'$nomecanico')";
         return ejecutarConsulta($sql);
     }
     public function listar(){
