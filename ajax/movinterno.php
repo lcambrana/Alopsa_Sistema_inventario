@@ -56,12 +56,13 @@ switch ($_GET['op']){
         }
     case 'listararea':
         $idpatio=$_REQUEST['id_patio'];
+        if (!empty($idpatio)){
         $rspta=$minter->listar_area($idpatio);
         echo '<option value="0">Seleccione Area</option>';
         while ($reg=$rspta->fetch_object()){
              echo '<option value='.$reg->id_area.'>'.$reg->area.'</option>';
         }    
-        
+        }
         break;
     case 'listarbloque':
         $idarea=$_REQUEST['id_area'];

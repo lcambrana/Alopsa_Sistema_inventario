@@ -30,8 +30,8 @@ if (!isset($_SESSION['nombre'])){
                             <div class="tab-content">
                                 <div class="active tab-pane" id="movinterno">
                                     <h4 class="box-title"> Movimientos Interno <button class="btn btn-success" id="btnagregar" onclick="mostrarmodal()"><i class="fa fa-plus-circle"></i>  Agregar</button> </h4>
-                                     <div class="panel-body" id="listamov_interno">
-                                        <table id="tbllista_movinterno" class="table table-responsive table-striped  table-bordered table-condensed table-hover">
+                                     <div class="panel-body table-responsive " id="listamov_interno">
+                                        <table id="tbllista_movinterno" class="table table-striped  table-bordered table-condensed table-hover" style="width: 100%">
                                             <thead>
                                              <th>No.</th>
                                              <th>Semana</th>
@@ -191,7 +191,7 @@ if (!isset($_SESSION['nombre'])){
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="titulo" name="titulo"></h4>
+                <h4 class="modal-title" id="tituloc" name="tituloc"></h4>
             </div>
             <div class="modal-body">
                 <form name="formularioagregarc" id="formularioagregarc" method="POST">
@@ -248,6 +248,36 @@ if (!isset($_SESSION['nombre'])){
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="getmodalanmintc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidde="true"  data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+                        <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Autorizacion de Anulacion</h4>
+            </div>
+            <div class="modal-body">
+                <form action="" name="formularioanulacion" id="formularioanulacion" method="POST">
+                    <div class="form-group col-lg-12 col-md-12 col-xs-12">
+                        <input type="hidden" id="idmov_intc" name="idmov_intc">
+                        <input type="hidden" id="tipomov" name="tipomov">
+                        <label>Usuario:</label>
+                        <input type="text" class="form-control" name="usuario" id="usuario">
+                        <label>Contraseña:</label>
+                        <input type="password" class="form-control" name="password" id="password">
+                    </div>
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <button class="btn btn-primary" type="submit" id="btnGuardar3"><i class="fa fa-close"></i>  Anular</button>
+                        <button class="btn btn-danger pull-right" onclick="cancelar_anu();" data-dismiss="modal" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                    </div>
+                </form>
+                    
+            </div>
+               <div class="modal-footer">
+                
             </div>
         </div>
     </div>

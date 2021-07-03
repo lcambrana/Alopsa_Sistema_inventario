@@ -250,7 +250,7 @@ function cancelar_anu(){
 function validarusuario(e){
     e.preventDefault();
     $('#btnGuardar2').prop('disabled',false);
-         var usuario=$("#usuario").val();
+    var usuario=$("#usuario").val();
     var password=$("#password").val();
     if ($("#usuario").val()==""){
         swal({ title: "Parametro Requerido", text:"Debe de Ingresar su usuario para anular el ingreso"});

@@ -31,18 +31,24 @@ switch ($_GET['op']){
            if ($rspta==true){
                 $hoy = date("Y/m/d");
                 $hora_actual=date("H:i:s");
-                $bitacora->insertar_bitacora('Actualizar', $hoy, $hora_actual,$_SESSION['nombre'] ,'Se ha actualizado el registro numero '.$idposcontpre,'contenedor_posicion_patio');
+                $bitacora->insertar_bitacora('Actualizar', $hoy, $hora_actual,$_SESSION['nombre'] ,'Se ha actualizado el registro numero '.$idmovinterc,'contenedor_posicion_patio');
             }
             echo $rspta ? 'Se ha Actualizado las posicion del contenedor satisfactoriamente':'Error: Se ha generado un error al grabar la Posicion';
  
         }
         break;
-    case 'mostrar':
-        break;
+
     case 'listar':
         $rspta=$minter->listar_movinterno_cabezal();
         $datos=Array();
+        $opcion='';
         while ($reg=$rspta->fetch_object()){
+            if ($reg->estado=='activo'){
+                $opcion='<button class="btn btn-danger btn-xs" onclick="dasactivarc('.$reg->id.')"><i class="fa fa-close" data-toggle="tooltip" data-placement="top" title="Anular"></i></button> ';
+            }else {
+                $opcion = '<button class="btn btn-success btn-xs" onclick="activarc('.$reg->id.')"><i class="fa fa-check" data-toggle="tooltip" data-placement="top" title="Activar Ingreso"></i></button>';
+            }
+            
             $datos[]=array(
                 '0'=>$reg->id,
                 '1'=>$reg->semana,
@@ -52,7 +58,7 @@ switch ($_GET['op']){
                 '5'=>$reg->cliente,
                 '6'=>$reg->actividad,
                 '7'=>$reg->Movinter_c,
-                '8'=>'<button class="btn btn-warning btn-xs" onclick="mostrar('.$reg->id.')"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Editar Monitoreo"></i></button>'.' '.'<button class="btn btn-danger btn-xs" onclick="dasactivar('.$reg->id.')"><i class="fa fa-close" data-toggle="tooltip" data-placement="top" title="Anular"></i></button> '
+                '8'=>'<button class="btn btn-warning btn-xs" onclick="mostrarc('.$reg->id.')"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Editar Monitoreo"></i></button>'.' '. $opcion
                 
             );
         }
@@ -63,5 +69,20 @@ switch ($_GET['op']){
             "aaData"=>$datos
         );
         echo json_encode($resultado);
+        break;
+    case 'mostrar':
+        $id_movinterno=$_REQUEST['idmovinternoc'];
+        $rspta=$minter->mostrarc($id_movinterno);
+        echo json_encode($rspta);
+        break;
+    case 'desactivar':
+        $id_movintc=$_REQUEST['idmovinterc'];
+        $rspta=$minter->desactivarc($id_movintc);
+        echo $rspta ? "Se ha desactivados correctamente el movimiento Interno Cabezal" : "No se pudo desactivar el registro";        
+        break;
+    case 'activar':
+        $id_movintc=$_REQUEST['idmovinterc'];
+        $rspta=$minter->activarc($id_movintc);
+         echo $rspta ? "Movimiento Interno Activado correctamente" : "No se pudo activar el movimiento interno";
         break;
 }

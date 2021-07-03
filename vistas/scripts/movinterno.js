@@ -17,7 +17,9 @@ function init(){
     $('#formularioagregarc').on('submit',function(e){
        guardareditarc(e); 
     });
-    
+    $('#formularioanulacion').on('submit',function(e){
+        validarusuario(e);
+    })
 }
 function lista(){
     tabla=$('#tbllista_movinterno').dataTable({
@@ -64,11 +66,11 @@ function mostrarmodal(){
     $('#getmodalmovinterno').modal('toggle');
 }
 function mostrarmodalc(){
-    var idmovinterno = $('#idmovic').val();
-    if (idmovinterno==""){
-        $('#titulo').html("Ingreso Movimientos Internos Cabezales");
+    var idmovinternoc = $('#idmovic').val();
+    if (idmovinternoc==""){
+        $('#tituloc').html("Ingreso Movimientos Internos Cabezales");
     }else{
-        $('#titulo').html('Modificacion de Movimientos Internos Cabezales No. ' + idmovinterno);
+        $('#tituloc').html('Modificacion de Movimientos Internos Cabezales No. ' + idmovinternoc);
     }
     $('#getmodalmovic').modal('toggle');
 }
@@ -148,8 +150,10 @@ function limpiarc(){
     $('#contenedorc').selectpicker('refresh');
     $('#clientec').val('');
     $('#actividadc').val('Mov. Interno');
-    $('#comentario').val('');
+    $('#comentarioc').val('');
     $('#semanac').val(semanadelmes($('#fechamovc').val()));
+    $('#titulo').html('');
+    $('#idmovic').val('');
     listarcomboingresoc();
 }
 function guardareditar(e){
@@ -259,18 +263,18 @@ function guardareditarc(e){
            $.ajax({
            url:'../ajax/movinternoc.php?op=guardareditar',
            type:'POST',
-           data: formdata,
+           data: datosform,
            contentType:false,
            processData:false,
            datatype:'json',
            success:function(da){
                 var d=da.substring(0,2);
                 if(d=='Se'){
-                    swal({icon:'success',title:'Movimiento Interno',text:da});
-                    tabla.ajax.reload();
-                    $('#getmodalmovinterno').modal('toggle');
+                    swal({icon:'success',title:'Movimiento Interno con Cabezal',text:da});
+                    tabla2.ajax.reload();
+                    $('#getmodalmovic').modal('toggle');
                 }else if(d=='Er'){
-                    swal({icon:'warning',title:'Error al Grabar el Movimiento Interno',text:da});
+                    swal({icon:'warning',title:'Error al Grabar el Movimiento Interno con Cabezal',text:da});
                 }else {
                     swal('Error: -> '. e);
                 }
@@ -284,6 +288,107 @@ function guardareditarc(e){
         })
     }
     
+}
+function mostrarc(val){
+    $.post('../ajax/movinternoc.php?op=mostrar',{idmovinternoc:val},
+    function(data,status){
+        d=JSON.parse(data);
+        $('#idmovic').val(d.id);
+        $('#semanac').val(d.semana);
+        $('#fechamovc').val(d.fecha_mov);
+        $('#hingresoc').val(d.hora_ingreso);
+        $('#contenedorc').val(d.contenedor);
+        $('#contenedorc').selectpicker('refresh');
+        $('#clientec').val(d.cliente);
+        $('#actividadc').val(d.actividad);
+        $('#comentarioc').val(d.Movinter_c)
+        if (d.estado=='inactivo'){
+            $('#btnGuardar2').prop('disabled',true);
+        }else if (d.estado=='activo'){
+            $('#btnGuardar2').prop('disabled',false);
+        }
+       mostrarmodalc() 
+    });
+}
+function dasactivarc(val){
+   $('#idmov_intc').val(val);
+   $('#tipomov').val('internoc');
+    $('#getmodalanmintc').modal('show');
+}
+function activarc(val){
+    swal({
+       title:"Activacion de Movimiento Interno Con cabezal",
+       text:"¿Se activara el ingreso seleccionado desea continuar?",
+       icon:"success",
+       buttons: true,
+       dangerMode: true,
+    }).then((willDelete)=>{
+        if (willDelete){
+        $.post("../ajax/movinternoc.php?op=activar", {idmovinterc:val}, function(e){
+				swal(e);
+				tabla2.ajax.reload();
+			});
+              }
+    });
+   
+}
+function cancelar_anu(){
+    $('#usuario').val('');
+    $('#password').val('');
+}
+function validarusuario(e){
+    e.preventDefault();
+    $('#btnGuardar3').prop('disabled',false);
+    var usuario=$("#usuario").val();
+    var password=$("#password").val();
+    if ($("#usuario").val()==""){
+        swal({ title: "Parametro Requerido", text:"Debe de Ingresar su usuario para anular"});
+    }else if ($("#password").val()=="") {
+        swal({title:"Parametro Requerido",text:'Debe de Ingresar su contraseña para continuar'});
+    }else{
+        $.post("../ajax/usuario.php?op=validaranulacion",{"logina":usuario,"clavea":password},
+        function(data){
+            if (data!="null"){
+                var idmovintc=$("#idmov_intc").val();
+                   desactivar_movinterc(idmovintc);
+            }else{
+                swal({title:'Anulacion Cancelada',title:"No cuenta con el acceso para anular "})
+            }
+        }
+        );
+    }
+}
+function desactivar_movinterc(val){
+    swal({
+        title: "Anulacion de Registro",
+        text: "Esta seguro de Anular el Movimiento con Cabezal",
+        icon: "warning",
+        buttons: true,
+        dangerMode:true,
+    })
+            .then((willDelete)=>{
+                if (willDelete){
+                    $.post("../ajax/movinternoc.php?op=desactivar",{idmovinterc:val},function(e){
+                       var c=e.substring(0,2);
+                       if (c=="Se"){
+                           limpiar();
+                           swal({icon:'success',title:'Anulacion el Movimiento Interno',title:e});
+                       }else if (c=="No"){
+                           limpiar();
+                            swal({icon:'warning',title:'Anulacion del Movimiento Interno',title:e});
+                       }else{
+                           swal("Error: "+ e );
+                       }
+                                $("#usuario").val('');
+                                $("#password").val('');
+                                $('#getmodalanmintc').modal('toggle');
+				tabla2.ajax.reload();
+                    });
+                }else{
+                    swal("Se ha Cancelado la Accion por el Usuario!");
+                    $('#getmodalanmintc').modal('toggle');
+                }
+            });
 }
 function semanadelmes(fecha){
     var dt = new Date(fecha);

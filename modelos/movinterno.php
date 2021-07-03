@@ -44,11 +44,11 @@ class movinterno{
         return ejecutarConsulta($sql);
     }
     public function insertarc($semana,$fechamov,$hora,$contenedor,$cliente,$actividad,$motivo,$usuario){
-        $sql="call inserta_movinternoc($semana,'$fechamov','$hora',$contenedor,'$cliente,'$actividad','$motivo',$usuario)";
+        $sql="call inserta_movinternoc($semana,'$fechamov','$hora',$contenedor,'$cliente','$actividad','$motivo',$usuario)";
         return ejecutarConsulta($sql);
     }
     public function actualizarc($idmovintc,$semana,$fechamov,$hora,$contenedor,$cliente,$actividad,$motivo){
-        $sql="call actualizar_movinternoc($idmovintc,$semana,'$fechamov','$hora',$contenedor,'$cliente,'$actividad','$motivo')";
+        $sql="call actualizar_movinternoc($idmovintc,$semana,'$fechamov','$hora',$contenedor,'$cliente','$actividad','$motivo')";
         return ejecutarConsulta($sql);
     }
     public function listar_movinterno_cabezal(){
@@ -57,6 +57,18 @@ class movinterno{
     }
     public function listar_movinterno() {
         $sql="call listar_movinterno('mi')";
+        return ejecutarConsulta($sql);
+    }
+    public function mostrarc($id){
+        $sql="select * from movimientosc where id=$id";
+        return ejecutarConsultaSimpleFila($sql);
+    }
+    public function desactivarc($id){
+        $sql="update movimientosc set estado='inactivo' where id=$id";
+        return ejecutarConsulta($sql);
+    }
+    public function activarc($id){
+        $sql="update movimientosc set estado='activo' where id=$id";
         return ejecutarConsulta($sql);
     }
 }
