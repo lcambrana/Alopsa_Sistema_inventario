@@ -1,3 +1,4 @@
 Thursday 8th of July 2021 02:11:39 PM - 1054 : Unknown column 'id_movimiento' in 'where clause' - update movimientos set estado='inactivo' where id_movimiento=3
 Thursday 8th of July 2021 02:13:40 PM - 1054 : Unknown column 'estado' in 'field list' - update movimientos set estado='inactivo' where Id_Movimientos=3
 Thursday 8th of July 2021 02:17:13 PM - 1064 : You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 - update movimientos set estado='inactivo' where Id_Movimientos=
+Friday 9th of July 2021 04:06:37 PM - 2014 : Commands out of sync; you can't run this command now - insert into bitacora (accion,fecha,hora,usuario,descripcion,tabla) values ('Insertar','2021/07/09','16:06:37','Administrador','Cierre de TIR No. 28','datostir')

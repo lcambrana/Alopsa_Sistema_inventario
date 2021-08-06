@@ -41,7 +41,7 @@ if ($_SESSION['seccionactiva']=='activo'){
     <link href="../public/datatables/responsive.dataTables.min.css" rel="stylesheet"/>
     
     <link rel="stylesheet" type="text/css" href="../public/css/bootstrap-select.min.css">
-<link rel="stylesheet" type="text/css" href="../public/clockpicker/jquery-clockpicker.css">
+    <link rel="stylesheet" type="text/css" href="../public/clockpicker/jquery-clockpicker.css">
     <link rel="stylesheet" type="text/css" href="../public/clockpicker/bootstrap-clockpicker.min.css">
    
   </head>
@@ -124,7 +124,7 @@ if ($_SESSION['dashboard']==1) {
 
      <?php 
 if ($_SESSION['ingresoc']==1) {
-  echo '<li class="treeview">
+  echo '<li class="treeview" >
           <a href="#">
             <i class="fa fa-truck"></i> <span>Ingreso Contenedores</span>
             <span class="pull-right-container">
@@ -156,6 +156,9 @@ if ($_SESSION['ingresoc']==1) {
             <ul class="treeview-menu">
           <li><a href="exportacion.php"><i class="fa fa-share-alt"></i>Exportaciones</a></li>
           </ul>
+          <ul class="treeview-menu">
+            <li><a href="salidatir.php"><i class="fa fa-calendar-minus-o"></i>TIR Salida</a></li>
+            </ul>
         </li>
         ';
 }   

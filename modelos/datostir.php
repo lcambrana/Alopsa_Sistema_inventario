@@ -71,4 +71,8 @@ class datostir{
         $sql="delete from fallas_tir where idfalla_tir=$iddetir and id_datostir=$idtir";
         return ejecutarConsulta($sql);
     }
+    public function tiringresado($contenedor) {
+        $sql="select * from datostir where idingreso = '$contenedor'";
+        return numeroitem($sql);
+    }
 }

@@ -39,6 +39,7 @@ $idf = isset($_POST['idf'])? limpiarCadena($_POST['idf']):'';
 $user_id=$_SESSION['idusuario'];
 switch ($_GET['op']){
            case 'guardaryeditar':
+             $existei=0;
            if ($tmingreso=='on'){$tipomov='Ingreso'; }else if($tmsalida=='on'){
                $tipomov='Salida';
            }
@@ -53,8 +54,14 @@ switch ($_GET['op']){
            if ($tec=='on'){$tech=1;}else{$tech=0;}
            if ($cha=='on'){$chas=1;}else{$chas=0;}
            if (empty($idtir)){
+               $existei=$datosTIR->tiringresado($contenedor);
+               if ($existei==0){
                $rspta=$datosTIR->Insertar($serietir,$chasis,$tchassis,$refr,$tcon,$fecha,$hora,$tipomov,$nav,$convasio,$dest,$izqu,$dere,$fren,$inte,$tras,$tech,$chas,$obser,$cli,$contenedor,$idf,$user_id,$booki,$sbot);
                echo json_encode($rspta);
+               }else
+                   {
+                   echo 'Error- El Contenedor que esta ingresando ya se encuentra en la base de datos';
+                   }
            }else{
                $rspta=$datosTIR->actualizar($idtir,$serietir,$chasis,$tchassis,$refr,$tcon,$fecha,$hora,$tipomov,$nav,$convasio,$dest,$izqu,$dere,$fren,$inte,$tras,$tech,$chas,$obser,$cli,$contenedor,$idf,$booki,$sbot);
                echo json_encode($rspta);
@@ -78,7 +85,7 @@ switch ($_GET['op']){
                     "8"=>$reg->Destino,
                     "9"=>$reg->vacio,
                     "10"=>$reg->cliente,
-                    "11"=>'<button class="btn btn-warning btn-xs" onclick="mostrar('.$reg->idtir.')"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Editar Datos TIR"></i></button>'.' '.'<button class="btn btn-danger btn-xs" onclick="dasactivar('.$reg->idtir.')"><i class="fa fa-close" data-toggle="tooltip" data-placement="top" title="Anular TIR"></i></button>'.' '.'<button class="btn btn-success btn-xs" onclick="cerrartir('.$reg->idtir.')"><i class="fa fa-lock" data-toggle="tooltip" data-placement="top" title="Cerrar TIR"></i></button> '
+                    "11"=>'<button class="btn btn-warning btn-xs" onclick="mostrar('.$reg->idtir.')"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Editar Datos TIR"></i></button>'.' '.'<button class="btn btn-danger btn-xs" onclick="dasactivar('.$reg->idtir.')"><i class="fa fa-close" data-toggle="tooltip" data-placement="top" title="Anular TIR"></i></button>'.' '.'<button class="btn btn-success btn-xs" onclick="cerrartir('.$reg->idtir.')"><i class="fa fa-lock" data-toggle="tooltip" data-placement="top" title="Cerrar TIR"></i></button> '.' '.'<button class="btn btn-danger btn-xs" onclick="vertir('.$reg->idtir.')"><i class="fa fa-print" data-toggle="tooltip" data-placement="top" title="Ver TIR"></i></button> '
                 );
             }
             $results=array(

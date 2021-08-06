@@ -7,7 +7,9 @@ class posicion_cont_predio{
         
     }
     public function listar_ingresos_conte(){
-         $sql="select Id_Ingreso,No_Contenedor from ingreso_maestro where estado='Ingresado'";
+         $sql="select dt.idingreso,im.No_Contenedor 
+                from sis_invcon.datostir dt inner join sis_invcon.ingreso_maestro im on dt.idingreso=im.Id_Ingreso 
+                where dt.estado = 'Activo'";
         return ejecutarConsulta($sql);
     }
     public function datosingresoco($val){
@@ -79,5 +81,9 @@ class posicion_cont_predio{
                  return ejecutarConsulta($sql3) or false; 
              }
         }
+    }
+    public function contenedor_posicion_patio($contenedor) {
+        $sql="select * from contenedor_posicion_patio cpp inner join ingreso_maestro im on cpp.id_ingre_m = im.Id_Ingreso where im.No_Contenedor = $contenedor ";
+        return numeroitem($sql);
     }
 }

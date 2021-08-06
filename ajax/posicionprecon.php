@@ -17,7 +17,7 @@ $idpatio=isset($_POST['patio'])? limpiarCadena($_POST['patio']):"";
 $idarea= isset($_POST['areap'])? limpiarCadena($_POST['areap']):'';
 $idbloque= isset($_POST['bloque'])? limpiarCadena($_POST['bloque']):'';
 $idfila= isset($_POST['fila'])? limpiarCadena($_POST['fila']):'';
-$altura= isset($_POST['no_altura'])? limpiarCadena($_POST['no_altura']):'';
+$altura= isset($_POST['altura'])? limpiarCadena($_POST['altura']):'';
 $observaciones=isset($_POST['observaciones'])? limpiarCadena($_POST['observaciones']):'';
 $idaltura= isset($_POST['idaltura'])? limpiarCadena($_POST['idaltura']):'';
 $user_id=$_SESSION['idusuario'];
@@ -25,6 +25,11 @@ $user_id=$_SESSION['idusuario'];
 switch ($_GET['op']){
     case 'guardareditar':
         if (empty($idposcontpre)){
+            $existe=0;
+            
+            $existe=$posicion_conte->posingresado($contenedor);
+            
+            if ($existe==0){
             $rspta=$posicion_conte->insertar($fecha,$hora,$idpatio,$idarea,$idbloque,$idfila,$altura,$user_id,$contenedor,$idf,$observaciones,$idaltura);
            if ($rspta==true){
                  $hoy = date("Y/m/d");
@@ -32,6 +37,9 @@ switch ($_GET['op']){
                 $bitacora->insertar_bitacora('Inserta', $hoy, $hora_actual,$_SESSION['nombre'] ,'Creacion de Nueva Posicion Contenedor','contenedor_posicion_patio');
            }
             echo $rspta ? 'Se asigno el contenedor en la patio correcto':'Error al realizar la asignacion del contenedor';
+            } else {
+                echo 'El contenedor que esta ingresando ya se encuentra en la base de datos.';    
+            }
         }else{
             $rspta=$posicion_conte->actualizar($idposcontpre,$fecha,$hora,$idpatio,$idarea,$idbloque,$idfila,$altura,$contenedor,$idf,$observaciones,$idaltura);
             if ($rspta==true){
@@ -46,7 +54,7 @@ switch ($_GET['op']){
         $rspta=$posicion_conte->listar_ingresos_conte();
         echo '<option value="0">Selecione Ingreso</option>';
         while ($reg=$rspta->fetch_object()){
-            echo '<option value='.$reg->Id_Ingreso.'>'.$reg->Id_Ingreso.'-'.$reg->No_Contenedor.'</option>';
+            echo '<option value='.$reg->idingreso.'>'.$reg->idingreso.'-'.$reg->No_Contenedor.'</option>';
         }
      break;
     case 'listapatio':
@@ -86,7 +94,7 @@ switch ($_GET['op']){
         $idfila=$_REQUEST['id_fila'];
         $rspta=$posicion_conte->numero_altura($idfila);
         while ($row= mysqli_fetch_array($rspta)){
-            echo '<div class="form-group col-lg-2 col-md-3 col-xs-12"><label id="altura" name="altura">Altura:</label><input type="text" class="form-control" name="noaltura" id="noaltura" value="'.$row['altura'].'" disabled="true"><input type="hidden" id="no_altura" name="no_altura" value='.$row['altura'].'><input type="hidden" id="idaltura" name="idaltura" value="'.$row['id_altura'].'" ></div>';
+            echo '<div class="form-group col-lg-2 col-md-3 col-xs-12"><label id="altura" name="altura">Altura:</label><input type="text" class="form-control" name="noaltura" id="noaltura" value="'.$row['altura'].'"><input type="hidden" id="altura" name="altura" value='.$row['altura'].'><input type="hidden" id="idaltura" name="idaltura" value="'.$row['id_altura'].'" ></div>';
         }
         break;
     case 'mostraringreso':

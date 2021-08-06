@@ -75,6 +75,9 @@ if (!isset($_SESSION['nombre'])){
                         </div>
                         
                     </div>
+                    <div class="col-lg-3 col-md-6 col-xs-6">
+                        <div 
+                    </div>
               </div>
               </div>
              </div>

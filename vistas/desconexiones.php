@@ -8,7 +8,7 @@ if (!isset($_SESSION['nombre'])){
 }else{
     require 'header.php';
     
-    If($_SESSION['ingresoc']==1){
+    if($_SESSION['ingresoc']==1){
         ?>
 <div class="content-wrapper">
     <section class="content">
