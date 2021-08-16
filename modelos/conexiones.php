@@ -31,7 +31,10 @@ class conexiones_c{
         return ejecutarConsulta($sql);
     }
     public function listar_ingreso(){
-        $sql="select Id_Ingreso,No_Contenedor from ingreso_maestro where estado in('Ingresado','Asignado') ";
+        //$sql="select Id_Ingreso,No_Contenedor from ingreso_maestro where estado in('Ingresado','Asignado') ";
+        $sql="SELECT cpp.id_ingre_m as Id_Ingreso,im.No_Contenedor from contenedor_posicion_patio cpp " .
+              " INNER JOIN ingreso_maestro im on im.Id_Ingreso=cpp.id_ingre_m " .
+              " WHERE cpp.estado='Ingresado' ";
         return ejecutarConsulta($sql);
     }
 }

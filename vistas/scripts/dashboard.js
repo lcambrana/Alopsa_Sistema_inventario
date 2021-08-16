@@ -5,6 +5,8 @@ function init(){
     contador_tirs();
     contador_conexion();
     contador_movinternos();
+    contador_tircerrados();
+    mostrardatos_linec();
 }
 
 function contador_ingresos(){
@@ -36,4 +38,35 @@ function contador_movinternos(){
         d=JSON.parse(data);
         $('#cantidadmovint').html(d);
     });
+}
+function contador_tircerrados(){
+    $.post('../ajax/dashboard.php?op=cantida_tirscerrado',
+    function(data){ 
+        d=JSON.parse(data);
+        $('#cantidadtircer').html(d);
+    }
+    );
+}
+function mostrardatos_linec(){
+   var weekdays = ["Lun", "Mar", "Mie", "Jue", "Vie", "Sab", "Dom"];
+   
+   $.post("../ajax/dashboard.php?op=grafica_linea",function(data){
+       datos=JSON.parse(data);
+       Morris.Line({
+                element: 'line-chart',
+                data:      
+                  datos,
+                lineColors: ['#f5901a', '#fc8710', '#FF6541', '#A4ADD3', '#766B56'],
+                xkey: 'period',
+                ykeys: ['total'],
+                labels: ['Total'],
+                xLabels: 'day',
+                xLabelFormat: function(d) {
+                  return weekdays[d.getDay()];
+                },
+                resize: true
+              });
+       
+   });
+
 }

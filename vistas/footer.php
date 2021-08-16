@@ -25,7 +25,9 @@
     <script src="../public/datatables/vfs_fonts.js"></script> 
     <script src="../public/iCheck/icheck.js"></script>
     <script src="../public/js/bootbox.min.js"></script> 
+    <script src="../public/morris/morris.min.js"></script>
     <script src="../public/js/bootstrap-select.min.js"></script>
+    <script src="../public/raphael/raphael.min.js"></script>
     <script type="text/javascript" src="../public/moment/moment.min.js"></script>
     <script type="text/javascript" src="../public/clockpicker/bootstrap-clockpicker.min.js"></script>
 

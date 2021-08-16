@@ -119,14 +119,15 @@ function limpiar(){
     listarcomboingreso();
     $("#horaconexion").val(horaactual);
     $("#fechaco").val(today);
-    $("#contenedor").val(false).trigger("change");
+    
     $("#idingreso").val("");
     $("#retorno").val("");
     $("#setpoint").val("");
     $("#suministro").val("");
     $('#tipoconexion').val("");
     $('#tipoconexion').selectpicker('refresh');
-     $('#mecanico').val("");
+    $('#mecanico').val("");
+    mostraringreso(0);
 }
 function mostrar(id){
     $.post("../ajax/conexiones.php?op=mostrar",{idconexion:id},
@@ -144,7 +145,7 @@ function mostrar(id){
             $('#tipoconexion').val(data.tipoconexion);
             $('#mecanico').val(data.mecanico);
             mostraringreso(data.Id_ingreso);
-                mostrarform();
+            mostrarform();
         }
     );
 }

@@ -22,6 +22,7 @@ function init(){
       listartchasis();
       tabladanios();
       tipo_contenedores();
+      listarpilotos();
       table3=$('#listdanioconte').dataTable({}).DataTable();
       $("#formulariotir").on("submit",function(e){
        guardaryeditar(e); 
@@ -32,6 +33,9 @@ function init(){
       $('#formulario_cierre').on('submit',function(e){
          cerrar_tir(e); 
       });
+        $('#formulario_pilotos').on("submit",function(e){
+            guardarpiloto(e);
+        });
 }
 
 function listar(){
@@ -57,6 +61,13 @@ function listar(){
         "order":[[0,"asc"]]
         
     }).DataTable();
+}
+
+function listarpilotos(){
+    $.post("../ajax/flotatransporte.php?op=selectflota",function(r){
+        $('#pilotoc').html(r);
+        $('#pilotoc').selectpicker('refresh');
+    })
 }
 
 function tabladanios(){
@@ -630,6 +641,7 @@ function cerrartir(val){
 }
 function cerrar_tir(e){
     e.preventDefault();
+    
     $('#btnGuardar3').prop("disabled",false);
     var datosform=new FormData($('#formulario_cierre')[0]);
     $.ajax({
@@ -651,4 +663,64 @@ function cerrar_tir(e){
              }
          }
     });
+}
+
+function datospiloto(){
+    var  idpiloto_f = $("#idpilotoc").val();
+    $.ajax({
+       url:'../ajax/flotatransporte.php?op=mostrardatos_ptir',
+       data:{idpiloto:idpiloto_f},
+       type: "get",
+       datatype:"json",
+       success: function(resp){
+        $('#datos_piloto').html(resp);
+       }
+    });
+}
+function mostrarmodalpiloto(){
+    $('#mostrarmodalpiloto').modal('toggle');
+}
+$("#pilotoc").change(function(){
+     var id_piloto=$("#pilotoc").val();
+    $("#idpilotoc").val(id_piloto);
+     datospiloto();
+});
+
+function guardarpiloto(e){
+    e.preventDefault();
+    $('#btnGuardar_piloto').prop("disabled", false);
+    var datospiloto=new FormData($('#formulario_pilotos')[0]);
+    $.ajax({
+        url:'../ajax/flotatransporte.php?op=guardar_dpiloto',
+        type: 'POST',
+        data: datospiloto,
+        contentType: false,
+        processData: false,
+        success: function(res){
+            var r=res.substring(0,2);
+            if(r=='Se'){
+                swal({icon:'success',title:'Datos Piloto',text:res});
+                listarpilotos();
+                 limpiardatospiloto();
+                $('#mostrarmodalpiloto').modal('toggle');
+            }else if (r=='Er'){
+                  limpiardatospiloto();
+                swal({icon:'error',title:'Error al Grabar',text:res});
+              
+            }else {
+                swal(res);
+            }
+        }
+    })
+}
+function cancelarform_piloto(){
+ limpiardatospiloto();
+}
+function limpiardatospiloto(){
+     $('#npiloto').val();
+    $('#lipiloto').val();
+    $('#plapiloto').val();
+    $('#cabezalpiloto').val();
+    $('#codnavierapiloto').val();
+    $('#transportepiloto').val();
 }

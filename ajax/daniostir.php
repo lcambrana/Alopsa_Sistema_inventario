@@ -110,7 +110,7 @@ switch ($_GET['op']){
             while ($row= mysqli_fetch_array($rspta)){
             echo '<div class="form-group col-lg-2 col-md-3 col-xs-12"><label>Tara:</label><input type="text" class="form-control" id="tara" name="tara" value="'.$row['tara'].'" disabled="true"></div>'
                 .'<div class="form-group col-lg-3 col-md-3 col-xs-12"><label>Transportista</label><input type="text" class="form-control" value="'.$row['Transporte'].'" disabled="true"><input type="hidden" id="naviera" name="naviera" value="'.$row['Transporte'].'" > </div>'
-                .'<div class="form-group col-lg-3 col-md-3 col-xs-12"><label>Piloto</label><input type="text" class="form-control" value="'.$row['Nombre_de_Piloto'].'" disabled="true"></div>'
+                .'<div class="form-group col-lg-3 col-md-3 col-xs-12"><label>Piloto</label><input type="text" class="form-control" value="'.$row['Nombre_de_Piloto'].'" readonly="true"></div>'
                 .'<div class="form-group col-lg-3 col-md-3 col-xs-12"><label>Licencia</label><input type="text" class="form-control" value="'.$row['Licencias'].'" disabled="true"></div>'
                 .'<div class="form-group col-lg-3 col-md-3 col-xs-12"><label>Placas</label><input type="text" class="form-control" value="'.$row['Placas'].'" disabled="true"></div>'
                 .'<div class="form-group col-lg-2 col-md-3 col-xs-12"><label>Codigo</label><input type="text" class="form-control" value="'.$row['Codigo_Piloto_Naviera'].'" disabled="true"></div>'
@@ -295,9 +295,11 @@ switch ($_GET['op']){
                 $idtirc=isset($_POST['idtircierre'])? limpiarCadena($_POST['idtircierre']):"";
                 $observacionesc=isset($_POST['observacionesc'])? limpiarCadena($_POST['observacionesc']):'';
                 $user_idc=$_SESSION['idusuario'];
+                $idpiloto= isset($_POST['idpilotoc'])? limpiarCadena($_POST['idpilotoc']):"";
                 $hoy = date("Y/m/d");
                 $hora_actual=date("H:i:s");
-                $rspta=$datosTIR->insertar_cierre($idtirc,$observacionesc,$user_idc,$hoy,$hora_actual);
+                
+                $rspta=$datosTIR->insertar_cierre($idtirc,$observacionesc,$user_idc,$hoy,$hora_actual,$idpiloto);
                 if ($rspta==true){
                 
                   $bitacora->insertar_bitacora('Insertar', $hoy, $hora_actual,$_SESSION['nombre'] ,'Cierre de TIR No. '.$idtirc,'datostir');

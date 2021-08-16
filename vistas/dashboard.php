@@ -76,9 +76,31 @@ if (!isset($_SESSION['nombre'])){
                         
                     </div>
                     <div class="col-lg-3 col-md-6 col-xs-6">
-                        <div 
+                        <div class="small-box bg-green">
+                            <div class="inner">
+                                <h3 id="cantidadtircer"></h3>
+                                <p>TIRs Cerrados</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-locked"></i>
+                            </div>
+                            <a class="small-box-footer"><i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
                     </div>
               </div>
+                  <div class="row">
+                      <div class="col-md-6">
+                          <div class="box box-primary">
+                              <div class="box-header with-border">
+                                  <h3 class="box-title">Ingresos Semanales</h3>
+                                  
+                              </div>
+                              <div class="box-body chart-responsive">
+                                  <div class="chart" id="line-chart" style="height: 300px;"></div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
               </div>
              </div>
         

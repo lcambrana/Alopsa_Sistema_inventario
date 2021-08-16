@@ -27,7 +27,7 @@ switch ($_GET['op']){
         if (empty($idposcontpre)){
             $existe=0;
             
-            $existe=$posicion_conte->posingresado($contenedor);
+            $existe=$posicion_conte->contenedor_posicion_patio($contenedor);
             
             if ($existe==0){
             $rspta=$posicion_conte->insertar($fecha,$hora,$idpatio,$idarea,$idbloque,$idfila,$altura,$user_id,$contenedor,$idf,$observaciones,$idaltura);

@@ -97,6 +97,13 @@ switch ($_GET["op"]) {
 
 
 		while ($reg=$rspta->fetch_object()) {
+			
+			 if ($reg->imagen==""){
+                        $rutaimagen="<img src='../files/server/usuario.png' height='50px' width='50px'>";
+                     }else{
+                        $rutaimagen="<img src='../files/usuarios/".$reg->imagen."' height='50px' width='50px'>";
+                     }
+			
 			$data[]=array(
 				"0"=>($reg->condicion)?'<button class="btn btn-warning btn-xs" onclick="mostrar('.$reg->id_usuario.')"><i class="fa fa-pencil"></i></button>'.' '.'<button class="btn btn-info btn-xs" onclick="mostrar_clave('.$reg->id_usuario.')"><i class="fa fa-key"></i></button>'.' '.'<button class="btn btn-danger btn-xs" onclick="desactivar('.$reg->id_usuario.')"><i class="fa fa-close"></i></button>':'<button class="btn btn-warning btn-xs" onclick="mostrar('.$reg->id_usuario.')"><i class="fa fa-pencil"></i></button>'.' '.'<button class="btn btn-info btn-xs" onclick="mostrar_clave('.$reg->id_usuario.')"><i class="fa fa-key"></i></button>'.' '.'<button class="btn btn-primary btn-xs" onclick="activar('.$reg->id_usuario.')"><i class="fa fa-check"></i></button>',
 				"1"=>$reg->nombre_usuario,
@@ -104,7 +111,7 @@ switch ($_GET["op"]) {
 				"3"=>$reg->departamento,
 				"4"=>$reg->email,
 				"5"=>$reg->usuario,
-				"6"=>"<img src='../files/usuarios/".$reg->imagen."' height='50px' width='50px'>",
+				"6"=>$rutaimagen,
 				"7"=>($reg->condicion)?'<span class="label bg-green">Activado</span>':'<span class="label bg-red">Desactivado</span>'
 				);
 		}

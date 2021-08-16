@@ -8,7 +8,7 @@ class posicion_cont_predio{
     }
     public function listar_ingresos_conte(){
          $sql="select dt.idingreso,im.No_Contenedor 
-                from sis_invcon.datostir dt inner join sis_invcon.ingreso_maestro im on dt.idingreso=im.Id_Ingreso 
+                from datostir dt inner join ingreso_maestro im on dt.idingreso=im.Id_Ingreso 
                 where dt.estado = 'Activo'";
         return ejecutarConsulta($sql);
     }
@@ -86,4 +86,5 @@ class posicion_cont_predio{
         $sql="select * from contenedor_posicion_patio cpp inner join ingreso_maestro im on cpp.id_ingre_m = im.Id_Ingreso where im.No_Contenedor = $contenedor ";
         return numeroitem($sql);
     }
+   
 }

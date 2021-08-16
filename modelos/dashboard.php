@@ -22,4 +22,12 @@ class dashboard{
         $sql="select * from movimientos where Estado='Activo'";
         return numeroitem($sql);
     }
+    public function cantidad_tirscerrados(){
+        $sql="select * from datostir where tipomov='Salida'";
+        return numeroitem($sql);
+    }
+    public function grafica_linea(){
+        $sql="call consulta_grafica()";
+        return ejecutarConsulta($sql);
+    }
 }

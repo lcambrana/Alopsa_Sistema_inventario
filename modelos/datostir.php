@@ -63,8 +63,8 @@ class datostir{
         $sql="select * from fallas_tir where idfalla_tir=$iditem and id_datostir=$idtir";
         return numeroitem($sql);
     }
-    public function insertar_cierre($idtirc,$observaciones,$idusuario,$fecha,$hora){
-        $sql="Call Cierre_Tir($idtirc,'$observaciones',$idusuario,'$fecha','$hora')";
+    public function insertar_cierre($idtirc,$observaciones,$idusuario,$fecha,$hora,$idpiloto){
+        $sql="Call Cierre_Tir($idtirc,'$observaciones',$idusuario,'$fecha','$hora',$idpiloto)";
         return ejecutarConsulta($sql);
     }
     public function eliminarDetalle_tir($iddetir,$idtir){

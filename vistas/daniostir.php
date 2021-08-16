@@ -100,11 +100,11 @@ if (!isset($_SESSION['nombre'])){
                         </div>
                         <div class="form-group col-lg-2 col-md-12 col-sm-12 col-xs-12">
                             <label>No Booking</label>
-                            <input type="text" class="form-control booking" name="booking" id="booking" >
+                            <input type="text" class="form-control booking" name="booking" id="booking" value="0" >
                         </div>
                         <div class="form-group col-lg-3 col-md-12 col-sm-12 col-xs-12">
                             <label>Sello Botella</label>
-                            <input type="text" name="sbotella" id="sbotella" class="form-control">
+                            <input type="text" name="sbotella" id="sbotella" class="form-control" value="0">
                         </div>
                     </div>
                     <div class="row">
@@ -343,11 +343,28 @@ if (!isset($_SESSION['nombre'])){
                             <label>No Booking</label>
                             <input type="text" class="form-control booking" name="bookingc" id="bookingc" disabled="" >
                         </div>
-                        <div class="form-group col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                        <div class="form-group col-lg-2 col-md-12 col-sm-12 col-xs-12">
                             <label>Sello Botella</label>
                             <input type="text" name="sbotellac" id="sbotellac" class="form-control" disabled="">
                         </div>
+                        <div class="form-group col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                            <label>Nombre Piloto</label>
+                                <div class="input-group">
+                                        <select name="pilotoc" id="pilotoc" class="form-control selectpicker" data-live-search="true" required>
+                                        </select>
+                                        <span class="input-group-btn">
+                                           <button id="agregarpiloto" name="agregarpiloto" class="btn btn-success" type="button" onclick="mostrarmodalpiloto()"><span class="fa fa-user-plus icon" data-toggle="tooltip" data-placement="top" title="Agregar Piloto"></span></button>
+                                        </span>
+                                </div>
+                                <input type="hidden" id="idpilotoc" name="idpilotoc">
+                        </div>
+                        
+                            <div class="row">
+                                <div id="datos_piloto"></div>
+                            </div>
+                        
                     </div>
+                           
                      <div class="box box-info">
                         <div class="box-header">
                             <h5 class="box-title">Daños Contenedor</h5>
@@ -434,6 +451,55 @@ if (!isset($_SESSION['nombre'])){
                         <button class="btn btn-success" type="submit" id="btnGuardar3"><i class="fa fa-lock"></i>  Cierre de TIR </button>
                         <button class="btn btn-danger pull-right" data-dismiss="modal" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
                     </div>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="mostrarmodalpiloto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidde="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Ingreso de Pilotos</h4>
+            </div>
+            <div class="modal-body">
+                <form name="formulario_pilotos" id="formulario_pilotos" method="POST">
+                <div class="box box-info">
+                    <div class="box-body">
+                       
+                            <div class="form-group col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                <label>Nombre Piloto:</label>
+                                <input type="text" id="npiloto" name="npiloto" class="form-control" autocomplete="off" placeholder="Nombre Piloto" onclick="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" required="">
+                            </div>
+                            <div class="form-group col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                <label>Licencia:</label>
+                                <input type="text" id="lipiloto" name="lipiloto" class="form-control" autocomplete="off" placeholder="Licencia" onclick="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" required="">
+                            </div>
+                            <div class="form-group col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                <label>Placa:</label>
+                                <input type="text" id="plapiloto" name="plapiloto" class="form-control" autocomplete="off" placeholder="Placa" onclick="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" required="">
+                            </div>
+                            <div class="form-group col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                <label>Cabezal:</label>
+                                <input type="text" id="cabezalpiloto" name="cabezalpiloto" class="form-control"  autocomplete="off" placeholder="Cabezal" onclick="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" required="">
+                            </div>
+                            <div class="form-group col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                <label>Codigo Naviera:</label>
+                                <input type="text" id="codnavierapiloto" name="codnavierapiloto" class="form-control" autocomplete="off" placeholder="Codigo Naviero Piloto" onclick="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" required="">
+                            </div>
+                            <div class="form-group col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                <label>Transporte</label>
+                                <input type="text" id="transportepiloto" name="transportepiloto" class="form-control" autocomplete="off" placeholder="Transportista" onclick="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" required="">
+                            </div>
+                       
+                    </div>
+                </div>
+                   <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                 <button class="btn btn-primary" type="submit" id="btnGuardar_piloto"><i class="fa fa-save"></i>  Grabar</button>
+                                <button class="btn btn-danger pull-right" onclick="cancelarform_piloto()" data-dismiss="modal" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                   </div>
                 </form>
             </div>
             <div class="modal-footer"></div>

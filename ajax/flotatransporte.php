@@ -49,6 +49,16 @@ switch ($_GET["op"]){
             . '<div class="form-group col-lg-3 col-md-3 col-xs-12"><label>Codigo Naviera:</label><input type="text" class="form-control" value="'.$row['Codigo_Piloto_Naviera'].'" disabled="true"></div>';
         }
         break;
+    case 'mostrardatos_ptir':
+        $piloto_id=$_REQUEST["idpiloto"];
+        $rspta=$flota->mostrar_datos($piloto_id);
+         while ($row = mysqli_fetch_array($rspta)){
+             echo '<div class="form-group col-lg-2 col-md-3 col-xs-12">'
+            . '<label>Placas:</label><input type="text" class="form-control" value="'.$row['Placas'].'" readonly="true"></div>'
+            . '<div class="form-group col-lg-2 col-md-12 col-xs-12"><label>Licencia:</label><input type="text" class="form-control" value="'.$row['Licencias'].'" disabled="true"></div>'
+            . '<div class="form-group col-lg-2 col-md-12 col-xs-12"><label>Codigo Naviera:</label><input type="text" class="form-control" value="'.$row['Codigo_Piloto_Naviera'].'" disabled="true"></div>';
+         }
+        break;
     case 'listar':
         
         $rspta=$flota->listar();        
