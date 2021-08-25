@@ -26,6 +26,14 @@ class reportes_g{
         $sql="call reportes_ingreso('$fechai','$fechaf')";
         return ejecutarConsulta($sql);
     }
+    public function reportetir_n($notir){
+        $sql="call reportetirxno($notir)";
+        return ejecutarConsulta($sql);
+    }
+    public function detalle_tir($notir){
+        $sql="select * from fallas_tir where id_datostir=$notir";
+        return ejecutarConsulta($sql);
+    }
 
 }   
     

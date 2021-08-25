@@ -32,7 +32,8 @@
                             <div class="form-group col-lg-4 col-md-12 col-sm-12 col-xs-12">
                                 </br>
                                 <button class="btn btn-primary" id="verreporte" name="verreporte" onclick="mostrarin()"><i class="fa fa-files-o"></i>  Ver Reporte</button>
-                                <button class="btn btn-success" id="exportar" name="exportar" onclick="exportar()"><i class="fa fa-arrow-circle-o-down"></i> Exportar Reporte</button>
+                                <button class="btn btn-info" id="exportar" name="exportar" onclick="exportar()"><i class="fa fa-arrow-circle-o-down"></i> Exportar Reporte</button>
+                                <button class="btn btn-success" id="exportarexcel" name="exportarexcel" onclick="exporexcel()"><i class="fa fa-file-excel-o"></i> Exportar Excel</button>
                             </div>
                         </div>
                         <div class="panel-body table-responsive" id="listadoingreso">

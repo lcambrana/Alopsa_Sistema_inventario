@@ -4,7 +4,7 @@ if (strlen(session_id())<1)
     session_start();
 
 require '../modelos/reportes.php';
-require 'pdf/fpdf/fpdf.php';
+require 'fpdf/fpdf.php';
 $reportesg=new reportes_g();
 class PDF extends FPDF{
     function Header() {
@@ -12,7 +12,7 @@ class PDF extends FPDF{
         $this->SetFont('Arial', 'B', 10);
         $this->Cell(110);
         $this->Cell(60, 10, 'Reporte de Ingresos', 0, 0, 'C');
-        $this->Ln(20);
+        $this->Ln(15);
          
               
     }

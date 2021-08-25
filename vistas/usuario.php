@@ -64,7 +64,7 @@ if ($_SESSION['acceso']==1) {
        <option value="0">Seleccione ...</option>
        <option value="1">ADMIN</option>
        <option value="2">USUARIO</option>
-       
+       <option value="3">SUPERVISOR</option>
      </select>
     </div>
     <div class="form-group col-lg-6 col-md-6 col-xs-12">

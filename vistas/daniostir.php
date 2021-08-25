@@ -32,9 +32,9 @@ if (!isset($_SESSION['nombre'])){
                     <div class="panel-body table-responsive" id="listadotir">
                         <table id="tbllistadotir" class="table table-striped table-bordered table-condensed table-hover">
                             <thead>
+                            <th>Tir</th>
                             <th>Contenedor</th>
                             <th>Chasis</th>
-                            <th>serie</th>
                             <th>Fecha</th>
                             <th>Hora</th>
                             <th>Transportista</th>
@@ -43,6 +43,7 @@ if (!isset($_SESSION['nombre'])){
                             <th>Destino</th>
                             <th>Vacio</th>
                             <th>Cliente</th>
+                            <th>Tipo Tir</th>
                             <th>Opciones</th>
                             </thead>
                         </table>

@@ -1,0 +1,2 @@
+Friday 20th of August 2021 03:41:51 PM - 1318 : Incorrect number of arguments for PROCEDURE sis_invcon_barrios.reportetirxno; expected 1, got 0 - call reportetirxno()
+Friday 20th of August 2021 04:00:06 PM - 1318 : Incorrect number of arguments for PROCEDURE sis_invcon_barrios.reportetirxno; expected 1, got 0 - call reportetirxno()

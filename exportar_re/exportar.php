@@ -2,7 +2,7 @@
 if (strlen(session_id())<1)
     session_start();
 require '../modelos/reportes.php';
-require 'pdf/fpdf/fpdf.php';
+require 'fpdf/fpdf.php';
 $reportesg=new reportes_g();
 
 class PDF extends FPDF

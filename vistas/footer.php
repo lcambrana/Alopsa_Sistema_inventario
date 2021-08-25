@@ -1,6 +1,6 @@
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <b>Version</b> 1.0.3
+      <b>Version</b> 1.0.4
     </div>
     <strong>Copyright &copy; 2020-2021 <a target="_blank" href="http://www.cambrantech.com">Luis Cambran</a></strong> Todo los derechos
     reservados - desarrollado para ALOPSA.

@@ -42,12 +42,6 @@ function listar(){
      tabla=$('#tbllistadotir').dataTable({
         "aProcessing": true,
         "aServerSide": true,
-        dom: 'Bfrtip',
-        buttons: [
-            'copyHtml5',
-            'excelHtml5',
-            'pdf'
-        ],
         "ajax":{
                 url:'../ajax/daniostir.php?op=listar',
                 type: 'get',
@@ -276,6 +270,7 @@ function guardaryeditar(e){
        processData: false,
        datatype:"json",
        success: function(data){
+         try{ 
            var datos=JSON.parse(data);
            var cadena=datos.idtir;
            if (cadena>=0){
@@ -283,7 +278,9 @@ function guardaryeditar(e){
            }else if (datos=='Er'){
                 swal({icon:'Error',title:'Error al Grabar',text:datos});
            }
-   
+       }catch(err){
+           swal({icon:'warning',title:'Duplicidad de ingreso',text:data});
+       }  
           
           }
         });
@@ -381,10 +378,13 @@ function enviadetallefallas(val){
        type:"POST",
        data:{datosfilas:JSON.stringify(filas)},
        success:function(data){
+        try{   
            var cadena=data.substring(0,2);
            if (cadena=='In'){
                swal({icon:'success',title:'Ingreso TIR',text:'Se ha Ingresado correctamente el TIR'});
                tabla.ajax.reload();
+               //window.location.href = "../exportar_re/tiringreso.php?notir="+val;
+               window.open("../exportar_re/tiringreso.php?notir="+val);
                $('#getmodaltir').modal('toggle');
                limpiar();
            }else if(cadena=='Er'){
@@ -392,9 +392,13 @@ function enviadetallefallas(val){
                $('#getmodaltir').modal('toggle');  
                limpiar();
            }
+       }catch(err){
+           swal(data);
+       }  
+          
            
-           console.log(data);
        }
+       
       });
     }else{
         $.ajax({

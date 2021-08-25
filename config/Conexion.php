@@ -12,7 +12,7 @@ if (mysqli_connect_errno()) {
 }
 
 if (!function_exists('ejecutarConsulta')) {
-	Function ejecutarConsulta($sql){ 
+Function ejecutarConsulta($sql){ 
 global $conexion;
 $query=$conexion->query($sql);
 if ($query==false){
@@ -58,6 +58,16 @@ function limpiarCadena($str){
 global $conexion;
 $str=mysqli_real_escape_string($conexion,trim($str));
 return htmlspecialchars($str);
+}
+function clearStoredResults(){
+    global $conexion;
+
+    do {
+         if ($res = $conexion->store_result()) {
+           $res->free();
+         }
+        } while ($conexion->more_results() && $conexion->next_result());        
+
 }
 
 }

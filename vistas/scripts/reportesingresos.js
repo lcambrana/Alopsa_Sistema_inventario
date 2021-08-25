@@ -44,3 +44,10 @@ function exportar(){
     var fechafi=$('#fechafinal').val();
     window.location.href = "../exportar_re/exportaring.php" + "?fechainicial=" + fechain + "&fechafinal=" + fechafi 
 }
+function exporexcel(){
+    var fechain=$('#fechainicial').val();
+    var fechafi=$('#fechafinal').val();
+
+       window.open('../exportar_re/exportacion_excel.php?reporte=ingreso&fechainicial='+fechain+'&fechafinal='+fechafi)
+
+}

@@ -60,7 +60,7 @@ switch ($_GET['op']){
                echo json_encode($rspta);
                }else
                    {
-                   echo 'Error- El Contenedor que esta ingresando ya se encuentra en la base de datos';
+                   echo 'Advertencia- El Contenedor que esta ingresando ya se encuentra en la base de datos';
                    }
            }else{
                $rspta=$datosTIR->actualizar($idtir,$serietir,$chasis,$tchassis,$refr,$tcon,$fecha,$hora,$tipomov,$nav,$convasio,$dest,$izqu,$dere,$fren,$inte,$tras,$tech,$chas,$obser,$cli,$contenedor,$idf,$booki,$sbot);
@@ -73,10 +73,26 @@ switch ($_GET['op']){
            $rspta=$datosTIR->listar();
            $datos_tir=array();
             while ($reg=$rspta->fetch_object()){
+                $tipomovimiento="";
+                $estado="";
+            if ($reg->tipomov=='Ingreso'){
+                $tipomovimiento='<span class="label bg-green">GATE IN</span>';
+            }else if ($reg->tipomov=='Salida'){
+                $tipomovimiento='<span class="label bg-red">GATE OUT</span>';
+            }
+            if ($reg->estado=='Activo'){
+                 $estado= '<button class="btn btn-warning btn-xs" onclick="mostrar('.$reg->idtir.')"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Editar Datos TIR"></i></button>'.' '.'<button class="btn btn-danger btn-xs" onclick="dasactivar('.$reg->idtir.')"><i class="fa fa-close" data-toggle="tooltip" data-placement="top" title="Anular TIR"></i></button>'.' '.'<button class="btn btn-success btn-xs" onclick="cerrartir('.$reg->idtir.')"><i class="fa fa-lock" data-toggle="tooltip" data-placement="top" title="Cerrar TIR"></i></button> '.' '.'<div class="btn-group"><div class="input-group-btn"><button class="btn btn-danger btn-xs dropdown-toggle" data-toggle="dropdown" "><i class="fa fa-print" data-toggle="tooltip" data-placement="top" title="Ver TIR"></i></button><ul class="dropdown-menu dropdown-menu-right"><li><a href="../exportar_re/tiringreso.php?notir='.$reg->idtir.'"><i class="fa fa-sign-in"></i> PDF Ingreso</a></li></div></div> ';
+            }else if ($reg->estado=='Cerrado'){
+                if ($reg->tipomov=='Salida'){
+                $estado='<button class="btn btn-warning btn-xs" disabled onclick="mostrar('.$reg->idtir.')"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Editar Datos TIR"></i></button>'.' '.'<button class="btn btn-danger btn-xs" onclick="dasactivar('.$reg->idtir.')"><i class="fa fa-close" data-toggle="tooltip" data-placement="top" title="Anular TIR"></i></button>'.' '.'<button class="btn btn-success btn-xs" disabled onclick="cerrartir('.$reg->idtir.')"><i class="fa fa-lock" data-toggle="tooltip" data-placement="top" title="Cerrar TIR"></i></button> '.' '.'<div class="btn-group"><div class="input-group-btn"><button class="btn btn-danger btn-xs dropdown-toggle" data-toggle="dropdown" "><i class="fa fa-print" data-toggle="tooltip" data-placement="top" title="Ver TIR"></i></button><ul class="dropdown-menu dropdown-menu-right"><li><a href="../exportar_re/tirsalida.php?notir='.$reg->idtir.'"><i class="fa fa-sign-in"></i> PDF Salida</a></li><li><a href="../exportar_re/tiringreso.php?notir='.$reg->idtir_ingreso.'"><i class="fa fa-sign-out"></i>  PDF Ingreso </a></li></ul></div></div> ';
+                }else if($reg->tipomov=='Ingreso'){
+                    $estado='<button class="btn btn-warning btn-xs" disabled onclick="mostrar('.$reg->idtir.')"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Editar Datos TIR"></i></button>'.' '.'<button class="btn btn-danger btn-xs" disabled onclick="dasactivar('.$reg->idtir.')"><i class="fa fa-close" data-toggle="tooltip" data-placement="top" title="Anular TIR"></i></button>'.' '.'<button class="btn btn-success btn-xs" disabled onclick="cerrartir('.$reg->idtir.')"><i class="fa fa-lock" data-toggle="tooltip" data-placement="top" title="Cerrar TIR"></i></button> '.' '.'<div class="btn-group"><div class="input-group-btn"><button class="btn btn-danger btn-xs dropdown-toggle" data-toggle="dropdown" "><i class="fa fa-print" data-toggle="tooltip" data-placement="top" title="Ver TIR"></i></button><ul class="dropdown-menu dropdown-menu-right"><li><a href="../exportar_re/tiringreso.php?notir='.$reg->idtir.'"><i class="fa fa-sign-in"></i> PDF Ingreso</a></li><li><a href="../exportar_re/tirsalida.php?notir='.$reg->idtir_ingreso.'"><i class="fa fa-sign-out"></i>  PDF Salida </a></li></ul></div></div> ';
+                }
+            }
                 $datos_tir[]=array(
-                    "0"=>$reg->No_Contenedor,
-                    "1"=>$reg->chassis,
-                    "2"=>$reg->SerieTir,
+                    "0"=>$reg->idtir,
+                    "1"=>$reg->No_Contenedor,
+                    "2"=>$reg->chassis,
                     "3"=>$reg->fecha,
                     "4"=>$reg->hora,
                     "5"=>$reg->Transporte,
@@ -85,7 +101,8 @@ switch ($_GET['op']){
                     "8"=>$reg->Destino,
                     "9"=>$reg->vacio,
                     "10"=>$reg->cliente,
-                    "11"=>'<button class="btn btn-warning btn-xs" onclick="mostrar('.$reg->idtir.')"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Editar Datos TIR"></i></button>'.' '.'<button class="btn btn-danger btn-xs" onclick="dasactivar('.$reg->idtir.')"><i class="fa fa-close" data-toggle="tooltip" data-placement="top" title="Anular TIR"></i></button>'.' '.'<button class="btn btn-success btn-xs" onclick="cerrartir('.$reg->idtir.')"><i class="fa fa-lock" data-toggle="tooltip" data-placement="top" title="Cerrar TIR"></i></button> '.' '.'<button class="btn btn-danger btn-xs" onclick="vertir('.$reg->idtir.')"><i class="fa fa-print" data-toggle="tooltip" data-placement="top" title="Ver TIR"></i></button> '
+                    "11"=>$tipomovimiento,
+                    "12"=>$estado
                 );
             }
             $results=array(
@@ -138,7 +155,7 @@ switch ($_GET['op']){
            $rspta=$datosTIR->listar_tcontenedores();
            echo '<option value="0">Seleccione..</option>';
            while ($reg=$rspta->fetch_object()){
-               echo '<option value='.$reg->descripcion.'>'.$reg->descripcion.'</option>';
+               echo '<option value='.$reg->id.'>'.$reg->descripcion.'</option>';
            }
            break;
        case 'actualizadetalle':
